@@ -80,6 +80,32 @@ button {
     --radius-btn-move: 60px;
     --radius-btn-ctrl: 45px;
 
+    /* Tipografía — tamaños */
+    --fs-2xs: 9px;
+    --fs-xs: 10px;
+    --fs-sm: 11px;
+    --fs-base: 12px;
+    --fs-md: 13px;
+    --fs-nav: 14px;
+    --fs-body: 15px;
+    --fs-lg: 16px;
+    --fs-xl: 18px;
+    --fs-2xl: 20px;
+    --fs-title: 24px;
+    --fs-headline: 28px;
+    --fs-icon-sm: 30px;
+    --fs-score-mode: 32px;
+    --fs-score: 36px;
+    --fs-trophy: 40px;
+    --fs-weather: 48px;
+
+    /* Tipografía — pesos */
+    --fw-normal: 400;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+    --fw-extrabold: 800;
+    --fw-black: 900;
+
     /* Layout */
     --container: 1440px;
     --sidebar: 300px;
