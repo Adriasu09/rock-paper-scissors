@@ -83,6 +83,13 @@ input {
   font-weight: 700;
 }
 
+.meta-pill-news {
+  background: var(--primary-soft);
+  color: #4b3dbd;
+  font-weight: 700;
+  order: -1;
+}
+
 .primary-button,
 .nav-tab {
   border: none;
