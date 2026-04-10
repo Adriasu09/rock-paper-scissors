@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro | Carnival</title>
+    <link rel="stylesheet" href="./style/main.css" />
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <header class="topbar card">
+        <div class="brand">
+          <span class="brand-symbol">♀</span>
+          <span>FemCoders</span>
+        </div>
+
+        <div class="topbar-meta">
+          <span class="meta-pill meta-pill-accent">Inicio de sesión / Registro</span>
+          <span class="meta-pill">Hola, <strong id="preview-name">Pendiente</strong></span>
+          <span class="meta-pill">País: <span id="preview-country">Pendiente</span></span>
+          <span class="meta-pill">Día: <span id="preview-date">Pendiente</span></span>
+          <span class="meta-pill">Hora: <span id="preview-time">Pendiente</span></span>
+          <span class="meta-pill">Temperatura: 22ºC</span>
+        </div>
+
+        <nav class="topnav">
+          <button class="nav-tab is-active" type="button" data-target="games-panel">
+            Juego
+          </button>
+          <button class="nav-tab" type="button" data-target="about-panel">
+            Sobre nosotras
+          </button>
+        </nav>
+      </header>
+
+      <main class="app-shell app-shell-empty">
+        <section class="card">
+          <h1>Completa tu registro</h1>
+          <form id="register-form" class="register-form">
+            <label>
+              Nombre
+              <input type="text" name="name" placeholder="Escribe tu nombre" required />
+            </label>
+
+            <label>
+              País
+              <input type="text" name="country" placeholder="Escribe tu país" required />
+            </label>
+
+            <label>
+              Fecha
+              <input type="date" name="date" required />
+            </label>
+
+            <label>
+              Hora
+              <input type="time" name="time" required />
+            </label>
+
+            <button class="primary-button" type="submit">Guardar y entrar</button>
+          </form>
+        </section>
+
+        <section id="games-panel" class="content-panel is-active"></section>
+
+        <section id="about-panel" class="content-panel"></section>
+
+        <a class="back-link" href="./index.html">← Volver al inicio</a>
+      </main>
+    </div>
+
+    <script type="module" src="./index.js"></script>
+  </body>
+</html>
