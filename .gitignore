@@ -1,0 +1,17 @@
+# Claude Code
+SKILL.md
+
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor / local dev tooling
+.vscode/
+.claude/
