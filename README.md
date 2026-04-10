@@ -1,3 +1,5 @@
+Este es el apartado de visual studio code del navbar donde vamos a crear el empiece de la página web.
+
 # ✂️ Piedra, Papel o Tijera — AZARGame | Carnival DOM
 
 Bienvenida al equipo de desarrollo! 👋 Este README explica cómo trabajar en el repositorio y cómo gestionar las tareas del proyecto usando GitHub Projects. Léelo con calma antes de empezar.
@@ -51,10 +53,24 @@ code .
 
 ### 2️⃣ Verifica en qué rama estás
 
-```bash
+
 git branch
+```bash
+# Antes de empezar una tarea nueva
+git checkout develop
+git pull origin develop
+git checkout -b feat/nombre-de-tu-tarea
+
+# Guardar y subir tu trabajo
+git status
+git add .
+git commit -m "feat: descripción de lo que hiciste"
+git push origin feat/nombre-de-tu-tarea
+
+# → Ir a GitHub, abrir el Pull Request y mover la tarjeta a "In review"
 ```
 
+---
 La rama con `*` es en la que estás. Debe ser la tuya.
 
 ---
