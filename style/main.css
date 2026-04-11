@@ -1,0 +1,256 @@
+:root {
+  --primary: #7c3aed;
+  --primary-strong: #a855f7;
+  --primary-soft: #eceaff;
+  --background: #020617;
+  --card: #0b1120;
+  --card-border: #1e293b;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --rock: #f97316;
+  --paper: #22d3ee;
+  --scissors: #a855f7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", "Poppins", "SF Pro Display", sans-serif;
+  background: var(--background);
+  color: var(--text);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.page-wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  box-shadow: none;
+  padding: 1rem 1.25rem;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.glass-header {
+  background: rgba(2, 6, 23, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.brand-logo {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
+.topbar-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 999px;
+  background: #111827;
+  border: 1px solid #1f2937;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.meta-pill-accent {
+  background: #ddd9ff;
+  color: #4b3dbd;
+  font-weight: 700;
+}
+
+.meta-pill-user {
+  color: #7c3aed;
+}
+
+.meta-pill-user strong {
+  color: #7c3aed;
+}
+
+.meta-pill-news {
+  background: #eceaff;
+  color: #4b3dbd;
+  font-weight: 700;
+  order: -1;
+}
+
+.primary-button,
+.nav-tab,
+.secondary-button {
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.primary-button:hover,
+.nav-tab:hover,
+.secondary-button:hover {
+  transform: translateY(-1px);
+}
+
+.primary-button {
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4);
+}
+
+.action-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.topnav {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.nav-tab {
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4);
+}
+
+.nav-tab.is-active {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #ffffff;
+}
+
+.app-shell {
+  padding: 1rem 0 2rem;
+  display: grid;
+  gap: 1rem;
+  justify-items: center;
+}
+
+.app-shell-empty {
+  min-height: 32vh;
+}
+
+.content-panel {
+  display: none;
+  width: min(860px, 100%);
+  margin: 0 auto;
+}
+
+.content-panel.is-active {
+  display: block;
+}
+
+#about-panel h2,
+#about-panel h3 {
+  color: #7c3aed;
+}
+
+#about-panel .about-heading-light {
+  color: #ffffff;
+}
+
+#about-panel p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.register-card {
+  width: min(520px, 100%);
+  margin: 0 auto;
+}
+
+.register-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--primary-strong);
+  font-size: clamp(1.9rem, 3vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.register-form {
+  display: grid;
+  gap: 0.95rem;
+}
+
+.register-form label {
+  display: grid;
+  gap: 0.4rem;
+  color: #7c3aed;
+  font-weight: 600;
+}
+
+.register-form input {
+  width: 100%;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  background: #111827;
+  color: var(--text);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin: 0 auto;
+  color: var(--primary-strong);
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.35rem 0;
+}
+
+@media (max-width: 768px) {
+  .topbar {
+    align-items: flex-start;
+  }
+
+  .topbar-meta,
+  .topnav {
+    width: 100%;
+  }
+}
