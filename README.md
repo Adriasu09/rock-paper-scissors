@@ -45,9 +45,13 @@ Las ramas siguen las convenciones estándar de GitHub según el tipo de tarea:
 
 ### 1️⃣ Abre tu proyecto en VS Code
 
+Abre VS Code dentro de la carpeta del repositorio que clonaste:
+
 ```bash
 code .
 ```
+
+> 💡 Asegúrate de estar dentro de la carpeta del proyecto (`rock-paper-scissors`) antes de ejecutar este comando.
 
 ---
 
@@ -115,6 +119,14 @@ git add .
 git commit -m "descripción breve de lo que hiciste"
 ```
 
+**Paso D — Antes de subir, actualiza tu rama con los últimos cambios de `develop`:**
+
+```bash
+git pull origin develop
+```
+
+> ⚠️ Esto es importante por si alguien ha subido cambios mientras trabajabas. Si hay conflictos, resuélvelos antes de continuar.
+
 > ✏️ Ejemplos de buenos mensajes:
 >
 > - `"feat: agrego lógica del juego"`
@@ -174,8 +186,8 @@ Ve a la pestaña **Projects** del repositorio o accede directamente desde tu per
 | **Backlog** | Tareas pendientes que aún no se han empezado |
 | **In progress** | Tareas en las que estás trabajando ahora mismo |
 | **In review** | Tu PR está abierto y esperando revisión |
-| **Ready** | El PR fue aprobado, listo para hacer merge |
-| **Done** | Tarea completada y mergeada en `develop` ✅ |
+| **Ready** | El PR fue aprobado y mergeado en `develop` ✅ |
+| **Done** | Tarea completada y mergeada en `main` ✅ |
 
 ---
 
@@ -222,8 +234,8 @@ El tablero refleja el estado real de tu trabajo. Mueve las tarjetas así:
 |--------|-----------|
 | Vas a empezar a trabajar en una tarea | Muévela de **Backlog** → **In progress** |
 | Abres el Pull Request | Muévela de **In progress** → **In review** |
-| El PR es aprobado | Muévela de **In review** → **Ready** |
-| Se hace merge del PR | Muévela a **Done** |
+| El PR es aprobado y mergeado en `develop` | Muévela de **In review** → **Ready** |
+| Se hace merge en `main` | Muévela a **Done** |
 
 > 💡 Para mover una tarjeta: haz clic en los **tres puntos `...`** de la tarjeta y selecciona el nuevo estado, o arrástrala directamente a la columna correcta.
 
