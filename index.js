@@ -180,8 +180,38 @@ function setupTabs() {
   openPanel(rememberedView, false);
 }
 
+function setupContactToggle() {
+  const contactButtons = Array.from(document.querySelectorAll(".contact-heading"));
+
+  contactButtons.forEach((button) => {
+    const message = button.nextElementSibling;
+
+    if (!message || !message.classList.contains("contact-message")) {
+      return;
+    }
+
+    button.addEventListener("click", () => {
+      const isVisible = message.classList.toggle("is-visible");
+      button.setAttribute("aria-expanded", String(isVisible));
+    });
+  });
+}
+
+function setupContactSubmitButtons() {
+  const sendButtons = Array.from(document.querySelectorAll('[data-action="send-contact"]'));
+
+  sendButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      sessionStorage.setItem("azargame-home-view", "games-panel");
+      window.location.href = "./nav.html";
+    });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   paintUserData(getStoredUserData());
   setupRegisterForm();
   setupTabs();
+  setupContactToggle();
+  setupContactSubmitButtons();
 });
