@@ -3,27 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Registro | Carnival</title>
+    <title>Registro | AZARGame</title>
     <link rel="stylesheet" href="./style/main.css" />
   </head>
   <body>
     <div class="page-wrapper">
       <header class="topbar card">
         <div class="brand">
-          <span class="brand-symbol">♀</span>
-          <span>FemCoders</span>
+          <img class="brand-logo" src="./assets/icons/ferris-wheel.svg" alt="Noria de AZARGame" />
+          <span>AZARGame</span>
         </div>
 
         <div class="topbar-meta">
-          <span class="meta-pill meta-pill-news">
-            Noticia · El País (19:34): la IA mejora los diagnósticos médicos · 10/04/2026
-          </span>
           <span class="meta-pill meta-pill-accent">Inicio de sesión / Registro</span>
-          <span class="meta-pill">Hola, <strong id="preview-name">Pendiente</strong></span>
+          <span class="meta-pill meta-pill-user">Hola, <strong id="preview-name">Pendiente</strong></span>
           <span class="meta-pill">País: <span id="preview-country">Pendiente</span></span>
           <span class="meta-pill">Fecha: <span id="preview-date">Pendiente</span></span>
           <span class="meta-pill">Hora: <span id="preview-time">Pendiente</span></span>
-          <span class="meta-pill">Temperatura: 22ºC</span>
+          <span class="meta-pill">Temperatura: <span id="preview-temperature">22ºC</span></span>
         </div>
 
         <nav class="topnav">
@@ -37,8 +34,8 @@
       </header>
 
       <main class="app-shell app-shell-empty">
-        <section class="card">
-          <h1>Completa tu registro</h1>
+        <section class="card register-card">
+          <h1 class="register-title">Completa tu registro</h1>
           <form id="register-form" class="register-form">
             <label>
               Nombre
@@ -67,16 +64,35 @@
         <section id="games-panel" class="content-panel is-active"></section>
 
         <section id="about-panel" class="card content-panel">
-          <h2>Sobre nosotras</h2>
-          <h3>Presentación</h3>
+          <h2 class="register-title">Sobre nosotras</h2>
+          <h2 class="about-heading-light">Presentación</h2>
           <p>
-            Bienvenidas a nuestra página web "Carnival". Somos un grupo de
-            FemCoders con ganas de hacer disfrutar a las personas con nuestra
-            página web. Cualquier duda, sugerencia o cuestión estamos en contacto
-            a través de esta sección. Muchas gracias.
+            Bienvenidas a nuestra página web "AZARGame". Somos un equipo que
+            quiere ofrecer una experiencia amable, divertida y pensada para
+            aprender jugando.
           </p>
 
-          <h3>Instrucciones del juego</h3>
+          <h2 class="about-heading-light">Nuestros valores</h2>
+          <p>
+            Cercanía, confianza, personalización, empoderamiento, igualdad,
+            aprendizaje y ocio educativo. #playandfun #fem #rights #learning
+            #learning
+          </p>
+
+          <h2>Misión</h2>
+          <p>
+            Nuestra misión es crear una experiencia de juego inclusiva, divertida
+            y educativa, donde cada persona pueda disfrutar y aprender, en un entorno inclusivo e igualitario, donde da igual tus dificultades y diferencias, porque nosotros te apoyamos.
+          </p>
+
+          <h2>Visión</h2>
+          <p>
+            Nuestra visión es construir un espacio digital referente en ocio
+            educativo, donde jugar también signifique compartir, aprender y
+            crecer en igualdad, dentro de una sociedad que abrace las diferencias y potencie la inclusión social.
+          </p>
+
+          <h2>Instrucciones del juego</h2>
           <p>
             Para jugar, haz click en los botones del teclado correspondiente para
             seleccionar una de las tres opciones: piedra, papel o tijera. El mejor
@@ -84,7 +100,7 @@
           </p>
         </section>
 
-        <a class="back-link" href="./index.html">← Volver al inicio</a>
+        <a class="back-link" href="./nav.html" data-action="go-home">← Volver al inicio</a>
       </main>
     </div>
 

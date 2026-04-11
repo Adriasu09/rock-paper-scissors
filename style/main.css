@@ -1,10 +1,15 @@
 :root {
-  --primary: #6c63ff;
+  --primary: #7c3aed;
+  --primary-strong: #a855f7;
   --primary-soft: #eceaff;
-  --background: #f5f7fb;
-  --card: #ffffff;
-  --text: #1f2340;
-  --muted: #5f6786;
+  --background: #020617;
+  --card: #0b1120;
+  --card-border: #1e293b;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --rock: #f97316;
+  --paper: #22d3ee;
+  --scissors: #a855f7;
 }
 
 * {
@@ -13,7 +18,7 @@
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: "Inter", "Poppins", "SF Pro Display", sans-serif;
   background: var(--background);
   color: var(--text);
 }
@@ -31,8 +36,9 @@ input {
 
 .card {
   background: var(--card);
+  border: 1px solid var(--card-border);
   border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(31, 35, 64, 0.08);
+  box-shadow: none;
   padding: 1rem 1.25rem;
 }
 
@@ -45,17 +51,24 @@ input {
   margin-top: 0.5rem;
 }
 
+.glass-header {
+  background: rgba(2, 6, 23, 0.8);
+  backdrop-filter: blur(10px);
+}
+
 .brand {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--primary);
+  color: var(--text);
   font-size: 1.3rem;
   font-weight: 700;
 }
 
-.brand-symbol {
-  font-size: 1.4rem;
+.brand-logo {
+  width: 26px;
+  height: 26px;
+  display: block;
 }
 
 .topbar-meta {
@@ -72,35 +85,62 @@ input {
   gap: 0.35rem;
   padding: 0.55rem 0.85rem;
   border-radius: 999px;
-  background: var(--primary-soft);
+  background: #111827;
+  border: 1px solid #1f2937;
   color: var(--text);
   white-space: nowrap;
 }
 
 .meta-pill-accent {
   background: #ddd9ff;
-  color: var(--primary);
+  color: #4b3dbd;
   font-weight: 700;
 }
 
+.meta-pill-user {
+  color: #7c3aed;
+}
+
+.meta-pill-user strong {
+  color: #7c3aed;
+}
+
 .meta-pill-news {
-  background: var(--primary-soft);
+  background: #eceaff;
   color: #4b3dbd;
   font-weight: 700;
   order: -1;
 }
 
 .primary-button,
-.nav-tab {
+.nav-tab,
+.secondary-button {
   border: none;
   border-radius: 999px;
-  padding: 0.85rem 1.2rem;
   cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.primary-button:hover,
+.nav-tab:hover,
+.secondary-button:hover {
+  transform: translateY(-1px);
 }
 
 .primary-button {
-  background: var(--primary);
-  color: white;
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4);
+}
+
+.action-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 }
 
 .topnav {
@@ -110,58 +150,99 @@ input {
 }
 
 .nav-tab {
-  background: var(--primary-soft);
-  color: var(--primary);
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4);
 }
 
 .nav-tab.is-active {
-  background: var(--primary);
-  color: white;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #ffffff;
 }
+
 
 .app-shell {
   padding: 1rem 0 2rem;
   display: grid;
   gap: 1rem;
+  justify-items: center;
 }
 
 .app-shell-empty {
-  min-height: 45vh;
-}
-
-.register-form {
-  display: grid;
-  gap: 1rem;
-}
-
-.register-form label {
-  display: grid;
-  gap: 0.35rem;
-  font-weight: 600;
-}
-
-.register-form input {
-  padding: 0.7rem;
-  border: 1px solid #cfd4e6;
-  border-radius: 10px;
-}
-
-.news-note {
-  margin: 0;
+  min-height: 32vh;
 }
 
 .content-panel {
   display: none;
+  width: min(860px, 100%);
+  margin: 0 auto;
 }
 
 .content-panel.is-active {
   display: block;
 }
 
+#about-panel h2,
+#about-panel h3 {
+  color: #7c3aed;
+}
+
+#about-panel .about-heading-light {
+  color: #ffffff;
+}
+
+#about-panel p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.register-card {
+  width: min(520px, 100%);
+  margin: 0 auto;
+}
+
+.register-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--primary-strong);
+  font-size: clamp(1.9rem, 3vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.register-form {
+  display: grid;
+  gap: 0.95rem;
+}
+
+.register-form label {
+  display: grid;
+  gap: 0.4rem;
+  color: #7c3aed;
+  font-weight: 600;
+}
+
+.register-form input {
+  width: 100%;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  background: #111827;
+  color: var(--text);
+}
+
 .back-link {
-  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin: 0 auto;
+  color: var(--primary-strong);
   font-weight: 600;
   text-decoration: none;
+  padding: 0.35rem 0;
 }
 
 @media (max-width: 768px) {

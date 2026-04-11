@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AZARGame | Inicio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style/main.css" />
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <header class="topbar card glass-header">
+        <div class="brand">
+          <img class="brand-logo" src="./assets/icons/ferris-wheel.svg" alt="Noria de AZARGame" />
+          <span>AZARGame</span>
+        </div>
+
+        <div class="topbar-meta">
+          <a class="primary-button action-link" href="./register.html">
+            Inicio de sesión / Registro
+          </a>
+          <span class="meta-pill meta-pill-user">Hola, <strong id="display-name">Invitada</strong></span>
+          <span class="meta-pill">País: <span id="display-country">Pendiente</span></span>
+          <span class="meta-pill">Fecha: <span id="display-date">Sin seleccionar</span></span>
+          <span class="meta-pill">Hora: <span id="display-time">Sin seleccionar</span></span>
+          <span class="meta-pill">Temperatura: <span id="display-temperature">22ºC</span></span>
+        </div>
+
+        <nav class="topnav">
+          <button class="nav-tab is-active" type="button" data-target="games-panel">Juego</button>
+          <button class="nav-tab" type="button" data-target="about-panel">Sobre nosotras</button>
+        </nav>
+      </header>
+
+      <main class="app-shell app-shell-empty">
+        <section id="games-panel" class="content-panel is-active"></section>
+
+        <section id="about-panel" class="card content-panel">
+          <h2 class="register-title">Sobre nosotras</h2>
+          <h2 class="about-heading-light">Presentación</h2>
+          <p>
+            Bienvenidas a nuestra página web "AZARGame". Somos un equipo de
+            FemCoders compuesto íntegramente por mujeres y queremos que cada
+            persona disfrute, aprenda y se sienta acompañada mientras juega.
+          </p>
+
+          <h2 class="about-heading-light">Nuestros valores</h2>
+          <p>
+            Cercanía, confianza, personalización, empoderamiento, igualdad,
+            aprendizaje y ocio educativo. #playandfun #fem #rights #learning
+            #learning
+          </p>
+
+          <h2>Misión</h2>
+          <p>
+            Nuestra misión es crear una experiencia de juego inclusiva, divertida
+            y educativa, donde cada persona pueda disfrutar, aprender y sentirse
+            representada en un entorno digital cercano y seguro.
+          </p>
+
+          <h2>Visión</h2>
+          <p>
+            Nuestra visión es construir un espacio digital referente en ocio
+            educativo, donde jugar también signifique compartir, aprender y
+            crecer en igualdad.
+          </p>
+
+          <h2>Instrucciones del juego</h2>
+          <p>
+            Para jugar, haz click en los botones del teclado correspondiente para
+            seleccionar una de las tres opciones: piedra, papel o tijera. El mejor
+            de tres gana. ¡Mucha suerte y a divertirse!
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./index.js"></script>
+  </body>
+</html>
+
