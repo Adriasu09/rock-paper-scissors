@@ -21,20 +21,43 @@
         </div>
 
         <div class="topbar-meta">
-          <a class="primary-button action-link" href="./register.html">
-            Inicio de sesión / Registro
+          <a class="meta-pill game-pill action-link" href="./register.html">
+            Inicio
           </a>
-          <span class="meta-pill meta-pill-user">Hola, <strong id="display-name">Invitada</strong></span>
-          <span class="meta-pill">País: <span id="display-country">Pendiente</span></span>
-          <span class="meta-pill">Fecha: <span id="display-date">Sin seleccionar</span></span>
-          <span class="meta-pill">Hora: <span id="display-time">Sin seleccionar</span></span>
-          <span class="meta-pill">Temperatura: <span id="display-temperature">22ºC</span></span>
         </div>
 
         <nav class="topnav">
-          <button class="nav-tab is-active" type="button" data-target="games-panel">Juego</button>
-          <button class="nav-tab" type="button" data-target="about-panel">Sobre nosotras</button>
+          <button class="nav-tab game-pill is-active" type="button" data-target="games-panel">
+            <span class="game-tab-content">
+              <svg class="game-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M8 11.5V8.4a1.2 1.2 0 1 1 2.4 0v2.7" />
+                <path d="M10.4 11.1V7.9a1.2 1.2 0 1 1 2.4 0v3.2" />
+                <path d="M12.8 11.1V8.3a1.2 1.2 0 1 1 2.4 0v2.8" />
+                <path d="M15.2 11.7V9.4a1.2 1.2 0 1 1 2.4 0v4.2" />
+                <path d="M8 12.3 6.5 11a1.4 1.4 0 0 0-2 2l2.7 2.9A4.5 4.5 0 0 0 10.5 17H15a3.7 3.7 0 0 0 3.7-3.7" />
+                <path d="M8.1 16.9V19h8.2" />
+              </svg>
+              <span>Juegos</span>
+            </span>
+          </button>
+          <button class="nav-tab about-pill" type="button" data-target="about-panel">Acerca de</button>
         </nav>
+
+        <div class="language-actions">
+          <button class="meta-pill game-pill language-pill" type="button">
+            <span class="language-ticket" aria-hidden="true">ES</span>
+            <span class="language-text">ES</span>
+          </button>
+          <button class="login-pill" type="button">
+            <span class="login-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <circle cx="12" cy="8" r="3.2" />
+                <path d="M6.8 18.2a5.2 5.2 0 0 1 10.4 0" />
+              </svg>
+            </span>
+            <span>Iniciar sesión</span>
+          </button>
+        </div>
       </header>
 
       <main class="app-shell app-shell-empty">
