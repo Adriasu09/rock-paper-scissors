@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock-Paper-Scissors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="./style/main.css" />
+
+</head>
+
+<body>
+
+    <section class="game">
+
+        <div class="score-hdr">
+            <div class="score">
+                <span>CPU</span>
+                <span id="cpu-score">0</span>
+            </div>
+
+            <span>VS</span>
+
+            <div class="battle">
+                <span>TÚ</span>
+                <span id="player-score">0</span>
+            </div>
+        </div>
+
+        <div class="arena" id="arena">
+            <img id="img-cpu" src="./assets/images/generated-1775857533380.png" alt="Puño izquierdo">
+            <img id="img-player" src="./assets/images/generated-1775859607042.png" alt="Puño derecho">
+        </div>
+
+        <p id="message" class="choose">¡Elige tu movimiento!</p>
+
+        <div class="options">
+            <button id="btn-rock">Piedra
+                <img src="./assets/icon/rock.svg" alt="Piedra">
+            </button>
+            <button id="btn-paper">Papel
+                <img src="./assets/icon/Paper.svg" alt="Papel">
+            </button>
+            <button id="btn-scissors">Tijera
+                <img src="./assets/icon/Scissors.svg" alt="Tijera">
+            </button>
+        </div>
+
+        <button id="btn-reset" class="choice-btn">
+            <img src="./assets/icon/volume-2.svg" alt="">
+        </button>
+
+    </section>
+
+</body>
+
+</html>
