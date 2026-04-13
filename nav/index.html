@@ -10,24 +10,25 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./style/main.css" />
+    <link rel="stylesheet" href="../style/main.css" />
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <div class="page-wrapper">
       <header class="topbar card glass-header">
         <div class="brand">
-          <img class="brand-logo" src="./assets/icons/ferris-wheel.svg" alt="Noria de AZARGame" />
+          <img class="brand-logo" src="../assets/icon/logo-icon.svg" alt="Logo de AZARGame" />
           <span>AZARGame</span>
         </div>
 
         <div class="topbar-meta">
-          <a class="meta-pill game-pill action-link" href="./register.html">
+          <a class="home-link" href="./register/register.html">
             Inicio
           </a>
         </div>
 
         <nav class="topnav">
-          <button class="nav-tab game-pill is-active" type="button" data-target="games-panel">
+          <a class="nav-tab game-pill is-active" href="#games-panel" data-target="games-panel">
             <span class="game-tab-content">
               <svg class="game-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                 <path d="M8 11.5V8.4a1.2 1.2 0 1 1 2.4 0v2.7" />
@@ -39,16 +40,17 @@
               </svg>
               <span>Juegos</span>
             </span>
-          </button>
-          <button class="nav-tab about-pill" type="button" data-target="about-panel">Acerca de</button>
+          </a>
+          <a class="nav-tab about-pill" href="#about-panel" data-target="about-panel">Acerca de</a>
         </nav>
 
         <div class="language-actions">
-          <a class="login-pill action-link" href="./register.html">
+          <a class="login-pill action-link" href="./register/register.html">
             <span class="login-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" focusable="false">
-                <circle cx="12" cy="7.6" r="4" />
-                <path d="M6.8 18.4a5.4 5.4 0 0 1 10.8 0" />
+              <svg viewBox="0 0 32 32" width="28" height="28" focusable="false">
+                <circle cx="16" cy="16" r="14" fill="#A78BFA" stroke="#e2d6fd" stroke-width="2" />
+                <circle cx="16" cy="13" r="5" fill="none" stroke="#e2d6fd" stroke-width="2" />
+                <path d="M9.5 23.5a7 7 0 0 1 13 0" fill="none" stroke="#e2d6fd" stroke-width="2" />
               </svg>
             </span>
             <span>Iniciar sesión</span>
@@ -137,6 +139,6 @@
       </main>
     </div>
 
-    <script type="module" src="./index.js"></script>
+    <script type="module" src="./nav.js"></script>
   </body>
 </html>
