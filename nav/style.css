@@ -1,0 +1,176 @@
+root {
+  --primary: #6c63ff;
+  --primary-soft: #eceaff;
+  --background: #f5f7fb;
+  --card: #ffffff;
+  --text: #1f2340;
+  --muted: #5f6786;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--background);
+  color: var(--text);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.page-wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(31, 35, 64, 0.08);
+  padding: 1rem 1.25rem;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.brand-symbol {
+  font-size: 1.4rem;
+}
+
+.topbar-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.meta-pill-accent {
+  background: #ddd9ff;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.meta-pill-news {
+  background: var(--primary-soft);
+  color: #4b3dbd;
+  font-weight: 700;
+  order: -1;
+}
+
+.primary-button,
+.nav-tab {
+  border: none;
+  border-radius: 999px;
+  padding: 0.85rem 1.2rem;
+  cursor: pointer;
+}
+
+.primary-button {
+  background: var(--primary);
+  color: white;
+}
+
+.topnav {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.nav-tab {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.nav-tab.is-active {
+  background: var(--primary);
+  color: white;
+}
+
+.app-shell {
+  padding: 1rem 0 2rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.app-shell-empty {
+  min-height: 45vh;
+}
+
+.register-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.register-form label {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 600;
+}
+
+.register-form input {
+  padding: 0.7rem;
+  border: 1px solid #cfd4e6;
+  border-radius: 10px;
+}
+
+.news-note {
+  margin: 0;
+}
+
+.content-panel {
+  display: none;
+}
+
+.content-panel.is-active {
+  display: block;
+}
+
+.back-link {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .topbar {
+    align-items: flex-start;
+  }
+
+  .topbar-meta,
+  .topnav {
+    width: 100%;
+  }
+}
