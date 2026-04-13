@@ -1,0 +1,72 @@
+.layout{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+    padding: 0 30px;
+}
+
+.sidebar-left, .sidebar-right{
+    width: 250px;
+    height: 596px;
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+}
+
+.game{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 690px;
+    min-height: 658px;
+    overflow: hidden;
+}
+
+.score-hdr{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: var(--surface-deep);
+} 
+
+.score, .battle{
+    display: flex;
+    flex-direction: column;
+    width: 30px;
+    height: 68px;
+    gap: 8px;
+}
+
+.battle{
+    align-items: flex-end;
+}
+
+.score > span:first-child, .battle > span:first-child{
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-extrabold);
+    line-height: 1;
+}
+
+.score > span:last-child, .battle > span:last-child{
+    font-size: var(--fs-trophy);
+    font-weight: var(--fw-black);
+    line-height: 1;
+}
+
+.score > span:first-child{
+    color: var(--cpu);
+}
+
+.battle > span:first-child{
+    color: var(--paper);
+}
+
+.score-hdr > span{
+    font-size: var(--fs-nav);
+    font-weight: var(--fw-extrabold);
+    color: var(--border-purple-soft);
+    line-height: 1;
+}
+

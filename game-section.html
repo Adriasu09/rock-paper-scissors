@@ -10,58 +10,64 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="./style/main.css" />
+    <link rel="stylesheet" href="./style/gameSection.css" />
 
 </head>
 
 <body>
 
-    <section class="game">
+    <div class="layout">
 
-        <div class="score-hdr">
-            <div class="score">
-                <span>CPU</span>
-                <span id="cpu-score">0</span>
-            </div>
+        <div class="sidebar-left"></div>
+        <section class="game">
 
-            <span>VS</span>
-
-            <div class="battle">
-                <span>TÚ</span>
-                <span id="player-score">0</span>
-            </div>
-        </div>
-
-        <div class="arena" id="arena">
-            <img id="img-cpu" src="./assets/images/generated-1775857533380.png" alt="Puño izquierdo">
-            <div class="arena-center">
-                <div class="arena-circle">
-                    <span id="countdown">3</span>
+            <div class="score-hdr">
+                <div class="score">
+                    <span>CPU</span>
+                    <span id="cpu-score">0</span>
                 </div>
-                <span id="arena-vs">VS</span>
+
+                <span>VS</span>
+
+                <div class="battle">
+                    <span>TÚ</span>
+                    <span id="player-score">0</span>
+                </div>
             </div>
-            <img id="img-player" src="./assets/images/generated-1775859607042.png" alt="Puño derecho">
-        </div>
 
-        <p id="message" class="choose">¡Elige tu movimiento!</p>
+            <div class="arena" id="arena">
+                <img id="img-cpu" src="./assets/images/generated-1775857533380.png" alt="Puño izquierdo">
+                <div class="arena-center">
+                    <div class="arena-circle">
+                        <span id="countdown">3</span>
+                    </div>
+                    <span id="arena-vs">VS</span>
+                </div>
+                <img id="img-player" src="./assets/images/generated-1775859607042.png" alt="Puño derecho">
+            </div>
 
-        <div class="options">
-            <button id="btn-rock">Piedra
-                <img src="./assets/icon/rock.svg" alt="Piedra">
+            <p id="message" class="choose">¡Elige tu movimiento!</p>
+
+            <div class="options">
+                <button id="btn-rock">Piedra
+                    <img src="./assets/icon/rock.svg" alt="Piedra">
+                </button>
+                <button id="btn-paper">Papel
+                    <img src="./assets/icon/Paper.svg" alt="Papel">
+                </button>
+                <button id="btn-scissors">Tijera
+                    <img src="./assets/icon/Scissors.svg" alt="Tijera">
+                </button>
+            </div>
+
+            <button id="btn-reset" class="choice-btn">
+                <img src="./assets/icon/volume-2.svg" alt="">
             </button>
-            <button id="btn-paper">Papel
-                <img src="./assets/icon/Paper.svg" alt="Papel">
-            </button>
-            <button id="btn-scissors">Tijera
-                <img src="./assets/icon/Scissors.svg" alt="Tijera">
-            </button>
-        </div>
 
-        <button id="btn-reset" class="choice-btn">
-            <img src="./assets/icon/volume-2.svg" alt="">
-        </button>
+        </section>
 
-    </section>
-
+        <div class="sidebar-right"></div>
+    </div>
 </body>
 
 </html>
