@@ -1,0 +1,198 @@
+.sidebar {
+    width: 250px;
+    background-color: yellow;
+}
+.contenedor {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+/* ── Fondo general ── */
+body {
+    background-color: #0A0B11;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: white;
+}
+
+/* ── Contenedor principal ── */
+section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    width: 690px;
+    height: 569px;
+    border: 2px solid #2D2E45; /* ← borde 2px con el color del Figma */
+    border-radius: 12px;  /* ← radio 12px del Figma */
+}
+
+
+/* ── Título ── */
+.titulo {
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+}
+
+/* ── Subtítulo ── */
+.subtitulo {
+    font-size: 14px;
+    font-weight: 400;
+    color: #aaaacc;
+    text-align: center;
+}
+
+/* ── Imagen central ── */
+.imagen-central {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: 3px solid #6842FF;
+    overflow: hidden;
+    box-shadow: 0 0 30px #7c3aed88;
+}
+
+.imagen-central img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ── Opciones piedra papel tijera ── */
+.opciones {
+    display: flex;
+    gap: 32px;
+}
+
+.opcion {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+}
+
+.opcion img {
+    width: 32px;
+    height: 32px;
+}
+/* ── Color individual de cada opción ── */
+.opcion-piedra { color: #FF7B00; }
+.opcion-papel  { color: #00D2FF; }
+.opcion-tijera { color: #6842FF; }
+
+.opcion-piedra img {
+    width: 17px;
+    height: 16px;
+    
+}
+ .opcion-papel img {
+    width: 13px;
+    height: 16px;
+    
+}
+
+.opcion-tijera img {
+    width: 15px;
+    height: 16px;
+    
+}
+
+/* ── Botones de acción ── */
+.acciones {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 300px;
+    height: 64px;
+}
+
+/* ── Botón PLAY ── */
+.btn-play {
+    background: #6842FF;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 32px;   
+    width: 220px;
+    height: 64px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    cursor: pointer;
+    letter-spacing: 0%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Icono del botón PLAY ── */
+.btn-play img {
+    width: 18.01px;
+    height: 20.01px;
+    filter: brightness(0) invert(1);
+}
+
+/* ── Botón Reglas ── */
+.btn-reglas {
+    background: #161728;
+    border: 1px solid #2D2E45;
+    border-radius: 32px;
+    width: 64px;
+    height: 64px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.btn-reglas span {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;       /* ← Bold */
+    font-size: 9px;         /* ← tamaño */
+    line-height: 1;         /* ← 100% */
+    letter-spacing: 0;      /* ← 0% */
+    color: #8B8FA8;         /* ← color correcto */
+    text-align: right;      /* ← alineación derecha */
+}
+
+.btn-reglas img {
+    width: 24px;
+    height: 24px;
+}
+
+/* ── Botón sonido ── */
+.btn-sound {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    background: #D946EF;
+    border: 3px solid #D946EF;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;    
+    padding: 4px 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.btn-sound img {
+    width: 22px;
+    height: 22px;
+    filter: brightness(0) invert(1);   /* ← icono blanco */
+}
