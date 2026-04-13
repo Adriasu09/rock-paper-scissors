@@ -214,9 +214,25 @@ input {
 }
 
 .about-pill {
+  background: #25104a;
   color: #7b8ca9 !important;
   font-weight: 400;
-  background: transparent;
+  border-radius: 999px;
+  padding: 0.74rem 1.1rem;
+  box-sizing: border-box;
+}
+
+.about-heading-light {
+  color: #e2d6fd;
+  font-weight: 700;
+}
+
+.contact-label {
+  background: #633BFF;
+  color: #e2d6fd;
+  border-radius: 999px;
+  padding: 0.5rem 1.2rem;
+  font-weight: 700;
 }
 
 @media (max-width: 768px) {
@@ -235,4 +251,11 @@ input {
 .nav-tab {
   min-width: 44px;
   min-height: 44px;
+}
+
+/* Títulos destacados con el color de 'Iniciar sesión' (#e2d6fd) */
+h2,
+.about-heading-light {
+  color: #e2d6fd;
+  font-weight: 700;
 }
