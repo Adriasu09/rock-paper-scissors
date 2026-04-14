@@ -21,18 +21,17 @@ export function renderLocation(locationData) {
 
   if (locationData.error) {
     return `
-    <article class="location-card">
+    <article class="location-card location-card--error">
       <div class="location-card__header">
-        <img src="./assets/icon/map-pin.svg" alt="ubicación" class="location-card__icon" />
-        <h3 class="location-card__title">Tu Ubicación</h3>
+        <span class="location-card__warning-icon">⚠</span>
+        <h3 class="location-card__title">${locationData.error}</h3>
       </div>
       <div class="location-card__body">
-        <p class="location-card__detail">${locationData.error}</p>
+        <p class="location-card__detail">No se pudo obtener tu ubicación. Inténtalo de nuevo.</p>
       </div>
-      <div class="location-card__status">
-        <span class="location-card__dot location-card__dot--inactive"></span>
-        <span>Geolocalización inactiva</span>
-      </div>
+      <button id="retry-location" class="btn btn--sm location-card__retry-btn">
+        Reintentar
+      </button>
     </article>
     `;
   }

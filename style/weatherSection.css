@@ -82,6 +82,24 @@
   background: var(--cpu);
 }
 
+/* --- Location Card: Error State --- */
+.location-card--error {
+  border-color: var(--cpu);
+}
+
+.location-card__warning-icon {
+  font-size: var(--fs-md);
+  color: var(--cpu);
+}
+
+.location-card__retry-btn {
+  background: var(--cpu);
+}
+
+.location-card__retry-btn:hover {
+  box-shadow: 0 8px 24px -8px var(--cpu);
+}
+
 /* ---------- Weather Card ---------- */
 .weather-card {
   background: var(--surface-weather);

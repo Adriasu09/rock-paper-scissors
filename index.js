@@ -14,7 +14,12 @@ function renderSidebar(locationHTML, weatherHTML) {
   `;
 }
 
+let isLoading = false;
+
 async function initSidebar() {
+  if (isLoading) return;
+  isLoading = true;
+
   renderSidebar(renderLocation(null), renderWeather(null));
 
   let locationData = null;
@@ -28,6 +33,11 @@ async function initSidebar() {
       renderLocation({ error: error.message }),
       renderWeather({ error: "Se requiere ubicación para el clima" }),
     );
+
+    document
+      .getElementById("retry-location")
+      .addEventListener("click", initSidebar);
+    isLoading = false;
     return;
   }
 
@@ -44,6 +54,8 @@ async function initSidebar() {
       renderWeather({ error: error.message }),
     );
   }
+
+  isLoading = false;
 }
 
 initSidebar();
