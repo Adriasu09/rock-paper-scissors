@@ -22,14 +22,15 @@
         <section class="game">
 
             <div class="score-hdr">
-                <div class="score">
+
+                <div class="score-cpu">
                     <span>CPU</span>
                     <span id="cpu-score">0</span>
                 </div>
 
-                <span class="score-hdr_vs" aria-hidden="true">VS</span>
+                <span class="score-hdr-vs" aria-hidden="true">VS</span>
 
-                <div class="battle">
+                <div class="score-player">
                     <span>TÚ</span>
                     <span id="player-score">0</span>
                 </div>
@@ -41,7 +42,7 @@
                     <div class="arena-circle">
                         <span id="countdown">3</span>
                     </div>
-                    <span id="arena-vs" aria-hidden="true">VS</span>
+                    <span class="arena-vs" aria-hidden="true">VS</span>
                 </div>
                 <img class="arena-hand" id="img-player" src="./assets/images/rock-left.png" alt="right hand">
             </div>
@@ -50,7 +51,7 @@
                 <p id="message" class="ctrl-section-message">¡Elige tu movimiento!</p>
 
                 <div class="options" role="group" aria-label="Elige tu movimiento">
-                    <button  type="button" id="btn-rock" class="btn--move btn--move--rock" aria-keyshortcuts="A">
+                    <button type="button" id="btn-rock" class="btn--move btn--move--rock" aria-keyshortcuts="A">
                         <img class="btn--move-icon" src="./assets/icon/rock.svg" alt="Rock" aria-hidden="true">
                         <span class="btn--move-label">Piedra</span>
                         <kbd class="btn--move-key" aria-hidden="true">A</kbd>
@@ -69,7 +70,8 @@
                     </button>
                 </div>
 
-                <button type="button" id="btn-sound" class="sound-btn" aria-label="Silenciar sonido" aria-pressed="false">
+                <button type="button" id="btn-sound" class="sound-btn" aria-label="Silenciar sonido"
+                    aria-pressed="false">
                     <img class="sound-btn-icon" src="./assets/icon/volume-2.svg" alt="Sound" aria-hidden="true">
                 </button>
             </div>
