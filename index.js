@@ -15,36 +15,33 @@ function renderSidebar(locationHTML, weatherHTML) {
 }
 
 async function initSidebar() {
-  console.log("🚀 initSidebar arrancando...");
   renderSidebar(renderLocation(null), renderWeather(null));
 
   let locationData = null;
 
   try {
-    console.log("📍 Pidiendo geolocalización...");
-    console.log("¿navigator.geolocation disponible?", !!navigator.geolocation);
     locationData = await getUserLocation();
-    console.log("✅ Ubicación obtenida:", locationData);
     renderSidebar(renderLocation(locationData), renderWeather(null));
   } catch (error) {
-    console.error("❌ Error en getUserLocation:", error.message);
+    console.error("Error en getUserLocation:", error.message);
     renderSidebar(
       renderLocation({ error: error.message }),
-      renderWeather({ error: "Se requiere ubicación para el clima" })
+      renderWeather({ error: "Se requiere ubicación para el clima" }),
     );
     return;
   }
 
   try {
-    console.log("🌤 Pidiendo clima para:", locationData.latitude, locationData.longitude);
-    const weatherData = await getWeather(locationData.latitude, locationData.longitude);
-    console.log("✅ Clima obtenido:", weatherData);
+    const weatherData = await getWeather(
+      locationData.latitude,
+      locationData.longitude,
+    );
     renderSidebar(renderLocation(locationData), renderWeather(weatherData));
   } catch (error) {
-    console.error("❌ Error en getWeather:", error.message);
+    console.error("Error en getWeather:", error.message);
     renderSidebar(
       renderLocation(locationData),
-      renderWeather({ error: error.message })
+      renderWeather({ error: error.message }),
     );
   }
 }
