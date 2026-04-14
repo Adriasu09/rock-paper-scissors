@@ -27,7 +27,7 @@
                     <span id="cpu-score">0</span>
                 </div>
 
-                <span>VS</span>
+                <span class="score-hdr_vs" aria-hidden="true">VS</span>
 
                 <div class="battle">
                     <span>TÚ</span>
@@ -35,34 +35,44 @@
                 </div>
             </div>
 
-            <div class="arena" id="arena">
-                <img id="img-cpu" src="./assets/images/rock-right.png" alt="Puño izquierdo">
+            <div class="arena">
+                <img class="arena-hand" id="img-cpu" src="./assets/images/rock-right.png" alt="left hand">
                 <div class="arena-center">
                     <div class="arena-circle">
                         <span id="countdown">3</span>
                     </div>
-                    <span id="arena-vs">VS</span>
+                    <span id="arena-vs" aria-hidden="true">VS</span>
                 </div>
-                <img id="img-player" src="./assets/images/rock-left.png" alt="Puño derecho">
+                <img class="arena-hand" id="img-player" src="./assets/images/rock-left.png" alt="right hand">
             </div>
 
-            <p id="message" class="choose">¡Elige tu movimiento!</p>
+            <div class="ctrl-section">
+                <p id="message" class="ctrl-section-message">¡Elige tu movimiento!</p>
 
-            <div class="options">
-                <button id="btn-rock">Piedra
-                    <img src="./assets/icon/rock.svg" alt="Piedra">
-                </button>
-                <button id="btn-paper">Papel
-                    <img src="./assets/icon/Paper.svg" alt="Papel">
-                </button>
-                <button id="btn-scissors">Tijera
-                    <img src="./assets/icon/Scissors.svg" alt="Tijera">
+                <div class="options" role="group" aria-label="Elige tu movimiento">
+                    <button  type="button" id="btn-rock" class="btn--move btn--move--rock" aria-keyshortcuts="A">
+                        <img class="btn--move-icon" src="./assets/icon/rock.svg" alt="Rock" aria-hidden="true">
+                        <span class="btn--move-label">Piedra</span>
+                        <kbd class="btn--move-key" aria-hidden="true">A</kbd>
+                    </button>
+
+                    <button type="button" id="btn-paper" class="btn--move btn--move--paper" aria-keyshortcuts="S">
+                        <img class="btn--move-icon" src="./assets/icon/Paper.svg" alt="Paper" aria-hidden="true">
+                        <span class="btn--move-label">Papel</span>
+                        <kbd class="btn--move-key" aria-hidden="true">S</kbd>
+                    </button>
+
+                    <button type="button" id="btn-scissors" class="btn--move btn--move--scissors" aria-keyshortcuts="D">
+                        <img class="btn--move-icon" src="./assets/icon/Scissors.svg" alt="Scissor" aria-hidden="true">
+                        <span class="btn--move-label">Tijera</span>
+                        <kbd class="btn--move-key" aria-hidden="true">D</kbd>
+                    </button>
+                </div>
+
+                <button type="button" id="btn-sound" class="sound-btn" aria-label="Silenciar sonido" aria-pressed="false">
+                    <img class="sound-btn-icon" src="./assets/icon/volume-2.svg" alt="Sound" aria-hidden="true">
                 </button>
             </div>
-
-            <button id="btn-reset" class="choice-btn">
-                <img src="./assets/icon/volume-2.svg" alt="">
-            </button>
 
         </section>
 
