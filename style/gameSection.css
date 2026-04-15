@@ -25,42 +25,40 @@
 
 .score-hdr{
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     width: 100%;
     background: var(--surface-deep);
-    border-radius: var(--radius-md);
     padding: 12px 20px;
 } 
 
-.score-cpu{
-    align-items: flex-start;
-    text-align: left;
+.score-cpu, 
+.score-player{
+    display: flex;
+    flex-direction: column;
 }
 
-.socore-player{
-    align-items: flex-end;
-    text-align: right;
-}
-
-.score > span:last-child{
-    font-size: var(--fs-headline);
-    font-weight: var(--fw-black);
-    line-height: 1;
-    color: var(--text);
+.score-cpu, 
+.score-player{
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .score-cpu > span:first-child{
     color: var(--cpu);
+    font-weight: var(--fw-bold);
 }
+
 
 .score-player > span:first-child{
     color: var(--paper);
+    font-weight: var(--fw-bold);
 }
 
-.socore > span:last-child{
-    font-size: var(--fs-headline);/*mobil*/
+.score-cpu > span:last-child,
+.score-player > span:last-child{
+    font-size: var(--fs-headline);
     font-weight: var(--fw-black);
     line-height: 1;
     color: var(--text);
@@ -76,7 +74,6 @@
 
 .arena{
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 10px;
@@ -84,17 +81,9 @@
     padding: 8px;
 }
 
-.arena img{
-    flex: 1;
-    width: 299px;
-    height: 320px;
-    object-fit: cover;
-}
-
 .arena-hand{
     flex: 1 1 0;
     min-width:0;
-    width: 100%;
     max-width: 299px;
     height: auto;
     aspect-ratio:299 / 320;
@@ -119,65 +108,62 @@
     height: 72px;
     border-radius: 50%;
     border: 2px solid var(--purple);
-    padding: 10px;
-    gap: 10px;
     background: var(--surface-weather);
 }
 
 .arena-circle span{
     font-size:var(--fs-2xl);
     font-weight: var(--fw-black);
-    color: var(--text);
     line-height: 1;
+    color: var(--text);  
 }
 
-arena-vs{
+.arena-vs{
     font-size: var(--fs-nav);
     font-weight: var(--fw-extrabold);
     line-height: 1;
-    color: var(--border-purple);
-    text-transform: lowercase;
+    color: var(--border-purple-soft);
 }
 
 .ctrl-section{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15;
+    gap: 15px;
     width: 100%;
     padding: 16px;
 }
 
 .ctrl-section-message{
+    margin: 0;
     font-size: var(--fs-md);
     font-weight: var(--fw-normal);
     line-height: 1;
     color: var(--text-muted);
     text-align: center;
-    margin: 0;
 }
 
 .options{
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 16;
+    gap: 16px;
     width: 100%;
-    flex-wrap: wrap;
 }
 
 .options .btn--move{
     width: 90px;
     height: 90px;
     padding: 8px;
+    border-radius: 50%;
 }
 
 .btn--move-icon{
+    display: block;
     width: auto;
     height: 28px;
     object-fit: contain;
-    display: block;
 }
 
 .btn--move-label{
@@ -193,11 +179,10 @@ arena-vs{
     min-width: 30px;
     height: 21px;
     padding: 3px 8px;
-    border-radius: 6px;
     border: 1px solid rgb(104 66 255 / 0.4);
-    background: #0D0A1A;
-    font-family: inherit;
-    font-size: 12px;
+    background: var(--surface-deep);
+    font-family: inherit;/*Revisar en main.css*/
+    font-size: var(--fs-base);
     font-weight: var(--fw-extrabold);
     line-height: 1;
     color: var(--purple);
@@ -205,7 +190,7 @@ arena-vs{
 }
 
 .sound-btn {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     align-self: flex-end;
@@ -213,10 +198,9 @@ arena-vs{
     height: 48px;
     padding: 0;
     border-radius: 50%;
-    background: var(--sound-soft);
-    border: 3px solid var(--sound);
+    background: #D946EF;
+    border: 3px solid #D946EF44;
     color: var(--text);
-    cursor: pointer;
     transition:
         transform 0.25s var(--ease),
         box-shadow 0.25s var(--ease),
@@ -225,21 +209,71 @@ arena-vs{
 
 .sound-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px -8px var(--sound);
+    box-shadow: 0 8px 24px -8px var(--purple);
 }
 
 .sound-btn:focus-visible {
-    outline: 2px solid var(--sound);
+    outline: 2px solid var(--purple);
     outline-offset: 3px;
 }
 
 .sound-btn-icon {
     width: 24px;
     height: 24px;
-    display: block;
 }
 
 .sound-btn.is-muted {
     background: transparent;
     opacity: 0.7;
 }
+
+@media (min-width: 768px){
+
+    .game{
+        max-width: 560px;
+    }
+
+    .score-cpu > span:last-child, 
+    .score-player > span:last-child{
+        font-size: 36px;
+    }
+
+    .arena-circle{width: 64px; height: 64px;}
+    .arena-circle span{ font-size: 24px;}
+    
+    .options{gap: 32px;}
+    .options .btn--move{ 
+        width: 105px; 
+        height: 105px;
+        border-radius: 50%;
+    }
+    .btn--move-icon{ height: 32px;}
+}
+
+@media (min-width: 1200px){
+
+    .game{
+        max-width: 690px;
+        min-height: 658px;
+    }
+
+    .score-cpu > span:last-child,
+    .score-player > span:last-child{ font-size: 40px; }
+        
+    .arena-circle{ width: 72px; height: 72px;}
+    .arena-circle  span{ font-size: 28px;}
+        
+    .options{ gap: 50px; }
+    .options .btn--move{
+         width: 120px; 
+         height: 120px;
+        border-radius: 50%;
+    }
+    .btn--move-icon{   height: 35px;}
+        
+}    
+
+    
+       
+   
+
