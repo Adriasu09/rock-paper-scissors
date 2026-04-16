@@ -70,6 +70,9 @@ button {
   --mode-ctrl: #ff9800;
   --gold: #ffd60a;
 
+  /* tags */
+  --active: #0D2213;
+
   /* Radii */
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -107,7 +110,7 @@ button {
   --fw-black: 900;
 
   /* Layout */
-  --container: 1440px;
+  --container: 1100px;
   --sidebar: 250px;
   --sidebar-tablet: 220px;
   --nav-h: 64px;
@@ -191,5 +194,6 @@ body {
 @media only screen and (min-width: 1024px) {
   #root {
     gap: 40px;
+    max-width: var(--container);
   }
 }
