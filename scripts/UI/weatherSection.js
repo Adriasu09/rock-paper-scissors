@@ -40,7 +40,16 @@ export function renderWeather(weatherData) {
       <h3 class="weather-card__title">Clima Actual</h3>
     </div>    
       <p class="weather-card__temperature">${weatherData.temperature}°C</p>
+      <div class="weather-card__details">
+      <img
+        class="weather-card__weather-icon"
+        src="${weatherData.iconUrl}"
+        alt="${weatherData.description}"
+        width="64"
+        height="64"
+      />
       <p class="weather-card__description">${weatherData.description}</p>
+      </div>
     <div class="weather-card__footer">
       <span class="weather-card__stat">💨 ${weatherData.windSpeed} km/h</span>
       <span class="weather-card__stat">💧 ${weatherData.humidity}%</span>

@@ -118,6 +118,17 @@
   font-weight: var(--fw-bold);
 }
 
+.weather-card__details{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.weather-card__weather-icon {
+  width: 24px;
+  height: 24px;
+}
+
 .weather-card__description {
   font-size: var(--fs-nav);
   color: var(--text);
