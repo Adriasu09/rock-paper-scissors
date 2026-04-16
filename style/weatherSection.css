@@ -1,21 +1,19 @@
 /* ---------- Sidebar ---------- */
 .sidebar {
-  width: var(--sidebar);
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 16px;
-}
+    width: var(--sidebar-tablet);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
 
 /* ---------- Location Card ---------- */
 .location-card {
-  background: var(--surface-weather);
-  border: 1px solid var(--border-soft);
+  background: var(--surface);
   border-radius: var(--radius-lg);
-  padding: 20px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
 .location-card__header {
@@ -27,12 +25,13 @@
 .location-card__icon {
   width: 18px;
   height: 18px;
+  color: var(--purple);
 }
 
 .location-card__title {
   font-size: var(--fs-md);
-  font-weight: var(--fw-semibold);
-  color: var(--text-muted);
+  font-weight: var(--fw-bold);
+  color: var(--text);
 }
 
 .location-card__body {
@@ -164,4 +163,16 @@
   text-align: center;
   font-size: var(--fs-2xs);
   color: var(--text-muted);
+}
+
+@media only screen and (min-width: 768px) {
+  .sidebar {
+    display: flex;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .sidebar {
+    width: var(--sidebar);
+  }
 }

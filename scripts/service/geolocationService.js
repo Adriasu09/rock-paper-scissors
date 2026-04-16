@@ -4,7 +4,7 @@ import { NOMINATIM_BASE_URL, FLAG_BASE_URL } from "../constants/urls.js";
 const GEOCODE_OPTIONS = {
   enableHighAccuracy: false,
   timeout: 10000,
-  maximumAge: 300000,
+  maximumAge: Infinity,
 };
 
 const ERROR_MESSAGES = {

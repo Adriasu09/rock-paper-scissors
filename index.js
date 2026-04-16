@@ -17,8 +17,8 @@ function renderSidebar(locationHTML, weatherHTML) {
 let isLoading = false;
 
 async function initSidebar() {
-  if (isLoading) return;
-  isLoading = true;
+  //if (isLoading) return;
+  //isLoading = true;
 
   renderSidebar(renderLocation(null), renderWeather(null));
 
@@ -37,7 +37,7 @@ async function initSidebar() {
     document
       .getElementById("retry-location")
       .addEventListener("click", initSidebar);
-    isLoading = false;
+    //isLoading = false;
     return;
   }
 
@@ -55,7 +55,7 @@ async function initSidebar() {
     );
   }
 
-  isLoading = false;
+  //isLoading = false;
 }
 
 initSidebar();
