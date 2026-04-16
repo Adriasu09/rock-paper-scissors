@@ -1,28 +1,7 @@
 import { fetchData } from "../helpers/fetchData.js";
 import { NEWSAPI_BASE_URL } from "../constants/urls.js";
 import { NEWS_API_KEY } from "../constants/config.js";
-import { NEWS_CATEGORIES } from "../constants/newsCategoryPalette.js";
-
-// NewsAPI solo acepta ciertos countryCodes en top-headlines.
-// Fuente: https://newsapi.org/docs/endpoints/top-headlines
-const SUPPORTED_COUNTRIES = new Set([
-  "ae", "ar", "at", "au", "be", "bg", "br", "ca", "ch", "cn", "co", "cu",
-  "cz", "de", "eg", "fr", "gb", "gr", "hk", "hu", "id", "ie", "il", "in",
-  "it", "jp", "kr", "lt", "lv", "ma", "mx", "my", "ng", "nl", "no", "nz",
-  "ph", "pl", "pt", "ro", "rs", "ru", "sa", "se", "sg", "si", "sk", "th",
-  "tr", "tw", "ua", "us", "ve", "za",
-]);
-
-// Idiomas soportados por NewsAPI: ar, de, en, es, fr, he, it, nl, no, pt, ru, sv, zh
-const COUNTRY_LANGUAGE = {
-  ae: "ar", ar: "es", at: "de", au: "en", be: "fr", br: "pt",
-  ca: "en", ch: "de", cn: "zh", co: "es", cu: "es", de: "de",
-  eg: "ar", es: "es", fr: "fr", gb: "en", hk: "zh", ie: "en",
-  il: "he", in: "en", it: "it", ma: "ar", mx: "es", ng: "en",
-  nl: "nl", no: "no", nz: "en", ph: "en", pt: "pt", ru: "ru",
-  sa: "ar", se: "sv", sg: "en", tw: "zh", us: "en", ve: "es",
-  za: "en",
-};
+import { NEWS_CATEGORIES, SUPPORTED_COUNTRIES, COUNTRY_LANGUAGE } from "../constants/newsConstants.js";
 
 function getRelativeTime(publishedAt) {
   const diffMs = Date.now() - new Date(publishedAt).getTime();
