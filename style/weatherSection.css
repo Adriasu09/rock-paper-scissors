@@ -1,9 +1,10 @@
 /* ---------- Sidebar ---------- */
 .sidebar {
   width: var(--sidebar-tablet);
-  display: none;
   flex-direction: column;
-  gap: 25px;
+  gap: 16px;
+  display: none;
+  flex-shrink: 0;
 }
 
 /* ---------- Location Card ---------- */
@@ -160,3 +161,4 @@
     width: var(--sidebar);
   }
 }
+

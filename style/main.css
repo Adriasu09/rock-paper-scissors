@@ -112,7 +112,7 @@ button {
   --fw-black: 900;
 
   /* Layout */
-  --container: 1100px;
+  --container: 1280px;
   --sidebar: 250px;
   --sidebar-tablet: 220px;
   --nav-h: 64px;
@@ -141,6 +141,12 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+/* ---------- Layout 3 columnas ---------- */
+.game-area {
+  flex: 1;
+  min-width: 0;
 }
 
 /* ---------- Botones ---------- */
@@ -189,13 +195,18 @@ body {
 
 @media only screen and (min-width: 768px) {
   #root {
-    gap: 30px;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 24px 20px;
   }
 }
 
 @media only screen and (min-width: 1024px) {
   #root {
-    gap: 40px;
+    gap: 24px;
     max-width: var(--container);
+    margin: 0 auto;
+    padding: 32px 24px;
   }
 }
