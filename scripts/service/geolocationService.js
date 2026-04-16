@@ -8,7 +8,7 @@ const GEOCODE_OPTIONS = {
 };
 
 const ERROR_MESSAGES = {
-  1: "Permiso de ubicación denegado",
+  1: "Permiso denegado",
   2: "Ubicación no disponible",
   3: "Tiempo de espera agotado",
 };

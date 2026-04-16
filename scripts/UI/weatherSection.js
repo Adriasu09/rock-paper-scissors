@@ -3,7 +3,9 @@ export function renderWeather(weatherData) {
     return `
     <article class="weather-card">
       <div class="weather-card__header">
-        <img src="./assets/icon/cloud.svg" alt="clima" class="weather-card__icon" />
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud weather-card__icon">
+          <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+        </svg>
         <h3 class="weather-card__title">Clima Actual</h3>
       </div>
       <div class="weather-card__body">
@@ -17,7 +19,9 @@ export function renderWeather(weatherData) {
     return `
     <article class="weather-card">
       <div class="weather-card__header">
-        <img src="./assets/icon/cloud.svg" alt="clima" class="weather-card__icon" />
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud weather-card__icon">
+        <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+      </svg>
         <h3 class="weather-card__title">Clima Actual</h3>
       </div>
       <div class="weather-card__body">
@@ -30,15 +34,15 @@ export function renderWeather(weatherData) {
   return `
   <article class="weather-card">
     <div class="weather-card__header">
-      <img src="./assets/icon/cloud.svg" alt="clima" class="weather-card__icon" />
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud weather-card__icon">
+        <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+      </svg>
       <h3 class="weather-card__title">Clima Actual</h3>
-    </div>
-    <div class="weather-card__body">
+    </div>    
       <p class="weather-card__temperature">${weatherData.temperature}°C</p>
       <p class="weather-card__description">${weatherData.description}</p>
-    </div>
     <div class="weather-card__footer">
-      <span class="weather-card__stat">🌬 ${weatherData.windSpeed} km/h</span>
+      <span class="weather-card__stat">💨 ${weatherData.windSpeed} km/h</span>
       <span class="weather-card__stat">💧 ${weatherData.humidity}%</span>
     </div>
     <p class="weather-card__source">via Open-Meteo</p>

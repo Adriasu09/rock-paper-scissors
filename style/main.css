@@ -72,8 +72,10 @@ button {
 
   /* tags */
   --active: #0D2213;
+  --warning: #FF8C00;
 
   /* Radii */
+  --radius-xs: 4px;
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
@@ -146,9 +148,9 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  font-weight: 700;
-  border-radius: 10px;
+  gap: 6px;
+  font-weight: var(--fw-semibold);
+  border-radius: var(--radius-sm);
   padding: 15px 32px;
   font-size: 15px;
   transition:
@@ -161,8 +163,8 @@ body {
 }
 
 .btn--sm {
-  font-size: 14px;
-  padding: 12px 24px;
+  font-size: var(--fs-sm);
+  padding: 8px 16px;
   border-radius: var(--radius-sm);
 }
 
