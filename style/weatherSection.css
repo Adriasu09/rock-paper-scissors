@@ -1,10 +1,6 @@
 /* ---------- Sidebar ---------- */
-.sidebar {
-  width: var(--sidebar-tablet);
-  flex-direction: column;
-  gap: 16px;
+.sidebar--right{
   display: none;
-  flex-shrink: 0;
 }
 
 /* ---------- Location Card ---------- */
@@ -35,7 +31,8 @@
   color: var(--purple);
 }
 
-.location-card__title, .weather-card__title {
+.location-card__title,
+.weather-card__title {
   font-size: var(--fs-md);
   font-weight: var(--fw-bold);
   color: var(--text);
@@ -61,7 +58,8 @@
   font-weight: var(--fw-bold);
 }
 
-.location-card__detail, .weather-card__detail {
+.location-card__detail,
+.weather-card__detail {
   font-size: var(--fs-md);
   color: var(--text-muted);
 }
@@ -103,14 +101,14 @@
   box-shadow: 0 8px 24px -8px var(--warning);
 }
 
-.refresh-icon{
+.refresh-icon {
   width: 12px;
   height: 12px;
 }
 
 /* ---------- Weather Card ---------- */
 .weather-card__icon {
- color: var(--paper);
+  color: var(--paper);
 }
 
 .weather-card__temperature {
@@ -119,7 +117,7 @@
   font-weight: var(--fw-bold);
 }
 
-.weather-card__details{
+.weather-card__details {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -151,14 +149,14 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .sidebar {
+  .sidebar--right {
     display: flex;
+    width: var(--sidebar-tablet);
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .sidebar {
+  .sidebar--right{
     width: var(--sidebar);
   }
 }
-

@@ -1,3 +1,8 @@
+/* ---------- Sidebar ---------- */
+.sidebar--left {
+  display: none;
+}
+
 /* ---------- News Card ---------- */
 .news-card {
   background: var(--surface);
@@ -11,13 +16,13 @@
 .news-card__header {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 19px;
 }
 
 .news-card__icon {
-  width: 18px;
-  height: 18px;
-  color: var(--paper);
+  width: 16px;
+  height: 16px;
+  color: var(--purple);
   flex-shrink: 0;
 }
 
@@ -50,9 +55,7 @@
 }
 
 .news-card__country-flag {
-  width: 20px;
-  height: 14px;
-  border-radius: 2px;
+  width: 24px;
   object-fit: cover;
 }
 
@@ -139,4 +142,14 @@
   width: 12px;
   height: 12px;
   flex-shrink: 0;
+}
+
+@media only screen and (min-width: 768px) {
+}
+
+@media only screen and (min-width: 1024px) {
+  .sidebar--left {
+    display: flex;
+    width: var(--sidebar);
+  }
 }

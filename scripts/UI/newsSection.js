@@ -1,23 +1,13 @@
 import { getCountryFlagUrl } from "../service/geolocationService.js";
 
-const NEWSPAPER_ICON = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-newspaper news-card__icon">
-    <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/>
-    <path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/>
-  </svg>
-`;
-
-const CLOCK_ICON = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="news-card__clock-icon">
-    <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-  </svg>
-`;
-
 function renderHeader(country) {
   const title = country ? `Noticias de ${country}` : "Noticias";
   return `
     <div class="news-card__header">
-      ${NEWSPAPER_ICON}
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-newspaper news-card__icon">
+        <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/>
+        <path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/>
+      </svg>
       <div class="news-card__heading">
         <h3 class="news-card__title">${title}</h3>
         <span class="news-card__subtitle">Via NewsApi</span>
@@ -53,7 +43,9 @@ function renderArticle(article) {
 function renderFooter() {
   return `
     <div class="news-card__footer">
-      ${CLOCK_ICON}
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="news-card__clock-icon">
+        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+      </svg>
       <span>Actualizado hace unos instantes</span>
     </div>
   `;
@@ -79,27 +71,36 @@ export function renderNews(newsData) {
   }
 
   if (newsData.error) {
-    return renderWrapper(`
+    return renderWrapper(
+      `
       <div class="news-card__body">
         <p class="news-card__detail">${newsData.error}</p>
       </div>
-    `, newsData);
+    `,
+      newsData,
+    );
   }
 
   if (!newsData.articles || newsData.articles.length === 0) {
-    return renderWrapper(`
+    return renderWrapper(
+      `
       <div class="news-card__body">
         <p class="news-card__detail">No hay noticias disponibles.</p>
       </div>
-    `, newsData);
+    `,
+      newsData,
+    );
   }
 
   const articlesHTML = newsData.articles.map(renderArticle).join("");
 
-  return renderWrapper(`
+  return renderWrapper(
+    `
     <ul class="news-card__list">
       ${articlesHTML}
     </ul>
     ${renderFooter()}
-  `, newsData);
+  `,
+    newsData,
+  );
 }

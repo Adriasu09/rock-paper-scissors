@@ -71,8 +71,8 @@ button {
   --gold: #ffd60a;
 
   /* tags */
-  --active: #0D2213;
-  --warning: #FF8C00;
+  --active: #0d2213;
+  --warning: #ff8c00;
 
   /* Radii */
   --radius-xs: 4px;
@@ -144,6 +144,12 @@ body {
 }
 
 /* ---------- Layout 3 columnas ---------- */
+.sidebar {
+  flex-direction: column;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
 .game-area {
   flex: 1;
   min-width: 0;
