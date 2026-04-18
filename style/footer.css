@@ -73,6 +73,16 @@
   color: var(--text);
 }
 
+.footer__link--accent {
+  color: var(--purple);
+  font-weight: var(--fw-semibold);
+}
+
+.footer__link--accent:hover {
+  color: var(--purple);
+  opacity: 0.85;
+}
+
 /* ---------- Breakpoints ---------- */
 @media only screen and (min-width: 768px) {
   .footer__inner {
@@ -92,15 +102,5 @@
 
   .footer__rights--short {
     display: none;
-  }
-
-  .footer__link--accent {
-    color: var(--purple);
-    font-weight: var(--fw-semibold);
-  }
-
-  .footer__link--accent:hover {
-    color: var(--purple);
-    opacity: 0.85;
   }
 }
