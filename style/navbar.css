@@ -6,16 +6,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
   padding: 15px 24px;
-  background: var(--bg-nav);
-  border-bottom: 1px solid var(--border-soft);
   min-height: var(--nav-h);
+  width: 100%;
+  max-width: var(--container);
 }
 
 /* ---------- Logo ---------- */
 .navbar__logo {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 8px;
   color: var(--text);
@@ -23,13 +22,12 @@
 }
 
 .navbar__logo-icon {
-  color: var(--text);
+  width: 15px;
 }
 
 .navbar__logo-text {
   font-size: var(--fs-lg);
   font-weight: var(--fw-bold);
-  color: var(--text);
 }
 
 /* ---------- Desktop links ---------- */
@@ -91,13 +89,13 @@
 }
 
 .navbar__pill {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 10px;
+  padding: 8px 12px;
   background: var(--surface);
   border-radius: var(--radius-pill);
-  font-size: var(--fs-base);
+  font-size: var(--fs-nav);
   color: var(--text-muted);
   white-space: nowrap;
 }
@@ -114,25 +112,16 @@
   border-radius: 2px;
 }
 
-.navbar__pill-text {
-  font-size: var(--fs-base);
-  color: var(--text-muted);
-}
-
 .navbar__menu-btn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 40px;
-  height: 32px;
+  height: 37px;
   background: var(--surface);
   color: var(--text-muted);
   border: none;
   border-radius: var(--radius-sm);
-}
-
-.navbar__menu-btn:hover {
-  color: var(--text);
 }
 
 /* ---------- Dropdown (mobile) ---------- */
