@@ -4,8 +4,10 @@ import { getNews } from "./scripts/service/newsService.js";
 import { renderLocation } from "./scripts/UI/locationSection.js";
 import { renderWeather } from "./scripts/UI/weatherSection.js";
 import { renderNews } from "./scripts/UI/newsSection.js";
+import { renderNavbar, initNavbarInteractions } from "./scripts/UI/navbar.js";
 
 const root = document.getElementById("root");
+const navbar = document.getElementById("navbar");
 
 function renderLayout({ leftHTML, rightHTML }) {
   root.innerHTML = `
@@ -21,7 +23,13 @@ function renderLayout({ leftHTML, rightHTML }) {
   `;
 }
 
+function renderNavbarWith(locationData, weatherData) {
+  navbar.innerHTML = renderNavbar(locationData, weatherData);
+  initNavbarInteractions();
+}
+
 async function initSidebar() {
+  renderNavbarWith(null, null);
   renderLayout({
     leftHTML: renderNews(null),
     rightHTML: renderLocation(null) + renderWeather(null),
@@ -31,12 +39,14 @@ async function initSidebar() {
 
   try {
     locationData = await getUserLocation();
+    renderNavbarWith(locationData, null);
     renderLayout({
       leftHTML: renderNews(null),
       rightHTML: renderLocation(locationData) + renderWeather(null),
     });
   } catch (error) {
     console.error("Error en getUserLocation:", error.message);
+    renderNavbarWith({ error: error.message }, { error: "Sin datos" });
     renderLayout({
       leftHTML: renderNews({ error: "Se requiere ubicación para las noticias" }),
       rightHTML:
@@ -55,10 +65,12 @@ async function initSidebar() {
     getNews(locationData.countryCode),
   ]);
 
-  const weatherHTML =
+  const weatherData =
     weatherResult.status === "fulfilled"
-      ? renderWeather(weatherResult.value)
-      : renderWeather({ error: weatherResult.reason.message });
+      ? weatherResult.value
+      : { error: weatherResult.reason.message };
+
+  const weatherHTML = renderWeather(weatherData);
 
   const newsHTML =
     newsResult.status === "fulfilled"
@@ -80,6 +92,7 @@ async function initSidebar() {
     console.error("Error en getNews:", newsResult.reason.message);
   }
 
+  renderNavbarWith(locationData, weatherData);
   renderLayout({
     leftHTML: newsHTML,
     rightHTML: renderLocation(locationData) + weatherHTML,
