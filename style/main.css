@@ -115,7 +115,7 @@ button {
   --container: 1280px;
   --sidebar: 250px;
   --sidebar-tablet: 220px;
-  --nav-h: 64px;
+  --nav-h: 66px;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -135,12 +135,29 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#navbar {
+  background: var(--bg-nav);
+  border-bottom: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #root {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  flex: 1;
+}
+
+#footer {
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border-soft);
 }
 
 /* ---------- Layout 3 columnas ---------- */
@@ -199,10 +216,113 @@ body {
   transform: translateY(-2px);
 }
 
+/* ---------- Botones de jugada (Roca / Papel / Tijera) ---------- */
+.btn--move {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 120px;
+  height: 120px;
+  border-radius: var(--radius-btn-move);
+  background: var(--surface-game);
+  border: 2px solid transparent;
+  color: var(--text);
+  font-weight: 700;
+  transition:
+    transform 0.25s var(--ease),
+    box-shadow 0.25s var(--ease);
+}
+
+.btn--move:hover {
+  transform: translateY(-2px);
+}
+
+.btn--move--rock {
+  border-color: var(--rock);
+  color: var(--rock);
+}
+
+.btn--move--rock:hover {
+  box-shadow: 0 12px 32px -12px var(--rock);
+}
+
+.btn--move--paper {
+  border-color: var(--paper);
+  color: var(--paper);
+}
+
+.btn--move--paper:hover {
+  box-shadow: 0 12px 32px -12px var(--paper);
+}
+
+.btn--move--scissors {
+  border-color: var(--scissors);
+  color: var(--scissors);
+}
+
+.btn--move--scissors:hover {
+  box-shadow: 0 12px 32px -12px var(--scissors);
+}
+
+/* ---------- Botones de modo (1P / 2P / Controles) ---------- */
+.btn--mode {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 110px;
+  height: 110px;
+  border-radius: var(--radius-btn-mode);
+  background: var(--surface);
+  border: 3px solid transparent;
+  color: var(--text);
+  font-weight: 800;
+  transition:
+    transform 0.25s var(--ease),
+    box-shadow 0.25s var(--ease);
+}
+
+.btn--mode:hover {
+  transform: translateY(-2px);
+}
+
+.btn--mode--1p {
+  border-color: var(--mode-1p);
+  color: var(--mode-1p);
+}
+
+.btn--mode--1p:hover {
+  box-shadow: 0 12px 32px -12px var(--mode-1p);
+}
+
+.btn--mode--2p {
+  border-color: var(--mode-2p);
+  color: var(--mode-2p);
+}
+
+.btn--mode--2p:hover {
+  box-shadow: 0 12px 32px -12px var(--mode-2p);
+}
+
+.btn--mode--ctrl {
+  width: 90px;
+  height: 90px;
+  border-radius: var(--radius-btn-ctrl);
+  border-color: var(--mode-ctrl);
+  color: var(--mode-ctrl);
+}
+
+.btn--mode--ctrl:hover {
+  box-shadow: 0 12px 32px -12px var(--mode-ctrl);
+}
+
 @media only screen and (min-width: 768px) {
   #root {
     flex-direction: row;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 20px;
     padding: 24px 20px;
   }
@@ -211,107 +331,9 @@ body {
 @media only screen and (min-width: 1024px) {
   #root {
     gap: 24px;
+    width: 100%;
     max-width: var(--container);
     margin: 0 auto;
     padding: 32px 24px;
   }
-}
-
-/* ---------- Botones de jugada (Roca / Papel / Tijera) ---------- */
-.btn--move {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    width: 120px;
-    height: 120px;
-    border-radius: var(--radius-btn-move);
-    background: var(--surface-game);
-    border: 2px solid transparent;
-    color: var(--text);
-    font-weight: 700;
-    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
-}
-
-.btn--move:hover {
-    transform: translateY(-2px);
-}
-
-.btn--move--rock {
-    border-color: var(--rock);
-    color: var(--rock);
-}
-
-.btn--move--rock:hover {
-    box-shadow: 0 12px 32px -12px var(--rock);
-}
-
-.btn--move--paper {
-    border-color: var(--paper);
-    color: var(--paper);
-}
-
-.btn--move--paper:hover {
-    box-shadow: 0 12px 32px -12px var(--paper);
-}
-
-.btn--move--scissors {
-    border-color: var(--scissors);
-    color: var(--scissors);
-}
-
-.btn--move--scissors:hover {
-    box-shadow: 0 12px 32px -12px var(--scissors);
-}
-
-/* ---------- Botones de modo (1P / 2P / Controles) ---------- */
-.btn--mode {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    width: 110px;
-    height: 110px;
-    border-radius: var(--radius-btn-mode);
-    background: var(--surface);
-    border: 3px solid transparent;
-    color: var(--text);
-    font-weight: 800;
-    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
-}
-
-.btn--mode:hover {
-    transform: translateY(-2px);
-}
-
-.btn--mode--1p {
-    border-color: var(--mode-1p);
-    color: var(--mode-1p);
-}
-
-.btn--mode--1p:hover {
-    box-shadow: 0 12px 32px -12px var(--mode-1p);
-}
-
-.btn--mode--2p {
-    border-color: var(--mode-2p);
-    color: var(--mode-2p);
-}
-
-.btn--mode--2p:hover {
-    box-shadow: 0 12px 32px -12px var(--mode-2p);
-}
-
-.btn--mode--ctrl {
-    width: 90px;
-    height: 90px;
-    border-radius: var(--radius-btn-ctrl);
-    border-color: var(--mode-ctrl);
-    color: var(--mode-ctrl);
-}
-
-.btn--mode--ctrl:hover {
-    box-shadow: 0 12px 32px -12px var(--mode-ctrl);
 }

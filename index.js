@@ -4,8 +4,13 @@ import { getNews } from "./scripts/service/newsService.js";
 import { renderLocation } from "./scripts/UI/locationSection.js";
 import { renderWeather } from "./scripts/UI/weatherSection.js";
 import { renderNews } from "./scripts/UI/newsSection.js";
+import { renderGameScreen } from "./scripts/UI/gameScreen.js";
 
 const root = document.getElementById("root");
+
+let gameState = { view: "start" }; // ← pantalla de inicio (por defecto)
+//let gameState = { view: "play" }; // ← juego en curso
+//let gameState = { view: "gameOver" }; // ← fin del juego
 
 function renderLayout({ leftHTML, rightHTML }) {
   root.innerHTML = `
@@ -13,12 +18,22 @@ function renderLayout({ leftHTML, rightHTML }) {
       ${leftHTML}
     </aside>
     <main class="game-area">
-      <!-- juego -->
+      ${renderGameScreen(gameState)}
     </main>
     <aside class="sidebar sidebar--right">
       ${rightHTML}
     </aside>
   `;
+}
+
+export function setGameState(nextState) {
+  gameState = nextState;
+  const leftAside = root.querySelector(".sidebar--left");
+  const rightAside = root.querySelector(".sidebar--right");
+  renderLayout({
+    leftHTML: leftAside ? leftAside.innerHTML : "",
+    rightHTML: rightAside ? rightAside.innerHTML : "",
+  });
 }
 
 async function initSidebar() {
@@ -38,7 +53,9 @@ async function initSidebar() {
   } catch (error) {
     console.error("Error en getUserLocation:", error.message);
     renderLayout({
-      leftHTML: renderNews({ error: "Se requiere ubicación para las noticias" }),
+      leftHTML: renderNews({
+        error: "Se requiere ubicación para las noticias",
+      }),
       rightHTML:
         renderLocation({ error: error.message }) +
         renderWeather({ error: "Se requiere ubicación para el clima" }),
