@@ -1,8 +1,36 @@
-import {
-  getStoredUserData,
-  saveUserData,
-  setupTabs,
-} from "./scripts/UI/service/main.js";
+const USER_DATA_KEY = "azarGameUserData";
+
+function getStoredUserData() {
+  try {
+    const rawValue = window.localStorage.getItem(USER_DATA_KEY);
+    return rawValue ? JSON.parse(rawValue) : null;
+  } catch {
+    return null;
+  }
+}
+
+function saveUserData(userData) {
+  window.localStorage.setItem(USER_DATA_KEY, JSON.stringify(userData));
+}
+
+function setupTabs() {
+  const tabButtons = document.querySelectorAll(".nav-tab[data-target]");
+  const panels = document.querySelectorAll(".content-panel");
+
+  tabButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const targetId = button.dataset.target;
+
+      tabButtons.forEach((tabButton) => {
+        tabButton.classList.toggle("is-active", tabButton === button);
+      });
+
+      panels.forEach((panel) => {
+        panel.classList.toggle("is-active", panel.id === targetId);
+      });
+    });
+  });
+}
 
 function formatDate(dateValue) {
   if (!dateValue) {
