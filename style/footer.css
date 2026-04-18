@@ -1,0 +1,106 @@
+/* =========================================================
+   Footer — AZARGame
+   ========================================================= */
+
+.footer__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px;
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+}
+
+/* ---------- Brand (logo + copyright) ---------- */
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.footer__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+}
+
+.footer__logo-icon {
+  width: 16px;
+  height: auto;
+  color: var(--text);
+}
+
+.footer__logo-text {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  color: var(--text);
+}
+
+.footer__rights {
+  font-size: var(--fs-nav);
+  color: var(--text-muted);
+}
+
+.footer__rights--full {
+  display: none;
+}
+
+.footer__rights--short {
+  display: inline;
+}
+
+/* ---------- Links ---------- */
+.footer__links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer__link {
+  font-size: var(--fs-nav);
+  color: var(--text-muted);
+  transition: color 0.2s var(--ease);
+}
+
+.footer__link:hover {
+  color: var(--text);
+}
+
+/* ---------- Breakpoints ---------- */
+@media only screen and (min-width: 768px) {
+  .footer__inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 87px;
+  }
+
+  .footer__brand {
+    align-items: flex-start;
+  }
+
+  .footer__rights--full {
+    display: inline;
+  }
+
+  .footer__rights--short {
+    display: none;
+  }
+
+  .footer__link--accent {
+    color: var(--purple);
+    font-weight: var(--fw-semibold);
+  }
+
+  .footer__link--accent:hover {
+    color: var(--purple);
+    opacity: 0.85;
+  }
+}

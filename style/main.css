@@ -135,6 +135,9 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 #navbar {
@@ -149,6 +152,12 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  flex: 1;
+}
+
+#footer {
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border-soft);
 }
 
 /* ---------- Layout 3 columnas ---------- */
@@ -161,6 +170,7 @@ body {
 .game-area {
   flex: 1;
   min-width: 0;
+  min-height: 400px;
 }
 
 /* ---------- Botones ---------- */
@@ -205,24 +215,6 @@ body {
 .btn--ghost:hover {
   background: #6842ff26;
   transform: translateY(-2px);
-}
-
-@media only screen and (min-width: 768px) {
-  #root {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 20px;
-    padding: 24px 20px;
-  }
-}
-
-@media only screen and (min-width: 1024px) {
-  #root {
-    gap: 24px;
-    max-width: var(--container);
-    margin: 0 auto;
-    padding: 32px 24px;
-  }
 }
 
 /* ---------- Botones de jugada (Roca / Papel / Tijera) ---------- */
@@ -326,4 +318,23 @@ body {
 
 .btn--mode--ctrl:hover {
   box-shadow: 0 12px 32px -12px var(--mode-ctrl);
+}
+
+@media only screen and (min-width: 768px) {
+  #root {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 20px;
+    padding: 24px 20px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  #root {
+    gap: 24px;
+    width: 100%;
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 32px 24px;
+  }
 }

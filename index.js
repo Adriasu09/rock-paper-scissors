@@ -5,9 +5,12 @@ import { renderLocation } from "./scripts/UI/locationSection.js";
 import { renderWeather } from "./scripts/UI/weatherSection.js";
 import { renderNews } from "./scripts/UI/newsSection.js";
 import { renderNavbar, initNavbarInteractions } from "./scripts/UI/navbar.js";
+import { renderFooter } from "./scripts/UI/footer.js";
 
 const root = document.getElementById("root");
 const navbar = document.getElementById("navbar");
+const footer = document.getElementById("footer");
+footer.innerHTML = renderFooter();
 
 function renderLayout({ leftHTML, rightHTML }) {
   root.innerHTML = `
