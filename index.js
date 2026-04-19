@@ -34,6 +34,8 @@ function renderLayout({ leftHTML, rightHTML }) {
 function renderNavbarWith(locationData, weatherData) {
   navbar.innerHTML = renderNavbar(locationData, weatherData);
   initNavbarInteractions();
+}
+
 export function setGameState(nextState) {
   gameState = nextState;
   const leftAside = root.querySelector(".sidebar--left");
