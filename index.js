@@ -6,11 +6,16 @@ import { renderWeather } from "./scripts/UI/weatherSection.js";
 import { renderNews } from "./scripts/UI/newsSection.js";
 import { renderNavbar, initNavbarInteractions } from "./scripts/UI/navbar.js";
 import { renderFooter } from "./scripts/UI/footer.js";
+import { renderGameScreen } from "./scripts/UI/gameScreen.js";
 
 const root = document.getElementById("root");
 const navbar = document.getElementById("navbar");
 const footer = document.getElementById("footer");
 footer.innerHTML = renderFooter();
+
+//let gameState = { view: "start" }; // ← pantalla de inicio (por defecto)
+let gameState = { view: "play" }; // ← juego en curso
+//let gameState = { view: "gameOver" }; // ← fin del juego
 
 function renderLayout({ leftHTML, rightHTML }) {
   root.innerHTML = `
@@ -18,7 +23,7 @@ function renderLayout({ leftHTML, rightHTML }) {
       ${leftHTML}
     </aside>
     <main class="game-area">
-      <!-- juego -->
+      ${renderGameScreen(gameState)}
     </main>
     <aside class="sidebar sidebar--right">
       ${rightHTML}
@@ -29,6 +34,14 @@ function renderLayout({ leftHTML, rightHTML }) {
 function renderNavbarWith(locationData, weatherData) {
   navbar.innerHTML = renderNavbar(locationData, weatherData);
   initNavbarInteractions();
+export function setGameState(nextState) {
+  gameState = nextState;
+  const leftAside = root.querySelector(".sidebar--left");
+  const rightAside = root.querySelector(".sidebar--right");
+  renderLayout({
+    leftHTML: leftAside ? leftAside.innerHTML : "",
+    rightHTML: rightAside ? rightAside.innerHTML : "",
+  });
 }
 
 async function initSidebar() {
@@ -51,7 +64,9 @@ async function initSidebar() {
     console.error("Error en getUserLocation:", error.message);
     renderNavbarWith({ error: error.message }, { error: "Sin datos" });
     renderLayout({
-      leftHTML: renderNews({ error: "Se requiere ubicación para las noticias" }),
+      leftHTML: renderNews({
+        error: "Se requiere ubicación para las noticias",
+      }),
       rightHTML:
         renderLocation({ error: error.message }) +
         renderWeather({ error: "Se requiere ubicación para el clima" }),
