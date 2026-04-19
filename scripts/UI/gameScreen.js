@@ -138,7 +138,7 @@ function renderGameOverScreen(state) {
 
   return `
     <section class="game game--over">
-      <img class="gameover-trophy" src="./assets/icon/trophy.svg" alt="" aria-hidden="true" />
+      <img class="gameover-trophy" src="./assets/icon/trophy-yellow.svg" alt="" aria-hidden="true" />
       <h2 class="gameover-title">${title}</h2>
 
       <div class="gameover-arena">
