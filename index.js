@@ -5,14 +5,20 @@ import { renderLocation } from "./scripts/UI/locationSection.js";
 import { renderWeather } from "./scripts/UI/weatherSection.js";
 import { renderNews } from "./scripts/UI/newsSection.js";
 import { renderGameScreen } from "./scripts/UI/gameScreen.js";
+import { renderNameModal, attachNameModal } from "./scripts/UI/nameModal.js";
+import { showRoundResult } from "./scripts/UI/roundModal.js";
 import { initAudio, attachSoundButton } from "./scripts/service/audioController.js";
 
 const root = document.getElementById("root");
 
 initAudio();
 
-let gameState = { view: "play" }; // ← juego en curso
-//let gameState = { view: "start" }; // ← pantalla de inicio (por defecto)
+// Punto de extensión: la lógica de rondas futura debe llamar a
+// window.__showRoundResult("win" | "lose" | "tie") al terminar cada ronda.
+window.__showRoundResult = showRoundResult;
+
+let gameState = { view: "start" }; // ← pantalla de inicio (por defecto)
+//let gameState = { view: "play" }; // ← juego en curso
 // let gameState = {
 //   view: "gameOver",
 //   winner: "player",
@@ -32,6 +38,24 @@ function renderLayout({ leftHTML, rightHTML }) {
     </aside>
   `;
   attachSoundButton();
+  attachStartScreenHandlers();
+}
+
+function attachStartScreenHandlers() {
+  if (gameState.view !== "start") return;
+  const playBtn = root.querySelector(".btn-play");
+  if (!playBtn) return;
+  playBtn.addEventListener("click", () => {
+    if (document.getElementById("name-modal")) return;
+    document.body.insertAdjacentHTML("beforeend", renderNameModal());
+    attachNameModal((name) => {
+      setGameState({
+        view: "play",
+        playerName: name,
+        scores: { player: 0, cpu: 0 },
+      });
+    });
+  });
 }
 
 export function setGameState(nextState) {

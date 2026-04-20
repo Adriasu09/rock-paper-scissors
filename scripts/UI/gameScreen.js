@@ -175,11 +175,12 @@ function renderGameOverScreen(state) {
   const winner = state?.winner ?? "player";
   const playerScore = state?.scores?.player ?? 0;
   const cpuScore = state?.scores?.cpu ?? 0;
+  const playerName = (state?.playerName ?? "JUGADOR").toUpperCase();
 
   const variants = {
-    player: { title: "¡JUGADOR GANA!", playerImg: "victory.png", cpuImg: "defeat.png" },
-    cpu:    { title: "¡CPU GANA!",     playerImg: "defeat.png",  cpuImg: "victory.png" },
-    tie:    { title: "¡EMPATE!",       playerImg: "victory.png", cpuImg: "victory.png" },
+    player: { title: `¡${playerName} GANA!`, playerImg: "victory.png", cpuImg: "defeat.png" },
+    cpu:    { title: "¡CPU GANA!",           playerImg: "defeat.png",  cpuImg: "victory.png" },
+    tie:    { title: "¡EMPATE!",             playerImg: "victory.png", cpuImg: "victory.png" },
   };
   const { title, playerImg, cpuImg } = variants[winner] ?? variants.player;
 
