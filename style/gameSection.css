@@ -165,22 +165,21 @@
 .arena-vs {
   font-size: var(--fs-nav);
   font-weight: var(--fw-extrabold);
-  line-height: 1;
   color: var(--border-purple-soft);
 }
 
 .arena {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 3px;
   width: 100%;
+  min-height: 250px;
 }
 
 .arena-hand {
   flex: 1 1 0;
   min-width: 0;
-  max-width: 161px;
   height: auto;
   object-fit: contain;
 }
@@ -208,7 +207,6 @@
 .arena-circle span {
   font-size: var(--fs-lg);
   font-weight: var(--fw-black);
-  line-height: 1;
   color: var(--text);
 }
 
@@ -218,13 +216,10 @@
   align-items: center;
   gap: 15px;
   width: 100%;
-  padding: 16px 0;
 }
 
 .ctrl-section-message {
-  margin: 0;
   font-size: var(--fs-base);
-  line-height: 1;
   color: var(--text-muted);
   text-align: center;
 }
@@ -246,34 +241,27 @@
 }
 
 .btn--move-icon {
-  display: block;
-  width: auto;
   height: 22px;
-  object-fit: contain;
 }
 
 .btn--move-label {
-  font-size: var(--fs-sm);
+  font-size: var(--fs-xs);
   font-weight: var(--fw-bold);
-  line-height: 1;
 }
 
 .btn--move-key {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 26px;
-  height: 18px;
-  padding: 2px 6px;
+  min-width: 30px;
+  height: 19px;
+  padding: 3px 8px;
   border: 1px solid var(--border-purple);
   border-radius: var(--radius-xs);
   background: var(--surface-deep);
-  font-family: inherit;
-  font-size: var(--fs-xs);
+  font-size: var(--fs-sm);
   font-weight: var(--fw-extrabold);
-  line-height: 1;
   color: var(--purple);
-  text-transform: uppercase;
 }
 
 /* ---------- Score Item (compartido por Play y GameOver) ---------- */
@@ -284,12 +272,10 @@
 }
 
 .score-item-label {
-  line-height: 1;
   font-weight: var(--fw-extrabold);
 }
 
 .score-item-value {
-  line-height: 1;
   font-weight: var(--fw-black);
   color: var(--text);
 }
@@ -298,7 +284,6 @@
 .score-item--player .score-item-label { color: var(--paper); }
 
 /* Play — tamaños del score-item dentro del header */
-.score-hdr .score-item { gap: 8px; }
 .score-hdr .score-item-label { font-size: var(--fs-2xs); }
 .score-hdr .score-item-value { font-size: var(--fs-score-mode); }
 
@@ -470,6 +455,7 @@
     min-height: 576px;
     border: 2px solid var(--border-soft);
     border-radius: var(--radius-md);
+
   }
 
   /* Start */
@@ -479,6 +465,10 @@
 
   .game-screen--start .options {
     gap: 32px;
+  }
+
+  .btn-play{
+    max-width: 300px;
   }
 
   /* Play */
@@ -523,8 +513,8 @@
   /* Sound button */
   .sound-btn {
     top: auto;
-    bottom: 16px;
-    right: 16px;
+    bottom: 2px;
+    right: 2px;
   }
 
   .sound-btn-icon {
@@ -533,7 +523,7 @@
   }
 
   /* Game Over */
-  .game-screen--over { padding: 32px 10px 20px; }
+  .game-screen--over { padding: 32px 10px; }
   .gameover-result { height: 320px; }
 }
 

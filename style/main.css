@@ -153,7 +153,6 @@ body {
 #root {
   display: flex;
   flex-direction: column;
-  gap: 20px;
   flex: 1;
 }
 
@@ -325,7 +324,6 @@ body {
   #root {
     flex-direction: row;
     align-items: stretch;
-    gap: 20px;
     padding: 24px 20px;
   }
 }
