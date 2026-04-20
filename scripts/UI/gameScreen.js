@@ -125,10 +125,71 @@ function renderPlayScreen(state) {
 }
 
 function renderGameOverScreen(state) {
+  const winner = state?.winner ?? "player";
+  const playerScore = state?.scores?.player ?? 0;
+  const cpuScore = state?.scores?.cpu ?? 0;
+
+  const variants = {
+    player: { title: "¡JUGADOR GANA!", playerImg: "victory.png", cpuImg: "defeat.png" },
+    cpu:    { title: "¡CPU GANA!",     playerImg: "defeat.png",  cpuImg: "victory.png" },
+    tie:    { title: "¡EMPATE!",       playerImg: "victory.png", cpuImg: "victory.png" },
+  };
+  const { title, playerImg, cpuImg } = variants[winner] ?? variants.player;
+
   return `
-    <section class="game-screen game-screen--gameover">
-      <h2>[ Pantalla: Fin del juego ]</h2>
-      <p>Ganador, marcador final, botones "Jugar de nuevo" / "Inicio" / "Compartir".</p>
+    <section class="game game--over">
+      <img class="gameover-trophy" src="./assets/icon/trophy-yellow.svg" alt="" aria-hidden="true" />
+      <h2 class="gameover-title">${title}</h2>
+
+      <div class="gameover-arena">
+        <img class="gameover-result" src="./assets/images/${playerImg}" alt="" />
+        <span class="gameover-arena-vs" aria-hidden="true">VS</span>
+        <img class="gameover-result" src="./assets/images/${cpuImg}" alt="" />
+      </div>
+
+      <div class="gameover-score">
+        <div class="gameover-score-player">
+          <span>TÚ</span>
+          <span id="final-player-score">${playerScore}</span>
+        </div>
+        <span class="gameover-score-sep" aria-hidden="true"></span>
+        <div class="gameover-score-cpu">
+          <span>CPU</span>
+          <span id="final-cpu-score">${cpuScore}</span>
+        </div>
+      </div>
+
+      <p class="gameover-message">¡Gran partida! ¿Quieres la revancha?</p>
+
+      <div class="gameover-actions">
+        <button type="button" id="btn-replay" class="btn btn--primary">
+          <img src="./assets/icon/retry.svg" alt="" aria-hidden="true" />
+          Jugar de Nuevo
+        </button>
+        <button type="button" id="btn-home" class="btn btn--ghost">
+          <img src="./assets/icon/home.svg" alt="" aria-hidden="true" />
+          Inicio
+        </button>
+        <button type="button" id="btn-share" class="btn btn--ghost">
+          <img src="./assets/icon/share.svg" alt="" aria-hidden="true" />
+          Compartir
+        </button>
+      </div>
+
+      <button
+        type="button"
+        id="btn-sound"
+        class="sound-btn"
+        aria-label="Silenciar sonido"
+        aria-pressed="false"
+      >
+        <img
+          class="sound-btn-icon"
+          src="./assets/icon/volume-2.svg"
+          alt=""
+          aria-hidden="true"
+        />
+      </button>
     </section>
   `;
 }
