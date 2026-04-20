@@ -1,36 +1,39 @@
 function renderStartScreen() {
   return `
     <section class="game-screen game-screen--start">
-      <h1 class="titulo">Piedra, Papel o Tijera</h1>
-      <p class="subtitulo">¡Desafía tu suerte!</p>
+      <h1 class="title">Piedra, Papel o Tijera</h1>
+      <p class="subtitle">¡Desafía tu suerte!</p>
 
-      <div class="imagen-central">
+      <div class="hero-image">
         <img src="./assets/images/generated-1775768550770.png" alt="manos">
       </div>
 
-      <div class="opciones">
-        <button class="opcion opcion-piedra">
+      <div class="options">
+        <button class="option option--rock">
           <img src="./assets/icon/rock-color.svg" alt="piedra">
           <span>PIEDRA</span>
         </button>
-        <button class="opcion opcion-papel">
+        <button class="option option--paper">
           <img src="./assets/icon/Paper-color.svg" alt="papel">
           <span>PAPEL</span>
         </button>
-        <button class="opcion opcion-tijera">
+        <button class="option option--scissors">
           <img src="./assets/icon/scissors-color.svg" alt="tijera">
           <span>TIJERA</span>
         </button>
       </div>
 
-      <div class="acciones">
+      <hr class="divider" />
+
+      <div class="actions">
         <button class="btn-play">
           <img src="./assets/icon/zap.svg" alt="rayo">
           PLAY vs CPU
         </button>
-        <button class="btn-reglas">
+        <button class="btn-rules">
           <img src="./assets/icon/rules.svg" alt="reglas">
-          <span>Reglas</span>
+          <span class="btn-rules-label-full">Reglas del juego</span>
+          <span class="btn-rules-label-short">Reglas</span>
         </button>
         <button
           type="button"
@@ -60,7 +63,7 @@ function renderPlayScreen(state) {
   const playerHand = state?.hands?.player ?? "./assets/images/rock-left.png";
 
   return `
-    <section class="game">
+    <section class="game-screen game-screen--play">
       <div class="score-hdr">
         <div class="score-item score-item--cpu">
           <span class="score-item-label">CPU</span>
@@ -181,7 +184,7 @@ function renderGameOverScreen(state) {
   const { title, playerImg, cpuImg } = variants[winner] ?? variants.player;
 
   return `
-    <section class="game game--over">
+    <section class="game-screen game-screen--over">
       <img class="gameover-trophy" src="./assets/icon/trophy-yellow.svg" alt="" aria-hidden="true" />
       <h2 class="gameover-title">${title}</h2>
 

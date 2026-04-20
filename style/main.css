@@ -83,8 +83,8 @@ button {
   --radius-lg: 16px;
   --radius-xl: 20px;
   --radius-pill: 999px;
+  --radius-btn-move: 32px;
   --radius-btn-mode: 55px;
-  --radius-btn-move: 60px;
   --radius-btn-ctrl: 45px;
 
   /* Tipografía — tamaños */
