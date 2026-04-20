@@ -10,15 +10,15 @@ function renderStartScreen() {
 
       <div class="opciones">
         <button class="opcion opcion-piedra">
-          <img src="./assets/icon/rock.svg" alt="piedra">
+          <img src="./assets/icon/rock-color.svg" alt="piedra">
           <span>PIEDRA</span>
         </button>
         <button class="opcion opcion-papel">
-          <img src="./assets/icon/Paper.svg" alt="papel">
+          <img src="./assets/icon/Paper-color.svg" alt="papel">
           <span>PAPEL</span>
         </button>
         <button class="opcion opcion-tijera">
-          <img src="./assets/icon/scissors.svg" alt="tijera">
+          <img src="./assets/icon/scissors-color.svg" alt="tijera">
           <span>TIJERA</span>
         </button>
       </div>

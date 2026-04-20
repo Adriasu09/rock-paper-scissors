@@ -8,8 +8,8 @@ import { renderGameScreen } from "./scripts/UI/gameScreen.js";
 
 const root = document.getElementById("root");
 
-//let gameState = { view: "start" }; // ← pantalla de inicio (por defecto)
-let gameState = { view: "play" }; // ← juego en curso
+let gameState = { view: "start" }; // ← pantalla de inicio (por defecto)
+//let gameState = { view: "play" }; // ← juego en curso
 // let gameState = {
 //   view: "gameOver",
 //   winner: "player",
