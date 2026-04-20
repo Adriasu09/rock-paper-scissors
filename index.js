@@ -9,12 +9,12 @@ import { renderGameScreen } from "./scripts/UI/gameScreen.js";
 const root = document.getElementById("root");
 
 //let gameState = { view: "start" }; // ← pantalla de inicio (por defecto)
-//let gameState = { view: "play" }; // ← juego en curso
-let gameState = {
-  view: "gameOver",
-  winner: "player",
-  scores: { player: 3, cpu: 0 },
-};
+let gameState = { view: "play" }; // ← juego en curso
+// let gameState = {
+//   view: "gameOver",
+//   winner: "player",
+//   scores: { player: 3, cpu: 0 },
+// };
 
 function renderLayout({ leftHTML, rightHTML }) {
   root.innerHTML = `

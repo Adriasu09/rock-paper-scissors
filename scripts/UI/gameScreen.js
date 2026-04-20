@@ -1,8 +1,41 @@
 function renderStartScreen() {
   return `
     <section class="game-screen game-screen--start">
-      <h2>[ Pantalla: Inicio del juego ]</h2>
-      <p>Aquí va el título "Piedra, Papel o Tijera", la animación central y el botón PLAY vs CPU.</p>
+      <h1 class="titulo">Piedra, Papel o Tijera</h1>
+      <p class="subtitulo">¡Desafía tu suerte!</p>
+
+      <div class="imagen-central">
+        <img src="./assets/images/generated-1775768550770.png" alt="manos">
+      </div>
+
+      <div class="opciones">
+        <button class="opcion opcion-piedra">
+          <img src="./assets/icon/rock.svg" alt="piedra">
+          <span>PIEDRA</span>
+        </button>
+        <button class="opcion opcion-papel">
+          <img src="./assets/icon/Paper.svg" alt="papel">
+          <span>PAPEL</span>
+        </button>
+        <button class="opcion opcion-tijera">
+          <img src="./assets/icon/scissors.svg" alt="tijera">
+          <span>TIJERA</span>
+        </button>
+      </div>
+
+      <div class="acciones">
+        <button class="btn-play">
+          <img src="./assets/icon/zap.svg" alt="rayo">
+          PLAY vs CPU
+        </button>
+        <button class="btn-reglas">
+          <img src="./assets/icon/rules.svg" alt="reglas">
+          <span>Reglas</span>
+        </button>
+        <button class="btn-sound">
+          <img src="./assets/icon/volume-2.svg" alt="sonido">
+        </button>
+      </div>
     </section>
   `;
 }
