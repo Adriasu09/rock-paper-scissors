@@ -5,16 +5,19 @@ import { renderLocation } from "./scripts/UI/locationSection.js";
 import { renderWeather } from "./scripts/UI/weatherSection.js";
 import { renderNews } from "./scripts/UI/newsSection.js";
 import { renderGameScreen } from "./scripts/UI/gameScreen.js";
+import { initAudio, attachSoundButton } from "./scripts/service/audioController.js";
 
 const root = document.getElementById("root");
 
+initAudio();
+
 //let gameState = { view: "start" }; // ← pantalla de inicio (por defecto)
-//let gameState = { view: "play" }; // ← juego en curso
-let gameState = {
-  view: "gameOver",
-  winner: "player",
-  scores: { player: 3, cpu: 0 },
-};
+let gameState = { view: "play" }; // ← juego en curso
+// let gameState = {
+//   view: "gameOver",
+//   winner: "player",
+//   scores: { player: 3, cpu: 0 },
+// };
 
 function renderLayout({ leftHTML, rightHTML }) {
   root.innerHTML = `
@@ -28,6 +31,7 @@ function renderLayout({ leftHTML, rightHTML }) {
       ${rightHTML}
     </aside>
   `;
+  attachSoundButton();
 }
 
 export function setGameState(nextState) {
