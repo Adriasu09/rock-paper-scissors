@@ -1,7 +1,7 @@
 import { fetchData } from "../helpers/fetchData.js";
 import { NEWSAPI_BASE_URL } from "../constants/urls.js";
 import { NEWS_API_KEY } from "../constants/config.js";
-import { NEWS_CATEGORIES, SUPPORTED_COUNTRIES, COUNTRY_LANGUAGE } from "../constants/newsConstants.js";
+import { NEWS_CATEGORIES, COUNTRY_LANGUAGE } from "../constants/newsConstants.js";
 
 function getRelativeTime(publishedAt) {
   const diffMs = Date.now() - new Date(publishedAt).getTime();
@@ -23,11 +23,11 @@ function mapArticle(article, category) {
   };
 }
 
-async function fetchCategory(country, language, category) {
+async function fetchCategory(language, category) {
   const params = new URLSearchParams({
-    country,
+    q: category.query,
     language,
-    category: category.apiCategory,
+    sortBy: "publishedAt",
     pageSize: "1",
     apiKey: NEWS_API_KEY,
   });
@@ -39,17 +39,15 @@ async function fetchCategory(country, language, category) {
   return article ? mapArticle(article, category) : null;
 }
 
-// Noticias filtradas por país o idioma usando NewsAPI,
-// una petición por categoría para respetar el diseño.
-// ESPAÑA NO ESTA INCLUIDO EN LOS PAÍSES SOPORTADOS POR NEWSAPI, ASÍ QUE SE USARÁ "US" COMO FALLBACK PARA ESPAÑA Y CUALQUIER OTRO PAÍS NO SOPORTADO.
+// Noticias filtradas por idioma usando el endpoint /v2/everything de NewsAPI.
+// Este endpoint no admite `country` ni `category`; se busca por palabra clave (q)
+// en el idioma derivado del país de la localización (p. ej. España → "es").
 export async function getNews(countryCode) {
   const country = (countryCode || "").toLowerCase();
-  const targetCountry = SUPPORTED_COUNTRIES.has(country) ? country : "us";
-
-  const language = COUNTRY_LANGUAGE[targetCountry] || "en";  
+  const language = COUNTRY_LANGUAGE[country] || "en";
 
   const results = await Promise.all(
-    NEWS_CATEGORIES.map((category) => fetchCategory(targetCountry, language, category)),
+    NEWS_CATEGORIES.map((category) => fetchCategory(language, category)),
   );
 
   return results.filter(Boolean);
