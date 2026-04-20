@@ -13,6 +13,8 @@ initAudio();
 
 //let gameState = { view: "start" }; // ← pantalla de inicio (por defecto)
 let gameState = { view: "play" }; // ← juego en curso
+let gameState = { view: "start" }; // ← pantalla de inicio (por defecto)
+//let gameState = { view: "play" }; // ← juego en curso
 // let gameState = {
 //   view: "gameOver",
 //   winner: "player",
