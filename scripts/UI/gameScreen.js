@@ -32,8 +32,19 @@ function renderStartScreen() {
           <img src="./assets/icon/rules.svg" alt="reglas">
           <span>Reglas</span>
         </button>
-        <button class="btn-sound">
-          <img src="./assets/icon/volume-2.svg" alt="sonido">
+        <button
+          type="button"
+          id="btn-sound"
+          class="sound-btn"
+          aria-label="Silenciar sonido"
+          aria-pressed="false"
+        >
+          <img
+            class="sound-btn-icon"
+            src="./assets/icon/volume-2.svg"
+            alt=""
+            aria-hidden="true"
+          />
         </button>
       </div>
     </section>
@@ -51,16 +62,16 @@ function renderPlayScreen(state) {
   return `
     <section class="game">
       <div class="score-hdr">
-        <div class="score-cpu">
-          <span>CPU</span>
-          <span id="cpu-score">${cpuScore}</span>
+        <div class="score-item score-item--cpu">
+          <span class="score-item-label">CPU</span>
+          <span id="cpu-score" class="score-item-value">${cpuScore}</span>
         </div>
 
         <span class="score-hdr-vs" aria-hidden="true">VS</span>
 
-        <div class="score-player">
-          <span>TÚ</span>
-          <span id="player-score">${playerScore}</span>
+        <div class="score-item score-item--player">
+          <span class="score-item-label">TÚ</span>
+          <span id="player-score" class="score-item-value">${playerScore}</span>
         </div>
       </div>
 
@@ -181,14 +192,14 @@ function renderGameOverScreen(state) {
       </div>
 
       <div class="gameover-score">
-        <div class="gameover-score-player">
-          <span>TÚ</span>
-          <span id="final-player-score">${playerScore}</span>
+        <div class="score-item score-item--player">
+          <span class="score-item-label">TÚ</span>
+          <span id="final-player-score" class="score-item-value">${playerScore}</span>
         </div>
         <span class="gameover-score-sep" aria-hidden="true"></span>
-        <div class="gameover-score-cpu">
-          <span>CPU</span>
-          <span id="final-cpu-score">${cpuScore}</span>
+        <div class="score-item score-item--cpu">
+          <span class="score-item-label">CPU</span>
+          <span id="final-cpu-score" class="score-item-value">${cpuScore}</span>
         </div>
       </div>
 
