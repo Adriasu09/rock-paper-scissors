@@ -1,6 +1,7 @@
 .sidebar {
     width: 250px;
     background-color: yellow;
+    display: none;
 }
 .contenedor {
     display: flex;
@@ -195,4 +196,11 @@ section {
     width: 22px;
     height: 22px;
     filter: brightness(0) invert(1);   /* ← icono blanco */
+}
+
+@media screen and (min-width: 768px) {  
+    .sidebar {
+        display: flex;
+    }
+    
 }

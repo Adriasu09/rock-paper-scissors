@@ -7,260 +7,335 @@
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 img {
-    display: block;
-    max-width: 100%;
-    height: auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
 ul {
-    list-style: none;
+  list-style: none;
 }
 
 button {
-    font: inherit;
-    cursor: pointer;
+  font: inherit;
+  cursor: pointer;
 }
 
 /* ---------- Variables ---------- */
 :root {
-    /* Backgrounds */
-    --bg: #0C0D14;
-    --bg-alt: #0A0B11;
-    --bg-nav: #0E0F1A;
+  /* Backgrounds */
+  --bg: #0c0d14;
+  --bg-alt: #0a0b11;
+  --bg-nav: #0e0f1a;
 
-    --surface: #161728;
-    --surface-2: #1E1F30;
-    --surface-weather: #1A1B2E;
-    --surface-game: #1A1128;
-    --surface-deep: #0D0A1A;
+  --surface: #161728;
+  --surface-2: #1e1f30;
+  --surface-weather: #1a1b2e;
+  --surface-game: #1a1128;
+  --surface-deep: #0d0a1a;
 
-    /* Borders */
-    --border-soft: #2D2E4544;
-    --border: #2D2E4566;
-    --border-purple-soft: #6842FF33;
-    --border-purple: #6842FF44;
+  /* Borders */
+  --border-soft: #2d2e4544;
+  --border: #2d2e4566;
+  --border-purple-soft: #6842ff33;
+  --border-purple: #6842ff44;
 
-    /* Text */
-    --text: #FFFFFF;
-    --text-muted: #8B8FA8;
+  /* Text */
+  --text: #ffffff;
+  --text-muted: #8b8fa8;
 
-    /* Acentos del juego */
-    --purple: #6842FF;
-    --rock: #FF7B00;
-    --paper: #00D2FF;
-    --scissors: #6842FF;
-    --cpu: #FF2D78;
-    --mode-1p: #2196F3;
-    --mode-2p: #4CAF50;
-    --mode-ctrl: #FF9800;
-    --gold: #FFD60A;
+  /* Acentos del juego */
+  --purple: #6842ff;
+  --rock: #ff7b00;
+  --paper: #00d2ff;
+  --scissors: #6842ff;
+  --cpu: #ff2d78;
+  --magenta: #d946ef;
+  --magenta-soft: #d946ef44;
+  --mode-1p: #2196f3;
+  --mode-2p: #4caf50;
+  --mode-ctrl: #ff9800;
+  --gold: #ffd60a;
 
-    /* Radii */
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 16px;
-    --radius-xl: 20px;
-    --radius-pill: 999px;
-    --radius-btn-mode: 55px;
-    --radius-btn-move: 60px;
-    --radius-btn-ctrl: 45px;
+  /* tags */
+  --active: #0d2213;
+  --warning: #ff8c00;
 
-    /* Tipografía — tamaños */
-    --fs-2xs: 9px;
-    --fs-xs: 10px;
-    --fs-sm: 11px;
-    --fs-base: 12px;
-    --fs-md: 13px;
-    --fs-nav: 14px;
-    --fs-body: 15px;
-    --fs-lg: 16px;
-    --fs-xl: 18px;
-    --fs-2xl: 20px;
-    --fs-title: 24px;
-    --fs-headline: 28px;
-    --fs-icon-sm: 30px;
-    --fs-score-mode: 32px;
-    --fs-score: 36px;
-    --fs-trophy: 40px;
-    --fs-weather: 48px;
+  /* Radii */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-pill: 999px;
+  --radius-btn-mode: 55px;
+  --radius-btn-move: 60px;
+  --radius-btn-ctrl: 45px;
 
-    /* Tipografía — pesos */
-    --fw-normal: 400;
-    --fw-semibold: 600;
-    --fw-bold: 700;
-    --fw-extrabold: 800;
-    --fw-black: 900;
+  /* Tipografía — tamaños */
+  --fs-2xs: 9px;
+  --fs-xs: 10px;
+  --fs-sm: 11px;
+  --fs-base: 12px;
+  --fs-md: 13px;
+  --fs-nav: 14px;
+  --fs-body: 15px;
+  --fs-lg: 16px;
+  --fs-xl: 18px;
+  --fs-2xl: 20px;
+  --fs-title: 24px;
+  --fs-headline: 28px;
+  --fs-icon-sm: 30px;
+  --fs-score-mode: 32px;
+  --fs-score: 36px;
+  --fs-trophy: 40px;
+  --fs-weather: 48px;
 
-    /* Layout */
-    --container: 1440px;
-    --sidebar: 300px;
-    --nav-h: 64px;
+  /* Tipografía — pesos */
+  --fw-normal: 400;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
+  --fw-black: 900;
 
-    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Layout */
+  --container: 1280px;
+  --sidebar: 250px;
+  --sidebar-tablet: 220px;
+  --nav-h: 66px;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* ---------- Base ---------- */
 body {
-    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    overflow-x: hidden;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#navbar {
+  background: var(--bg-nav);
+  border-bottom: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
+#footer {
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border-soft);
+}
+
+/* ---------- Layout 3 columnas ---------- */
+.sidebar {
+  flex-direction: column;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.game-area {
+  flex: 1;
+  min-width: 0;
 }
 
 /* ---------- Botones ---------- */
 .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-weight: 700;
-    border-radius: 10px;
-    padding: 15px 32px;
-    font-size: 15px;
-    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), background 0.25s var(--ease);
-    border: 2px solid transparent;
-    white-space: nowrap;
-    color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-weight: var(--fw-semibold);
+  border-radius: var(--radius-sm);
+  padding: 15px 32px;
+  font-size: 15px;
+  transition:
+    transform 0.25s var(--ease),
+    box-shadow 0.25s var(--ease),
+    background 0.25s var(--ease);
+  border: 2px solid transparent;
+  white-space: nowrap;
+  color: #fff;
 }
 
 .btn--sm {
-    font-size: 14px;
-    padding: 12px 24px;
-    border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
 }
 
 .btn--primary {
-    background: var(--purple);
+  background: var(--purple);
 }
 
 .btn--primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 32px -12px var(--purple);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px -12px var(--purple);
 }
 
 .btn--ghost {
-    background: transparent;
-    border-color: var(--purple);
+  background: transparent;
+  border-color: var(--purple);
 }
 
 .btn--ghost:hover {
-    background: #6842FF26;
-    transform: translateY(-2px);
+  background: #6842ff26;
+  transform: translateY(-2px);
 }
 
 /* ---------- Botones de jugada (Roca / Papel / Tijera) ---------- */
 .btn--move {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    width: 120px;
-    height: 120px;
-    border-radius: var(--radius-btn-move);
-    background: var(--surface-game);
-    border: 2px solid transparent;
-    color: var(--text);
-    font-weight: 700;
-    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 120px;
+  height: 120px;
+  border-radius: var(--radius-btn-move);
+  background: var(--surface-game);
+  border: 2px solid transparent;
+  color: var(--text);
+  font-weight: 700;
+  transition:
+    transform 0.25s var(--ease),
+    box-shadow 0.25s var(--ease);
 }
 
 .btn--move:hover {
-    transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .btn--move--rock {
-    border-color: var(--rock);
-    color: var(--rock);
+  border-color: var(--rock);
+  color: var(--rock);
 }
 
 .btn--move--rock:hover {
-    box-shadow: 0 12px 32px -12px var(--rock);
+  box-shadow: 0 12px 32px -12px var(--rock);
 }
 
 .btn--move--paper {
-    border-color: var(--paper);
-    color: var(--paper);
+  border-color: var(--paper);
+  color: var(--paper);
 }
 
 .btn--move--paper:hover {
-    box-shadow: 0 12px 32px -12px var(--paper);
+  box-shadow: 0 12px 32px -12px var(--paper);
 }
 
 .btn--move--scissors {
-    border-color: var(--scissors);
-    color: var(--scissors);
+  border-color: var(--scissors);
+  color: var(--scissors);
 }
 
 .btn--move--scissors:hover {
-    box-shadow: 0 12px 32px -12px var(--scissors);
+  box-shadow: 0 12px 32px -12px var(--scissors);
 }
 
 /* ---------- Botones de modo (1P / 2P / Controles) ---------- */
 .btn--mode {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    width: 110px;
-    height: 110px;
-    border-radius: var(--radius-btn-mode);
-    background: var(--surface);
-    border: 3px solid transparent;
-    color: var(--text);
-    font-weight: 800;
-    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 110px;
+  height: 110px;
+  border-radius: var(--radius-btn-mode);
+  background: var(--surface);
+  border: 3px solid transparent;
+  color: var(--text);
+  font-weight: 800;
+  transition:
+    transform 0.25s var(--ease),
+    box-shadow 0.25s var(--ease);
 }
 
 .btn--mode:hover {
-    transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .btn--mode--1p {
-    border-color: var(--mode-1p);
-    color: var(--mode-1p);
+  border-color: var(--mode-1p);
+  color: var(--mode-1p);
 }
 
 .btn--mode--1p:hover {
-    box-shadow: 0 12px 32px -12px var(--mode-1p);
+  box-shadow: 0 12px 32px -12px var(--mode-1p);
 }
 
 .btn--mode--2p {
-    border-color: var(--mode-2p);
-    color: var(--mode-2p);
+  border-color: var(--mode-2p);
+  color: var(--mode-2p);
 }
 
 .btn--mode--2p:hover {
-    box-shadow: 0 12px 32px -12px var(--mode-2p);
+  box-shadow: 0 12px 32px -12px var(--mode-2p);
 }
 
 .btn--mode--ctrl {
-    width: 90px;
-    height: 90px;
-    border-radius: var(--radius-btn-ctrl);
-    border-color: var(--mode-ctrl);
-    color: var(--mode-ctrl);
+  width: 90px;
+  height: 90px;
+  border-radius: var(--radius-btn-ctrl);
+  border-color: var(--mode-ctrl);
+  color: var(--mode-ctrl);
 }
 
 .btn--mode--ctrl:hover {
-    box-shadow: 0 12px 32px -12px var(--mode-ctrl);
+  box-shadow: 0 12px 32px -12px var(--mode-ctrl);
+}
+
+@media only screen and (min-width: 768px) {
+  #root {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 20px;
+    padding: 24px 20px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  #root {
+    gap: 24px;
+    width: 100%;
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 32px 24px;
+  }
 }
