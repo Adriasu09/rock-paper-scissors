@@ -21,13 +21,20 @@ export function initAudio() {
   if (audio) return;
   audio = new Audio("./assets/sounds/music-game.mp3");
   audio.loop = true;
-  audio.volume = 0.2;
+  audio.volume = 0.1;
   audio.muted = isMuted;
   tryPlay();
 }
 
 export function isAudioMuted() {
   return isMuted;
+}
+
+export function playSfx(path, volume = 0.6) {
+  if (isMuted) return;
+  const sfx = new Audio(path);
+  sfx.volume = volume;
+  sfx.play().catch(() => {});
 }
 
 export function toggleMute() {

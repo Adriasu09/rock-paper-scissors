@@ -15,6 +15,37 @@
   padding: 40px 28px;
 }
 
+.game-screen--play {
+  animation: playScreenEnter 0.55s var(--ease) both;
+}
+
+.game-screen--play .arena-hand {
+  animation: handSlideIn 0.6s var(--ease) both;
+}
+
+.game-screen--play .arena-hand:first-of-type {
+  animation-name: handSlideInLeft;
+}
+
+.game-screen--play .arena-hand:last-of-type {
+  animation-name: handSlideInRight;
+}
+
+@keyframes playScreenEnter {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes handSlideInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes handSlideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
 /* ---------- Start Screen ---------- */
 .game-screen--start {
   align-items: center;

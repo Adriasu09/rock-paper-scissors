@@ -1,4 +1,7 @@
 import { setGameState } from "../../index.js"
+import { playSfx } from "./audioController.js"
+
+const HOVER_SOUND = "./assets/sounds/btn-hover.wav"
 
 let cpuScore = 0
 let playerScore = 0
@@ -136,6 +139,10 @@ export function initGameListeners() {
     const btnScissors = document.getElementById("btn-scissors")
 
     if (!btnRock || !btnPaper || !btnScissors) return
+
+    for (const btn of [btnRock, btnPaper, btnScissors]) {
+        btn.addEventListener("mouseenter", () => playSfx(HOVER_SOUND, 0.4))
+    }
 
     btnRock.addEventListener("click", function () {
         startCountdown("rock")
