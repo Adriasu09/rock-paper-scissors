@@ -1,4 +1,4 @@
-import { getCountryFlagUrl } from "../service/geolocationService.js";
+import { getCountryFlagUrl } from "../services/geolocationService.js";
 import { LANDING_URL } from "../constants/urls.js";
 import { icon } from "../helpers/icons.js";
 

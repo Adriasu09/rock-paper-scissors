@@ -1,14 +1,27 @@
-import { setPlayerName, resetGameState } from "./scripts/services/gameService.js";
+import {
+  setPlayerName,
+  resetGameState,
+} from "./scripts/services/gameService.js";
 import { initGameListeners } from "./scripts/ui/gameController.js";
-import { initAudio, attachSoundButton, playSfx } from "./scripts/services/audioService.js";
+import {
+  initAudio,
+  attachSoundButton,
+  playSfx,
+} from "./scripts/services/audioService.js";
 import { SFX } from "./scripts/constants/game.js";
 import { byId } from "./scripts/helpers/dom.js";
 import { renderShell } from "./scripts/ui/layout.js";
 import { loadSidebar } from "./scripts/ui/sidebar.js";
 import { attachStartScreen } from "./scripts/ui/screens/startScreen.js";
 import { attachGameOverScreen } from "./scripts/ui/screens/gameOverScreen.js";
+import { renderNavbar, initNavbarInteractions } from "./scripts/ui/navbar.js";
+import { renderFooter } from "./scripts/ui/footer.js";
 
 const root = byId("root");
+const navbar = byId("navbar");
+const footer = byId("footer");
+
+footer.innerHTML = renderFooter();
 
 initAudio();
 
@@ -20,6 +33,11 @@ function renderLayout({ leftHTML, rightHTML }) {
   attachSoundButton();
   attachScreenHandlers();
   attachRetryLocationHandler();
+}
+
+function renderNavbarWith(locationData, weatherData) {
+  navbar.innerHTML = renderNavbar(locationData, weatherData);
+  initNavbarInteractions();
 }
 
 function attachScreenHandlers() {
@@ -52,12 +70,7 @@ function handleGoHome() {
 function attachRetryLocationHandler() {
   const retryBtn = byId("retry-location");
   if (!retryBtn) return;
-  retryBtn.addEventListener("click", () => loadSidebar(renderLayout));
-}
-
-function renderNavbarWith(locationData, weatherData) {
-  navbar.innerHTML = renderNavbar(locationData, weatherData);
-  initNavbarInteractions();
+  retryBtn.addEventListener("click", () => loadSidebar(renderNavbarWith, renderLayout));
 }
 
 export function setGameState(nextState) {
@@ -70,4 +83,4 @@ export function setGameState(nextState) {
   });
 }
 
-loadSidebar(renderLayout);
+loadSidebar(renderNavbarWith, renderLayout);

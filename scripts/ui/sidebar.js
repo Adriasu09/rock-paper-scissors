@@ -7,7 +7,8 @@ import { renderNews } from "./newsSection.js";
 import { logError, toUserMessage } from "../helpers/errorHandler.js";
 import { ERROR_MESSAGES } from "../constants/errorMessages.js";
 
-export async function loadSidebar(renderLayout) {
+export async function loadSidebar(renderNavbarWith, renderLayout) {
+  renderNavbarWith(null, null);
   renderLayout({
     leftHTML: renderNews(null),
     rightHTML: renderLocation(null) + renderWeather(null),
@@ -38,9 +39,12 @@ export async function loadSidebar(renderLayout) {
     getNews(locationData.countryCode),
   ]);
 
+  const weatherData =
+    weatherResult.status === "fulfilled" ? weatherResult.value : null;
+
   const weatherHTML =
     weatherResult.status === "fulfilled"
-      ? renderWeather(weatherResult.value)
+      ? renderWeather(weatherData)
       : renderWeather({
           error: toUserMessage(weatherResult.reason, ERROR_MESSAGES.weather.default),
         });
@@ -65,6 +69,7 @@ export async function loadSidebar(renderLayout) {
     logError("sidebar:getNews", newsResult.reason);
   }
 
+  renderNavbarWith(locationData, weatherData);
   renderLayout({
     leftHTML: newsHTML,
     rightHTML: renderLocation(locationData) + weatherHTML,
