@@ -5,7 +5,7 @@ import { renderLocation } from "./scripts/UI/locationSection.js";
 import { renderWeather } from "./scripts/UI/weatherSection.js";
 import { renderNews } from "./scripts/UI/newsSection.js";
 import { renderGameScreen } from "./scripts/UI/gameScreen.js";
-import { initGameListeners } from "./scripts/service/gameService.js"; 
+import { initGameListeners, setPlayerName, resetGameState } from "./scripts/service/gameService.js";
 import { renderNameModal, attachNameModal } from "./scripts/UI/nameModal.js";
 import { showRoundResult } from "./scripts/UI/roundModal.js";
 import { initAudio, attachSoundButton } from "./scripts/service/audioController.js";
@@ -42,6 +42,14 @@ function renderLayout({ leftHTML, rightHTML }) {
   initGameListeners()
   attachSoundButton();
   attachStartScreenHandlers();
+  attachGameOverHandlers();
+  attachRetryLocationHandler();
+}
+
+function attachRetryLocationHandler() {
+  const retryBtn = document.getElementById("retry-location");
+  if (!retryBtn) return;
+  retryBtn.addEventListener("click", initSidebar);
 }
 
 function attachStartScreenHandlers() {
@@ -52,6 +60,8 @@ function attachStartScreenHandlers() {
     if (document.getElementById("name-modal")) return;
     document.body.insertAdjacentHTML("beforeend", renderNameModal());
     attachNameModal((name) => {
+      resetGameState();
+      setPlayerName(name);
       setGameState({
         view: "play",
         playerName: name,
@@ -59,6 +69,32 @@ function attachStartScreenHandlers() {
       });
     });
   });
+}
+
+function attachGameOverHandlers() {
+  if (gameState.view !== "gameOver") return;
+  const replayBtn = document.getElementById("btn-replay");
+  const homeBtn = document.getElementById("btn-home");
+  const playerName = gameState.playerName;
+
+  if (replayBtn) {
+    replayBtn.addEventListener("click", () => {
+      resetGameState();
+      setPlayerName(playerName);
+      setGameState({
+        view: "play",
+        playerName,
+        scores: { player: 0, cpu: 0 },
+      });
+    });
+  }
+
+  if (homeBtn) {
+    homeBtn.addEventListener("click", () => {
+      resetGameState();
+      setGameState({ view: "start" });
+    });
+  }
 }
 
 export function setGameState(nextState) {
@@ -96,9 +132,6 @@ async function initSidebar() {
         renderWeather({ error: "Se requiere ubicación para el clima" }),
     });
 
-    document
-      .getElementById("retry-location")
-      .addEventListener("click", initSidebar);
     return;
   }
 

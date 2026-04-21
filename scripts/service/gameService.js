@@ -1,6 +1,20 @@
+import { setGameState } from "../../index.js"
+
 let cpuScore = 0
 let playerScore = 0
+let isPlaying = false
+let currentPlayerName = ""
+let keyboardBound = false
 
+export function setPlayerName(name) {
+    currentPlayerName = name
+}
+
+export function resetGameState() {
+    cpuScore = 0
+    playerScore = 0
+    isPlaying = false
+}
 
 //Función que genera la elección aleatoria de la máquina
 function getComputerChoice() {
@@ -30,7 +44,7 @@ function getResult(player, cpu) {
 }
 
 //Función que actualiza la pantalla con el resultado
-function showResult(playerChoice, cpuChoice, result) {
+async function showResult(playerChoice, cpuChoice, result) {
     //1. Cambio las imágenes de las manos
     const imgCPU = document.getElementById("img-cpu")
     const imgPlayer = document.getElementById("img-player")
@@ -49,7 +63,7 @@ function showResult(playerChoice, cpuChoice, result) {
         messageEl.textContent = " 😞 La CPU gana esta ronda"
     }
 
-    else {(result === "draw") 
+    else {
         messageEl.textContent = "🤝 ¡Empate!"
     }
 
@@ -63,10 +77,32 @@ function showResult(playerChoice, cpuChoice, result) {
 
     document.getElementById("cpu-score").textContent = cpuScore
     document.getElementById("player-score").textContent = playerScore
-}
 
-//variable para evitar clics durante la cuenta atrás
-let isPlaying = false
+    //4. Muestro el modal de la ronda y espero a que se cierre
+    const modalResult = result === "draw" ? "tie" : result
+    if (typeof window.__showRoundResult === "function") {
+        await window.__showRoundResult(modalResult)
+    }
+
+    //5. ¿Hay ganador de la partida?
+    if (playerScore >= 3 || cpuScore >= 3) {
+        const winner = playerScore >= 3 ? "player" : "cpu"
+        const finalScores = { player: playerScore, cpu: cpuScore }
+        const finalName = currentPlayerName
+        resetGameState()
+        setGameState({
+            view: "gameOver",
+            winner,
+            playerName: finalName,
+            scores: finalScores,
+        })
+        return
+    }
+
+    //6. Si la partida continúa, reiniciamos el countdown visible
+    const countdownEl = document.getElementById("countdown")
+    if (countdownEl) countdownEl.textContent = "3"
+}
 
 //función de cuenta atrás
 function startCountdown(playerChoice) {
@@ -83,7 +119,7 @@ function startCountdown(playerChoice) {
     let count = 3
     countdownEl.textContent = count
 
-    const interval = setInterval(function () {
+    const interval = setInterval(async function () {
         count = count - 1
         countdownEl.textContent = count
 
@@ -94,14 +130,9 @@ function startCountdown(playerChoice) {
             //Ahora juega la ronda
             const cpuChoice = getComputerChoice()
             const result = getResult(playerChoice, cpuChoice)
-            showResult(playerChoice, cpuChoice, result)
+            await showResult(playerChoice, cpuChoice, result)
 
             isPlaying = false
-
-            //Después de 1.5 segundos, vuelve a poner el 3
-            setTimeout(function () {
-                countdownEl.textContent = "3"
-            }, 1500)
         }
     }, 700)
 }
@@ -111,6 +142,8 @@ export function initGameListeners() {
     const btnRock = document.getElementById("btn-rock")
     const btnPaper = document.getElementById("btn-paper")
     const btnScissors = document.getElementById("btn-scissors")
+
+    if (!btnRock || !btnPaper || !btnScissors) return
 
     btnRock.addEventListener("click", function () {
         startCountdown("rock")
@@ -124,18 +157,22 @@ export function initGameListeners() {
         startCountdown("scissor")
     })
 
-    //Eventos del teclado (A, S, D)
-    document.addEventListener("keydown", function (e) {
-        const key = e.key.toLowerCase()
+    //Eventos del teclado (A, S, D) — solo se enganchan una vez
+    if (!keyboardBound) {
+        keyboardBound = true
+        document.addEventListener("keydown", function (e) {
+            if (!document.getElementById("btn-rock")) return
+            const key = e.key.toLowerCase()
 
-        if (key === "a") {
-            startCountdown("rock")
-        }
-        else if (key === "s") {
-            startCountdown("paper")
-        }
-        else if (key === "d") {
-            startCountdown("scissor")
-        }
-    })
+            if (key === "a") {
+                startCountdown("rock")
+            }
+            else if (key === "s") {
+                startCountdown("paper")
+            }
+            else if (key === "d") {
+                startCountdown("scissor")
+            }
+        })
+    }
 }
