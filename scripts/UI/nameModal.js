@@ -4,6 +4,7 @@ export function renderNameModal() {
   return `
     <div class="modal-overlay" id="name-modal" role="dialog" aria-modal="true" aria-labelledby="name-modal-title">
       <div class="modal modal--name">
+        <button id="name-close" type="button" class="modal-close" aria-label="Cerrar">&times;</button>
         <h2 id="name-modal-title" class="modal-title">¿Cuál es tu nombre?</h2>
         <p class="modal-subtitle">Mínimo ${MIN_LENGTH} caracteres</p>
         <input
@@ -28,6 +29,20 @@ export function attachNameModal(onConfirm) {
 
   const input = overlay.querySelector("#name-input");
   const confirmBtn = overlay.querySelector("#name-confirm");
+  const closeBtn = overlay.querySelector("#name-close");
+
+  const close = () => overlay.remove();
+
+  closeBtn.addEventListener("click", close);
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) close();
+  });
+  document.addEventListener("keydown", function onEsc(e) {
+    if (e.key === "Escape" && document.getElementById("name-modal")) {
+      close();
+      document.removeEventListener("keydown", onEsc);
+    }
+  });
 
   const isValid = () => input.value.trim().length >= MIN_LENGTH;
 

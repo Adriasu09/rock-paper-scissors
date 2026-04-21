@@ -20,6 +20,7 @@
 }
 
 .modal {
+  position: relative;
   background: var(--surface);
   border: 1px solid var(--border-purple);
   border-radius: var(--radius-md);
@@ -31,6 +32,30 @@
   gap: 14px;
   box-shadow: 0 20px 60px -20px rgba(104, 66, 255, 0.5);
   animation: modalPop 0.25s var(--ease) both;
+}
+
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.modal-close:hover {
+  background: var(--surface-2);
+  color: var(--text);
 }
 
 .modal-title {
@@ -82,7 +107,80 @@
   box-shadow: none;
 }
 
+/* ---------- Modal de reglas ---------- */
+.modal--rules {
+  width: min(420px, 100%);
+  gap: 16px;
+}
+
+.rules-list {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rules-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: var(--fs-body);
+}
+
+.rules-item__icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.rules-item__text strong {
+  color: var(--text);
+  font-weight: var(--fw-semibold);
+}
+
+.rules-hint {
+  margin-top: 4px;
+  font-size: var(--fs-sm);
+}
+
+.rules-hint kbd {
+  display: inline-block;
+  padding: 2px 7px;
+  margin: 0 2px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-purple);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: var(--fs-xs);
+  color: var(--text);
+}
+
 /* ---------- Modal de ronda ---------- */
+.modal-overlay--round {
+  position: absolute;
+  inset: 0 0 auto 0;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.modal-overlay--round .modal {
+  pointer-events: auto;
+}
+
 .modal--round {
   padding: 24px 28px;
   width: min(320px, 100%);

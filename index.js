@@ -7,6 +7,7 @@ import { renderNews } from "./scripts/UI/newsSection.js";
 import { renderGameScreen } from "./scripts/UI/gameScreen.js";
 import { initGameListeners, setPlayerName, resetGameState } from "./scripts/service/gameService.js";
 import { renderNameModal, attachNameModal } from "./scripts/UI/nameModal.js";
+import { renderRulesModal, attachRulesModal } from "./scripts/UI/rulesModal.js";
 import { showRoundResult } from "./scripts/UI/roundModal.js";
 import { initAudio, attachSoundButton } from "./scripts/service/audioController.js";
 
@@ -54,6 +55,14 @@ function attachRetryLocationHandler() {
 
 function attachStartScreenHandlers() {
   if (gameState.view !== "start") return;
+  const rulesBtn = root.querySelector(".btn-rules");
+  if (rulesBtn) {
+    rulesBtn.addEventListener("click", () => {
+      if (document.getElementById("rules-modal")) return;
+      document.body.insertAdjacentHTML("beforeend", renderRulesModal());
+      attachRulesModal();
+    });
+  }
   const playBtn = root.querySelector(".btn-play");
   if (!playBtn) return;
   playBtn.addEventListener("click", () => {

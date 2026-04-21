@@ -23,7 +23,8 @@ export function showRoundResult(result) {
       <h2 class="modal-title">${variant.title}</h2>
     </div>
   `;
-  document.body.appendChild(overlay);
+  const host = document.querySelector(".ctrl-section") ?? document.body;
+  host.appendChild(overlay);
 
   return new Promise((resolve) => {
     setTimeout(() => {

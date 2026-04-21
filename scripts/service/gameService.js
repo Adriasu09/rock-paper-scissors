@@ -52,20 +52,9 @@ async function showResult(playerChoice, cpuChoice, result) {
     imgCPU.src = "./assets/images/" + cpuChoice + "-right.png"
     imgPlayer.src = "./assets/images/" + playerChoice + "-left.png"
 
-    //2. Cambio el mensaje
+    //2. El resultado lo muestra el modal, limpio el mensaje
     const messageEl = document.getElementById("message")
-
-    if (result === "win") {
-        messageEl.textContent = " 🎉 ¡Ganaste esta ronda!"
-    }
-
-    else if (result === "lose") {
-        messageEl.textContent = " 😞 La CPU gana esta ronda"
-    }
-
-    else {
-        messageEl.textContent = "🤝 ¡Empate!"
-    }
+    messageEl.textContent = ""
 
     //3. Actualizo el marcador
     if (result === "win") {
@@ -99,9 +88,12 @@ async function showResult(playerChoice, cpuChoice, result) {
         return
     }
 
-    //6. Si la partida continúa, reiniciamos el countdown visible
+    //6. Si la partida continúa, reiniciamos countdown, mensaje y puños
     const countdownEl = document.getElementById("countdown")
     if (countdownEl) countdownEl.textContent = "3"
+    if (messageEl) messageEl.textContent = "¡Elige tu movimiento!"
+    imgCPU.src = "./assets/images/rock-right.png"
+    imgPlayer.src = "./assets/images/rock-left.png"
 }
 
 //función de cuenta atrás
