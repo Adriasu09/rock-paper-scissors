@@ -68,6 +68,30 @@
   50%      { transform: rotate(-14deg); }
 }
 
+/* ---------- Entrada al Game Over ---------- */
+.game-screen--over {
+  animation: gameOverEnter 0.7s cubic-bezier(0.2, 0.7, 0.3, 1.2) both;
+}
+
+.game-screen--over .score-hdr,
+.game-screen--over .arena,
+.game-screen--over .ctrl-section {
+  animation: gameOverItem 0.6s var(--ease) both;
+}
+
+.game-screen--over .arena { animation-delay: 0.15s; }
+.game-screen--over .ctrl-section { animation-delay: 0.3s; }
+
+@keyframes gameOverEnter {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes gameOverItem {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 /* ---------- Start Screen ---------- */
 .game-screen--start {
   align-items: center;

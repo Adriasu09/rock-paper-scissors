@@ -3,6 +3,10 @@ import { playSfx } from "./audioController.js"
 
 const HOVER_SOUND = "./assets/sounds/btn-hover.wav"
 const COUNTDOWN_SOUND = "./assets/sounds/3-2-1-fight.flac"
+const WIN_SOUND = "./assets/sounds/succes-sound.wav"
+const LOSE_SOUND = "./assets/sounds/error-sound.mp3"
+const GAME_WIN_SOUND = "./assets/sounds/win.mp3"
+const GAME_LOSE_SOUND = "./assets/sounds/lose-2.wav"
 
 let cpuScore = 0
 let playerScore = 0
@@ -56,6 +60,10 @@ async function showResult(playerChoice, cpuChoice, result) {
     imgCPU.src = "./assets/images/" + cpuChoice + "-right.png"
     imgPlayer.src = "./assets/images/" + playerChoice + "-left.png"
 
+    //1.1 Efecto de sonido según el resultado
+    if (result === "win") playSfx(WIN_SOUND, 0.7)
+    else if (result === "lose") playSfx(LOSE_SOUND, 0.7)
+
     //2. El resultado lo muestra el modal, limpio el mensaje
     const messageEl = document.getElementById("message")
     messageEl.textContent = ""
@@ -83,6 +91,7 @@ async function showResult(playerChoice, cpuChoice, result) {
         const finalScores = { player: playerScore, cpu: cpuScore }
         const finalName = currentPlayerName
         resetGameState()
+        playSfx(winner === "player" ? GAME_WIN_SOUND : GAME_LOSE_SOUND, 0.8)
         setGameState({
             view: "gameOver",
             winner,

@@ -21,7 +21,7 @@ export function initAudio() {
   if (audio) return;
   audio = new Audio("./assets/sounds/music-game.mp3");
   audio.loop = true;
-  audio.volume = 0.1;
+  audio.volume = 0.05;
   audio.muted = isMuted;
   tryPlay();
 }
