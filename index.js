@@ -5,11 +5,13 @@ import { renderLocation } from "./scripts/UI/locationSection.js";
 import { renderWeather } from "./scripts/UI/weatherSection.js";
 import { renderNews } from "./scripts/UI/newsSection.js";
 import { renderGameScreen } from "./scripts/UI/gameScreen.js";
+import { initGameListeners } from "./scripts/service/gameService.js"; 
 import { renderNameModal, attachNameModal } from "./scripts/UI/nameModal.js";
 import { showRoundResult } from "./scripts/UI/roundModal.js";
 import { initAudio, attachSoundButton } from "./scripts/service/audioController.js";
 
 const root = document.getElementById("root");
+
 
 initAudio();
 
@@ -37,6 +39,7 @@ function renderLayout({ leftHTML, rightHTML }) {
       ${rightHTML}
     </aside>
   `;
+  initGameListeners()
   attachSoundButton();
   attachStartScreenHandlers();
 }
