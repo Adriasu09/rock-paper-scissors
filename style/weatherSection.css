@@ -152,6 +152,7 @@
   .sidebar--right {
     display: flex;
     width: var(--sidebar-tablet);
+    padding: 0 10px;
   }
 }
 

@@ -1,8 +1,55 @@
 function renderStartScreen() {
   return `
     <section class="game-screen game-screen--start">
-      <h2>[ Pantalla: Inicio del juego ]</h2>
-      <p>Aquí va el título "Piedra, Papel o Tijera", la animación central y el botón PLAY vs CPU.</p>
+      <h1 class="title">Piedra, Papel o Tijera</h1>
+      <p class="subtitle">¡Desafía tu suerte!</p>
+
+      <div class="hero-image">
+        <img src="./assets/images/generated-1775768550770.png" alt="manos">
+      </div>
+
+      <div class="options">
+        <button class="option option--rock">
+          <img src="./assets/icon/rock-color.svg" alt="piedra">
+          <span>PIEDRA</span>
+        </button>
+        <button class="option option--paper">
+          <img src="./assets/icon/Paper-color.svg" alt="papel">
+          <span>PAPEL</span>
+        </button>
+        <button class="option option--scissors">
+          <img src="./assets/icon/scissors-color.svg" alt="tijera">
+          <span>TIJERA</span>
+        </button>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="actions">
+        <button class="btn-play">
+          <img src="./assets/icon/zap.svg" alt="rayo">
+          PLAY vs CPU
+        </button>
+        <button class="btn-rules">
+          <img src="./assets/icon/rules.svg" alt="reglas">
+          <span class="btn-rules-label-full">Reglas del juego</span>
+          <span class="btn-rules-label-short">Reglas</span>
+        </button>
+        <button
+          type="button"
+          id="btn-sound"
+          class="sound-btn"
+          aria-label="Silenciar sonido"
+          aria-pressed="false"
+        >
+          <img
+            class="sound-btn-icon"
+            src="./assets/icon/volume-2.svg"
+            alt=""
+            aria-hidden="true"
+          />
+        </button>
+      </div>
     </section>
   `;
 }
@@ -16,18 +63,18 @@ function renderPlayScreen(state) {
   const playerHand = state?.hands?.player ?? "./assets/images/rock-left.png";
 
   return `
-    <section class="game">
+    <section class="game-screen game-screen--play">
       <div class="score-hdr">
-        <div class="score-cpu">
-          <span>CPU</span>
-          <span id="cpu-score">${cpuScore}</span>
+        <div class="score-item score-item--cpu">
+          <span class="score-item-label">CPU</span>
+          <span id="cpu-score" class="score-item-value">${cpuScore}</span>
         </div>
 
         <span class="score-hdr-vs" aria-hidden="true">VS</span>
 
-        <div class="score-player">
-          <span>TÚ</span>
-          <span id="player-score">${playerScore}</span>
+        <div class="score-item score-item--player">
+          <span class="score-item-label">TÚ</span>
+          <span id="player-score" class="score-item-value">${playerScore}</span>
         </div>
       </div>
 
@@ -128,16 +175,17 @@ function renderGameOverScreen(state) {
   const winner = state?.winner ?? "player";
   const playerScore = state?.scores?.player ?? 0;
   const cpuScore = state?.scores?.cpu ?? 0;
+  const playerName = (state?.playerName ?? "JUGADOR").toUpperCase();
 
   const variants = {
-    player: { title: "¡JUGADOR GANA!", playerImg: "victory.png", cpuImg: "defeat.png" },
-    cpu:    { title: "¡CPU GANA!",     playerImg: "defeat.png",  cpuImg: "victory.png" },
-    tie:    { title: "¡EMPATE!",       playerImg: "victory.png", cpuImg: "victory.png" },
+    player: { title: `¡${playerName} GANA!`, playerImg: "victory.png", cpuImg: "defeat.png" },
+    cpu:    { title: "¡CPU GANA!",           playerImg: "defeat.png",  cpuImg: "victory.png" },
+    tie:    { title: "¡EMPATE!",             playerImg: "victory.png", cpuImg: "victory.png" },
   };
   const { title, playerImg, cpuImg } = variants[winner] ?? variants.player;
 
   return `
-    <section class="game game--over">
+    <section class="game-screen game-screen--over">
       <img class="gameover-trophy" src="./assets/icon/trophy-yellow.svg" alt="" aria-hidden="true" />
       <h2 class="gameover-title">${title}</h2>
 
@@ -148,14 +196,14 @@ function renderGameOverScreen(state) {
       </div>
 
       <div class="gameover-score">
-        <div class="gameover-score-player">
-          <span>TÚ</span>
-          <span id="final-player-score">${playerScore}</span>
+        <div class="score-item score-item--player">
+          <span class="score-item-label">TÚ</span>
+          <span id="final-player-score" class="score-item-value">${playerScore}</span>
         </div>
         <span class="gameover-score-sep" aria-hidden="true"></span>
-        <div class="gameover-score-cpu">
-          <span>CPU</span>
-          <span id="final-cpu-score">${cpuScore}</span>
+        <div class="score-item score-item--cpu">
+          <span class="score-item-label">CPU</span>
+          <span id="final-cpu-score" class="score-item-value">${cpuScore}</span>
         </div>
       </div>
 
