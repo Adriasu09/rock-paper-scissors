@@ -84,7 +84,7 @@
 }
 
 .location-card__dot--active {
-  background: var(--mode-2p);
+  background: var(--success);
 }
 
 /* --- Location Card: Error State --- */

@@ -1,8 +1,3 @@
-/* =========================================================
-   Carnival DOM — Rock Paper Scissors
-   Juego PPT (Vanilla CSS)
-   ========================================================= */
-
 /* ---------- Reset ---------- */
 *,
 *::before,
@@ -67,10 +62,7 @@ button {
   --cpu: #ff2d78;
   --magenta: #d946ef;
   --magenta-soft: #d946ef44;
-  --mode-1p: #2196f3;
-  --mode-2p: #4caf50;
-  --mode-ctrl: #ff9800;
-  --gold: #ffd60a;
+  --success: #4caf50;
 
   /* tags */
   --active: #0d2213;
@@ -84,8 +76,6 @@ button {
   --radius-xl: 20px;
   --radius-pill: 999px;
   --radius-btn-move: 32px;
-  --radius-btn-mode: 55px;
-  --radius-btn-ctrl: 45px;
 
   /* Tipografía — tamaños */
   --fs-2xs: 9px;
@@ -100,14 +90,12 @@ button {
   --fs-2xl: 20px;
   --fs-title: 24px;
   --fs-headline: 28px;
-  --fs-icon-sm: 30px;
   --fs-score-mode: 32px;
   --fs-score: 36px;
   --fs-trophy: 40px;
   --fs-weather: 48px;
 
   /* Tipografía — pesos */
-  --fw-normal: 400;
   --fw-semibold: 600;
   --fw-bold: 700;
   --fw-extrabold: 800;
@@ -265,59 +253,6 @@ body {
 
 .btn--move--scissors:hover {
   box-shadow: 0 12px 32px -12px var(--scissors);
-}
-
-/* ---------- Botones de modo (1P / 2P / Controles) ---------- */
-.btn--mode {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  width: 110px;
-  height: 110px;
-  border-radius: var(--radius-btn-mode);
-  background: var(--surface);
-  border: 3px solid transparent;
-  color: var(--text);
-  font-weight: 800;
-  transition:
-    transform 0.25s var(--ease),
-    box-shadow 0.25s var(--ease);
-}
-
-.btn--mode:hover {
-  transform: translateY(-2px);
-}
-
-.btn--mode--1p {
-  border-color: var(--mode-1p);
-  color: var(--mode-1p);
-}
-
-.btn--mode--1p:hover {
-  box-shadow: 0 12px 32px -12px var(--mode-1p);
-}
-
-.btn--mode--2p {
-  border-color: var(--mode-2p);
-  color: var(--mode-2p);
-}
-
-.btn--mode--2p:hover {
-  box-shadow: 0 12px 32px -12px var(--mode-2p);
-}
-
-.btn--mode--ctrl {
-  width: 90px;
-  height: 90px;
-  border-radius: var(--radius-btn-ctrl);
-  border-color: var(--mode-ctrl);
-  color: var(--mode-ctrl);
-}
-
-.btn--mode--ctrl:hover {
-  box-shadow: 0 12px 32px -12px var(--mode-ctrl);
 }
 
 @media only screen and (min-width: 768px) {

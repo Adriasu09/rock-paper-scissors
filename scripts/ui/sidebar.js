@@ -4,6 +4,8 @@ import { getNews } from "../services/newsService.js";
 import { renderLocation } from "./locationSection.js";
 import { renderWeather } from "./weatherSection.js";
 import { renderNews } from "./newsSection.js";
+import { logError, toUserMessage } from "../helpers/errorHandler.js";
+import { ERROR_MESSAGES } from "../constants/errorMessages.js";
 
 export async function loadSidebar(renderLayout) {
   renderLayout({
@@ -20,14 +22,13 @@ export async function loadSidebar(renderLayout) {
       rightHTML: renderLocation(locationData) + renderWeather(null),
     });
   } catch (error) {
-    console.error("getUserLocation failed:", error.message);
+    logError("sidebar:getUserLocation", error);
     renderLayout({
-      leftHTML: renderNews({
-        error: "Se requiere ubicación para las noticias",
-      }),
+      leftHTML: renderNews({ error: ERROR_MESSAGES.location.forNews }),
       rightHTML:
-        renderLocation({ error: error.message }) +
-        renderWeather({ error: "Se requiere ubicación para el clima" }),
+        renderLocation({
+          error: toUserMessage(error, ERROR_MESSAGES.location.needed),
+        }) + renderWeather({ error: ERROR_MESSAGES.location.forWeather }),
     });
     return;
   }
@@ -40,7 +41,9 @@ export async function loadSidebar(renderLayout) {
   const weatherHTML =
     weatherResult.status === "fulfilled"
       ? renderWeather(weatherResult.value)
-      : renderWeather({ error: weatherResult.reason.message });
+      : renderWeather({
+          error: toUserMessage(weatherResult.reason, ERROR_MESSAGES.weather.default),
+        });
 
   const newsHTML =
     newsResult.status === "fulfilled"
@@ -52,14 +55,14 @@ export async function loadSidebar(renderLayout) {
       : renderNews({
           country: locationData.country,
           countryCode: locationData.countryCode,
-          error: newsResult.reason.message,
+          error: toUserMessage(newsResult.reason, ERROR_MESSAGES.news.default),
         });
 
   if (weatherResult.status === "rejected") {
-    console.error("getWeather failed:", weatherResult.reason.message);
+    logError("sidebar:getWeather", weatherResult.reason);
   }
   if (newsResult.status === "rejected") {
-    console.error("getNews failed:", newsResult.reason.message);
+    logError("sidebar:getNews", newsResult.reason);
   }
 
   renderLayout({

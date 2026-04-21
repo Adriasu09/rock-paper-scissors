@@ -1,4 +1,5 @@
 import { AUDIO_ICONS, MUSIC_PATH } from "../constants/game.js";
+import { logError } from "../helpers/errorHandler.js";
 
 let audio = null;
 let isMuted = false;
@@ -7,9 +8,10 @@ function tryPlay() {
   if (!audio) return;
   const promise = audio.play();
   if (promise && typeof promise.catch === "function") {
-    promise.catch(() => {
+    promise.catch((err) => {
+      logError("audio:autoplay", err);
       const unlock = () => {
-        audio.play().catch(() => {});
+        audio.play().catch((retryErr) => logError("audio:unlock", retryErr));
       };
       document.addEventListener("pointerdown", unlock, { once: true });
     });
@@ -33,7 +35,7 @@ export function playSfx(path, volume = 0.6) {
   if (isMuted) return;
   const sfx = new Audio(path);
   sfx.volume = volume;
-  sfx.play().catch(() => {});
+  sfx.play().catch((err) => logError("audio:sfx", err));
 }
 
 export function toggleMute() {
