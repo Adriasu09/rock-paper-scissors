@@ -84,7 +84,7 @@
 }
 
 .location-card__dot--active {
-  background: var(--mode-2p);
+  background: var(--success);
 }
 
 /* --- Location Card: Error State --- */
@@ -152,6 +152,7 @@
   .sidebar--right {
     display: flex;
     width: var(--sidebar-tablet);
+    padding: 0 10px;
   }
 }
 

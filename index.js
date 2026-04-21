@@ -1,34 +1,58 @@
-import { getUserLocation } from "./scripts/service/geolocationService.js";
-import { getWeather } from "./scripts/service/weatherService.js";
-import { getNews } from "./scripts/service/newsService.js";
-import { renderLocation } from "./scripts/UI/locationSection.js";
-import { renderWeather } from "./scripts/UI/weatherSection.js";
-import { renderNews } from "./scripts/UI/newsSection.js";
-import { renderNavbar, initNavbarInteractions } from "./scripts/UI/navbar.js";
-import { renderFooter } from "./scripts/UI/footer.js";
-import { renderGameScreen } from "./scripts/UI/gameScreen.js";
+import { setPlayerName, resetGameState } from "./scripts/services/gameService.js";
+import { initGameListeners } from "./scripts/ui/gameController.js";
+import { initAudio, attachSoundButton, playSfx } from "./scripts/services/audioService.js";
+import { SFX } from "./scripts/constants/game.js";
+import { byId } from "./scripts/helpers/dom.js";
+import { renderShell } from "./scripts/ui/layout.js";
+import { loadSidebar } from "./scripts/ui/sidebar.js";
+import { attachStartScreen } from "./scripts/ui/screens/startScreen.js";
+import { attachGameOverScreen } from "./scripts/ui/screens/gameOverScreen.js";
 
-const root = document.getElementById("root");
-const navbar = document.getElementById("navbar");
-const footer = document.getElementById("footer");
-footer.innerHTML = renderFooter();
+const root = byId("root");
 
-//let gameState = { view: "start" }; // ← pantalla de inicio (por defecto)
-let gameState = { view: "play" }; // ← juego en curso
-//let gameState = { view: "gameOver" }; // ← fin del juego
+initAudio();
+
+let gameState = { view: "start" };
 
 function renderLayout({ leftHTML, rightHTML }) {
-  root.innerHTML = `
-    <aside class="sidebar sidebar--left">
-      ${leftHTML}
-    </aside>
-    <main class="game-area">
-      ${renderGameScreen(gameState)}
-    </main>
-    <aside class="sidebar sidebar--right">
-      ${rightHTML}
-    </aside>
-  `;
+  root.innerHTML = renderShell({ leftHTML, rightHTML, gameState });
+  initGameListeners();
+  attachSoundButton();
+  attachScreenHandlers();
+  attachRetryLocationHandler();
+}
+
+function attachScreenHandlers() {
+  if (gameState.view === "start") {
+    attachStartScreen({ onPlay: handleStartGame });
+  } else if (gameState.view === "gameOver") {
+    attachGameOverScreen({
+      onReplay: () => handleStartGame(gameState.playerName),
+      onHome: handleGoHome,
+    });
+  }
+}
+
+function handleStartGame(name) {
+  resetGameState();
+  setPlayerName(name);
+  playSfx(SFX.startGame, 0.7);
+  setGameState({
+    view: "play",
+    playerName: name,
+    scores: { player: 0, cpu: 0 },
+  });
+}
+
+function handleGoHome() {
+  resetGameState();
+  setGameState({ view: "start" });
+}
+
+function attachRetryLocationHandler() {
+  const retryBtn = byId("retry-location");
+  if (!retryBtn) return;
+  retryBtn.addEventListener("click", () => loadSidebar(renderLayout));
 }
 
 function renderNavbarWith(locationData, weatherData) {
@@ -46,77 +70,4 @@ export function setGameState(nextState) {
   });
 }
 
-async function initSidebar() {
-  renderNavbarWith(null, null);
-  renderLayout({
-    leftHTML: renderNews(null),
-    rightHTML: renderLocation(null) + renderWeather(null),
-  });
-
-  let locationData = null;
-
-  try {
-    locationData = await getUserLocation();
-    renderNavbarWith(locationData, null);
-    renderLayout({
-      leftHTML: renderNews(null),
-      rightHTML: renderLocation(locationData) + renderWeather(null),
-    });
-  } catch (error) {
-    console.error("Error en getUserLocation:", error.message);
-    renderNavbarWith({ error: error.message }, { error: "Sin datos" });
-    renderLayout({
-      leftHTML: renderNews({
-        error: "Se requiere ubicación para las noticias",
-      }),
-      rightHTML:
-        renderLocation({ error: error.message }) +
-        renderWeather({ error: "Se requiere ubicación para el clima" }),
-    });
-
-    document
-      .getElementById("retry-location")
-      .addEventListener("click", initSidebar);
-    return;
-  }
-
-  const [weatherResult, newsResult] = await Promise.allSettled([
-    getWeather(locationData.latitude, locationData.longitude),
-    getNews(locationData.countryCode),
-  ]);
-
-  const weatherData =
-    weatherResult.status === "fulfilled"
-      ? weatherResult.value
-      : { error: weatherResult.reason.message };
-
-  const weatherHTML = renderWeather(weatherData);
-
-  const newsHTML =
-    newsResult.status === "fulfilled"
-      ? renderNews({
-          country: locationData.country,
-          countryCode: locationData.countryCode,
-          articles: newsResult.value,
-        })
-      : renderNews({
-          country: locationData.country,
-          countryCode: locationData.countryCode,
-          error: newsResult.reason.message,
-        });
-
-  if (weatherResult.status === "rejected") {
-    console.error("Error en getWeather:", weatherResult.reason.message);
-  }
-  if (newsResult.status === "rejected") {
-    console.error("Error en getNews:", newsResult.reason.message);
-  }
-
-  renderNavbarWith(locationData, weatherData);
-  renderLayout({
-    leftHTML: newsHTML,
-    rightHTML: renderLocation(locationData) + weatherHTML,
-  });
-}
-
-initSidebar();
+loadSidebar(renderLayout);
