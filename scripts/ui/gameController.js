@@ -10,6 +10,7 @@ import {
   getPlayerName,
   resetGameState,
 } from "../services/gameService.js";
+import { showRoundResult } from "./roundModal.js";
 import {
   COUNTDOWN_START,
   COUNTDOWN_INTERVAL_MS,
@@ -43,9 +44,7 @@ async function showResult(playerChoice, cpuChoice, result) {
 
   // 5. Mostrar modal de ronda y esperar cierre
   const modalResult = result === "draw" ? "tie" : result;
-  if (typeof window.__showRoundResult === "function") {
-    await window.__showRoundResult(modalResult);
-  }
+  await showRoundResult(modalResult);
 
   // 6. ¿Fin de partida?
   if (isGameOver()) {

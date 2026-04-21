@@ -9,15 +9,12 @@ import { setPlayerName, resetGameState } from "./scripts/services/gameService.js
 import { initGameListeners } from "./scripts/ui/gameController.js";
 import { renderNameModal, attachNameModal } from "./scripts/ui/nameModal.js";
 import { renderRulesModal, attachRulesModal } from "./scripts/ui/rulesModal.js";
-import { showRoundResult } from "./scripts/ui/roundModal.js";
 import { initAudio, attachSoundButton, playSfx } from "./scripts/services/audioService.js";
 import { SFX } from "./scripts/constants/game.js";
 
 const root = document.getElementById("root");
 
 initAudio();
-
-window.__showRoundResult = showRoundResult;
 
 let gameState = { view: "start" };
 
