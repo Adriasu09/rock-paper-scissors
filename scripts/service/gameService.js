@@ -2,6 +2,7 @@ import { setGameState } from "../../index.js"
 import { playSfx } from "./audioController.js"
 
 const HOVER_SOUND = "./assets/sounds/btn-hover.wav"
+const COUNTDOWN_SOUND = "./assets/sounds/3-2-1-fight.flac"
 
 let cpuScore = 0
 let playerScore = 0
@@ -109,7 +110,17 @@ function startCountdown(playerChoice) {
 
     const countdownEl = document.getElementById("countdown")
     const messageEl = document.getElementById("message")
+    const imgCPU = document.getElementById("img-cpu")
+    const imgPlayer = document.getElementById("img-player")
+
     messageEl.textContent = "3...2...1..."
+
+    //Sonido sincronizado con la cuenta atrás
+    playSfx(COUNTDOWN_SOUND, 0.7)
+
+    //Animación de shake en las manos
+    imgCPU.classList.add("is-shaking")
+    imgPlayer.classList.add("is-shaking")
 
     let count = 3
     countdownEl.textContent = count
@@ -122,14 +133,19 @@ function startCountdown(playerChoice) {
             clearInterval(interval)
             countdownEl.textContent = " ⚡"
 
+            //Paramos el shake antes de revelar el resultado
+            imgCPU.classList.remove("is-shaking")
+            imgPlayer.classList.remove("is-shaking")
+
             //Ahora juega la ronda
             const cpuChoice = getComputerChoice()
             const result = getResult(playerChoice, cpuChoice)
+
             await showResult(playerChoice, cpuChoice, result)
 
             isPlaying = false
         }
-    }, 700)
+    }, 1000)
 }
 
 //Función que conecta con la lógica del juego

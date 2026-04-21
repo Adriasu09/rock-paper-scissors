@@ -46,6 +46,28 @@
   to   { opacity: 1; transform: translateX(0); }
 }
 
+/* Shake de las manos durante la cuenta atrás — el antebrazo queda fijo
+   y el puño pivota desde el lado del brazo (chopping motion). */
+.game-screen--play .arena-hand:first-of-type.is-shaking {
+  transform-origin: 8% 50%;
+  animation: handChopLeft 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.game-screen--play .arena-hand:last-of-type.is-shaking {
+  transform-origin: 92% 50%;
+  animation: handChopRight 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes handChopLeft {
+  0%, 100% { transform: rotate(-20deg); }
+  50%      { transform: rotate(14deg); }
+}
+
+@keyframes handChopRight {
+  0%, 100% { transform: rotate(20deg); }
+  50%      { transform: rotate(-14deg); }
+}
+
 /* ---------- Start Screen ---------- */
 .game-screen--start {
   align-items: center;

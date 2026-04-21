@@ -17,13 +17,7 @@ initAudio();
 
 window.__showRoundResult = showRoundResult;
 
-let gameState = { view: "start" }; // ← pantalla de inicio (por defecto)
-//let gameState = { view: "play" }; // ← juego en curso
-// let gameState = {
-//   view: "gameOver",
-//   winner: "player",
-//   scores: { player: 3, cpu: 0 },
-// };
+let gameState = { view: "start" };
 
 function renderLayout({ leftHTML, rightHTML }) {
   root.innerHTML = `

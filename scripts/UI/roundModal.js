@@ -1,4 +1,4 @@
-const AUTO_CLOSE_MS = 1500;
+const AUTO_CLOSE_MS = 3000;
 
 const VARIANTS = {
   win:  { title: "¡Ganaste la ronda!", className: "modal--round-win",  icon: "./assets/icon/trophy-yellow.svg" },
