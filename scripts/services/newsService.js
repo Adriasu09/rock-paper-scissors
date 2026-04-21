@@ -1,4 +1,4 @@
-import { fetchData } from "../helpers/fetchData.js";
+import { fetchData } from "./apiClient.js";
 import { NEWSAPI_BASE_URL } from "../constants/urls.js";
 import { NEWS_API_KEY } from "../constants/config.js";
 import { NEWS_CATEGORIES, COUNTRY_LANGUAGE } from "../constants/news.js";
@@ -24,16 +24,13 @@ function mapArticle(article, category) {
 }
 
 async function fetchCategory(language, category) {
-  const params = new URLSearchParams({
+  const data = await fetchData(NEWSAPI_BASE_URL, {
     q: category.query,
     language,
     sortBy: "publishedAt",
     pageSize: "1",
     apiKey: NEWS_API_KEY,
   });
-
-  const url = `${NEWSAPI_BASE_URL}?${params}`;
-  const data = await fetchData(url);
   const article = data.articles?.[0];
 
   return article ? mapArticle(article, category) : null;

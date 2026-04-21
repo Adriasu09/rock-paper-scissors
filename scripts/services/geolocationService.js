@@ -1,4 +1,4 @@
-import { fetchData } from "../helpers/fetchData.js";
+import { fetchData } from "./apiClient.js";
 import { NOMINATIM_BASE_URL, FLAG_BASE_URL } from "../constants/urls.js";
 import {
   GEOCODE_OPTIONS,
@@ -49,8 +49,12 @@ function getPosition() {
 }
 
 export async function reverseGeocode(lat, lng) {
-  const url = `${NOMINATIM_BASE_URL}?lat=${lat}&lon=${lng}&format=json&accept-language=es`;
-  const data = await fetchData(url);
+  const data = await fetchData(NOMINATIM_BASE_URL, {
+    lat,
+    lon: lng,
+    format: "json",
+    "accept-language": "es",
+  });
 
   const { address } = data;
   const city =

@@ -1,4 +1,8 @@
-export async function fetchData(url) {
+export async function fetchData(baseUrl, params) {
+  const url = params
+    ? `${baseUrl}?${new URLSearchParams(params)}`
+    : baseUrl;
+
   const response = await fetch(url);
 
   if (!response.ok) {

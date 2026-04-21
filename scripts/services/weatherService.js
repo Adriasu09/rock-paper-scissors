@@ -1,4 +1,4 @@
-import { fetchData } from "../helpers/fetchData.js";
+import { fetchData } from "./apiClient.js";
 import { OPEN_METEO_BASE_URL, WEATHER_ICON_BASE_URL } from "../constants/urls.js";
 import { WMO_CODES } from "../constants/weatherCodes.js";
 
@@ -9,14 +9,11 @@ function getWeatherInfo(code, isDay) {
 }
 
 export async function getWeather(latitude, longitude) {
-  const params = new URLSearchParams({
+  const data = await fetchData(OPEN_METEO_BASE_URL, {
     latitude,
     longitude,
     current: "temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,is_day",
   });
-
-  const url = `${OPEN_METEO_BASE_URL}?${params}`;
-  const data = await fetchData(url);
   const { current } = data;
 
   const isDay = current.is_day === 1;
