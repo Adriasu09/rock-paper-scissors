@@ -141,7 +141,7 @@ export function initGameListeners() {
     if (!btnRock || !btnPaper || !btnScissors) return
 
     for (const btn of [btnRock, btnPaper, btnScissors]) {
-        btn.addEventListener("mouseenter", () => playSfx(HOVER_SOUND, 0.4))
+        btn.addEventListener("mouseenter", () => playSfx(HOVER_SOUND, 0.5))
     }
 
     btnRock.addEventListener("click", function () {
