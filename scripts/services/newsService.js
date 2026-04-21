@@ -40,8 +40,8 @@ async function fetchCategory(language, category) {
 }
 
 export async function getNews(countryCode) {
-  const country = (countryCode || "").toLowerCase();
-  const language = COUNTRY_LANGUAGE[country] || "en";
+  const country = (countryCode ?? "").toLowerCase();
+  const language = COUNTRY_LANGUAGE[country] ?? "en";
 
   const results = await Promise.all(
     NEWS_CATEGORIES.map((category) => fetchCategory(language, category)),

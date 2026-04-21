@@ -1,5 +1,5 @@
 import { GAME_OVER_VARIANTS } from "../../constants/game.js";
-import { byId } from "../../helpers/dom.js";
+import { byId, escapeHtml } from "../../helpers/dom.js";
 
 export function attachGameOverScreen({ onReplay, onHome }) {
   const replayBtn = byId("btn-replay");
@@ -16,7 +16,7 @@ export function renderGameOverScreen(state) {
   const playerName = (state?.playerName ?? "JUGADOR").toUpperCase();
 
   const variant = GAME_OVER_VARIANTS[winner] ?? GAME_OVER_VARIANTS.player;
-  const title = variant.title(playerName);
+  const title = escapeHtml(variant.title(playerName));
   const { playerImg, cpuImg } = variant;
 
   return `

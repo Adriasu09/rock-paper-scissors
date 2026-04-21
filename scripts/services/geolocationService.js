@@ -26,7 +26,7 @@ function getPosition() {
               (retryError) => {
                 reject(
                   new Error(
-                    GEOLOCATION_ERROR_MESSAGES[retryError.code] ||
+                    GEOLOCATION_ERROR_MESSAGES[retryError.code] ??
                       UNKNOWN_GEOLOCATION_ERROR,
                   ),
                 );
@@ -39,7 +39,7 @@ function getPosition() {
 
         reject(
           new Error(
-            GEOLOCATION_ERROR_MESSAGES[error.code] || UNKNOWN_GEOLOCATION_ERROR,
+            GEOLOCATION_ERROR_MESSAGES[error.code] ?? UNKNOWN_GEOLOCATION_ERROR,
           ),
         );
       },
