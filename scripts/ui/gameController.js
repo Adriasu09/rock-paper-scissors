@@ -11,6 +11,7 @@ import {
   resetGameState,
 } from "../services/gameService.js";
 import { showRoundResult } from "./roundModal.js";
+import { byId } from "../helpers/dom.js";
 import {
   COUNTDOWN_START,
   COUNTDOWN_INTERVAL_MS,
@@ -23,8 +24,8 @@ let keyboardBound = false;
 
 async function showResult(playerChoice, cpuChoice, result) {
   // 1. Update hand images
-  const cpuImg = document.getElementById("img-cpu");
-  const playerImg = document.getElementById("img-player");
+  const cpuImg = byId("img-cpu");
+  const playerImg = byId("img-player");
   cpuImg.src = HAND_IMAGES[cpuChoice].right;
   playerImg.src = HAND_IMAGES[playerChoice].left;
 
@@ -33,14 +34,14 @@ async function showResult(playerChoice, cpuChoice, result) {
   else if (result === "lose") playSfx(SFX.roundLose, 0.7);
 
   // 3. Clear message (the modal shows the result)
-  const messageEl = document.getElementById("message");
+  const messageEl = byId("message");
   messageEl.textContent = "";
 
   // 4. Update DOM scoreboard from service state
   applyRoundResult(result);
   const scores = getScores();
-  document.getElementById("cpu-score").textContent = scores.cpu;
-  document.getElementById("player-score").textContent = scores.player;
+  byId("cpu-score").textContent = scores.cpu;
+  byId("player-score").textContent = scores.player;
 
   // 5. Show round modal and wait for close
   const modalResult = result === "draw" ? "tie" : result;
@@ -63,7 +64,7 @@ async function showResult(playerChoice, cpuChoice, result) {
   }
 
   // 7. Reset UI for the next round
-  const countdownEl = document.getElementById("countdown");
+  const countdownEl = byId("countdown");
   if (countdownEl) countdownEl.textContent = String(COUNTDOWN_START);
   if (messageEl) messageEl.textContent = "¡Elige tu movimiento!";
   cpuImg.src = HAND_IMAGES.rock.right;
@@ -74,10 +75,10 @@ function startCountdown(playerChoice) {
   if (isPlaying) return;
   isPlaying = true;
 
-  const countdownEl = document.getElementById("countdown");
-  const messageEl = document.getElementById("message");
-  const cpuImg = document.getElementById("img-cpu");
-  const playerImg = document.getElementById("img-player");
+  const countdownEl = byId("countdown");
+  const messageEl = byId("message");
+  const cpuImg = byId("img-cpu");
+  const playerImg = byId("img-player");
 
   messageEl.textContent = "3...2...1...";
   playSfx(SFX.countdown, 0.7);
@@ -109,9 +110,9 @@ function startCountdown(playerChoice) {
 }
 
 export function initGameListeners() {
-  const btnRock = document.getElementById("btn-rock");
-  const btnPaper = document.getElementById("btn-paper");
-  const btnScissors = document.getElementById("btn-scissors");
+  const btnRock = byId("btn-rock");
+  const btnPaper = byId("btn-paper");
+  const btnScissors = byId("btn-scissors");
 
   if (!btnRock || !btnPaper || !btnScissors) return;
 
@@ -127,7 +128,7 @@ export function initGameListeners() {
   if (!keyboardBound) {
     keyboardBound = true;
     document.addEventListener("keydown", (e) => {
-      if (!document.getElementById("btn-rock")) return;
+      if (!byId("btn-rock")) return;
       const key = e.key.toLowerCase();
       if (key === "a") startCountdown("rock");
       else if (key === "s") startCountdown("paper");

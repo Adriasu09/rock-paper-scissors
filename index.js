@@ -11,8 +11,9 @@ import { renderNameModal, attachNameModal } from "./scripts/ui/nameModal.js";
 import { renderRulesModal, attachRulesModal } from "./scripts/ui/rulesModal.js";
 import { initAudio, attachSoundButton, playSfx } from "./scripts/services/audioService.js";
 import { SFX } from "./scripts/constants/game.js";
+import { byId, qs } from "./scripts/helpers/dom.js";
 
-const root = document.getElementById("root");
+const root = byId("root");
 
 initAudio();
 
@@ -38,25 +39,25 @@ function renderLayout({ leftHTML, rightHTML }) {
 }
 
 function attachRetryLocationHandler() {
-  const retryBtn = document.getElementById("retry-location");
+  const retryBtn = byId("retry-location");
   if (!retryBtn) return;
   retryBtn.addEventListener("click", initSidebar);
 }
 
 function attachStartScreenHandlers() {
   if (gameState.view !== "start") return;
-  const rulesBtn = root.querySelector(".btn-rules");
+  const rulesBtn = qs(".btn-rules", root);
   if (rulesBtn) {
     rulesBtn.addEventListener("click", () => {
-      if (document.getElementById("rules-modal")) return;
+      if (byId("rules-modal")) return;
       document.body.insertAdjacentHTML("beforeend", renderRulesModal());
       attachRulesModal();
     });
   }
-  const playBtn = root.querySelector(".btn-play");
+  const playBtn = qs(".btn-play", root);
   if (!playBtn) return;
   playBtn.addEventListener("click", () => {
-    if (document.getElementById("name-modal")) return;
+    if (byId("name-modal")) return;
     document.body.insertAdjacentHTML("beforeend", renderNameModal());
     attachNameModal((name) => {
       resetGameState();
@@ -73,8 +74,8 @@ function attachStartScreenHandlers() {
 
 function attachGameOverHandlers() {
   if (gameState.view !== "gameOver") return;
-  const replayBtn = document.getElementById("btn-replay");
-  const homeBtn = document.getElementById("btn-home");
+  const replayBtn = byId("btn-replay");
+  const homeBtn = byId("btn-home");
   const playerName = gameState.playerName;
 
   if (replayBtn) {
@@ -99,8 +100,8 @@ function attachGameOverHandlers() {
 
 export function setGameState(nextState) {
   gameState = nextState;
-  const leftAside = root.querySelector(".sidebar--left");
-  const rightAside = root.querySelector(".sidebar--right");
+  const leftAside = qs(".sidebar--left", root);
+  const rightAside = qs(".sidebar--right", root);
   renderLayout({
     leftHTML: leftAside ? leftAside.innerHTML : "",
     rightHTML: rightAside ? rightAside.innerHTML : "",
