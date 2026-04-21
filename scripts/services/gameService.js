@@ -1,5 +1,5 @@
 import { setGameState } from "../../index.js"
-import { playSfx } from "./audioController.js"
+import { playSfx } from "./audioService.js"
 import {
     CHOICES,
     WIN_SCORE,

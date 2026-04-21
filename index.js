@@ -1,15 +1,15 @@
-import { getUserLocation } from "./scripts/service/geolocationService.js";
-import { getWeather } from "./scripts/service/weatherService.js";
-import { getNews } from "./scripts/service/newsService.js";
-import { renderLocation } from "./scripts/UI/locationSection.js";
-import { renderWeather } from "./scripts/UI/weatherSection.js";
-import { renderNews } from "./scripts/UI/newsSection.js";
-import { renderGameScreen } from "./scripts/UI/gameScreen.js";
-import { initGameListeners, setPlayerName, resetGameState } from "./scripts/service/gameService.js";
-import { renderNameModal, attachNameModal } from "./scripts/UI/nameModal.js";
-import { renderRulesModal, attachRulesModal } from "./scripts/UI/rulesModal.js";
-import { showRoundResult } from "./scripts/UI/roundModal.js";
-import { initAudio, attachSoundButton, playSfx } from "./scripts/service/audioController.js";
+import { getUserLocation } from "./scripts/services/geolocationService.js";
+import { getWeather } from "./scripts/services/weatherService.js";
+import { getNews } from "./scripts/services/newsService.js";
+import { renderLocation } from "./scripts/ui/locationSection.js";
+import { renderWeather } from "./scripts/ui/weatherSection.js";
+import { renderNews } from "./scripts/ui/newsSection.js";
+import { renderGameScreen } from "./scripts/ui/gameScreen.js";
+import { initGameListeners, setPlayerName, resetGameState } from "./scripts/services/gameService.js";
+import { renderNameModal, attachNameModal } from "./scripts/ui/nameModal.js";
+import { renderRulesModal, attachRulesModal } from "./scripts/ui/rulesModal.js";
+import { showRoundResult } from "./scripts/ui/roundModal.js";
+import { initAudio, attachSoundButton, playSfx } from "./scripts/services/audioService.js";
 import { SFX } from "./scripts/constants/game.js";
 
 const root = document.getElementById("root");

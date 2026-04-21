@@ -1,4 +1,4 @@
-import { getCountryFlagUrl } from "../service/geolocationService.js";
+import { getCountryFlagUrl } from "../services/geolocationService.js";
 
 function renderHeader(country) {
   const title = country ? `Noticias de ${country}` : "Noticias";

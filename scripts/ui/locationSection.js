@@ -1,4 +1,4 @@
-import { getCountryFlagUrl } from "../service/geolocationService.js";
+import { getCountryFlagUrl } from "../services/geolocationService.js";
 
 export function renderLocation(locationData) {
   if (!locationData) {

@@ -19,6 +19,29 @@ export const HAND_IMAGES = {
   },
 };
 
+export const RESULT_IMAGES = {
+  victory: "./assets/images/victory.png",
+  defeat: "./assets/images/defeat.png",
+};
+
+export const GAME_OVER_VARIANTS = {
+  player: {
+    title: (name) => `¡${name} GANA!`,
+    playerImg: RESULT_IMAGES.victory,
+    cpuImg: RESULT_IMAGES.defeat,
+  },
+  cpu: {
+    title: () => "¡CPU GANA!",
+    playerImg: RESULT_IMAGES.defeat,
+    cpuImg: RESULT_IMAGES.victory,
+  },
+  tie: {
+    title: () => "¡EMPATE!",
+    playerImg: RESULT_IMAGES.victory,
+    cpuImg: RESULT_IMAGES.victory,
+  },
+};
+
 export const SFX = {
   hover: "./assets/sounds/btn-hover.wav",
   countdown: "./assets/sounds/3-2-1-fight.flac",
