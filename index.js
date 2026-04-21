@@ -1,17 +1,12 @@
-import { getUserLocation } from "./scripts/services/geolocationService.js";
-import { getWeather } from "./scripts/services/weatherService.js";
-import { getNews } from "./scripts/services/newsService.js";
-import { renderLocation } from "./scripts/ui/locationSection.js";
-import { renderWeather } from "./scripts/ui/weatherSection.js";
-import { renderNews } from "./scripts/ui/newsSection.js";
-import { renderGameScreen } from "./scripts/ui/gameScreen.js";
 import { setPlayerName, resetGameState } from "./scripts/services/gameService.js";
 import { initGameListeners } from "./scripts/ui/gameController.js";
-import { renderNameModal, attachNameModal } from "./scripts/ui/nameModal.js";
-import { renderRulesModal, attachRulesModal } from "./scripts/ui/rulesModal.js";
 import { initAudio, attachSoundButton, playSfx } from "./scripts/services/audioService.js";
 import { SFX } from "./scripts/constants/game.js";
-import { byId, qs } from "./scripts/helpers/dom.js";
+import { byId } from "./scripts/helpers/dom.js";
+import { renderShell } from "./scripts/ui/layout.js";
+import { loadSidebar } from "./scripts/ui/sidebar.js";
+import { attachStartScreen } from "./scripts/ui/screens/startScreen.js";
+import { attachGameOverScreen } from "./scripts/ui/screens/gameOverScreen.js";
 
 const root = byId("root");
 
@@ -20,156 +15,54 @@ initAudio();
 let gameState = { view: "start" };
 
 function renderLayout({ leftHTML, rightHTML }) {
-  root.innerHTML = `
-    <aside class="sidebar sidebar--left">
-      ${leftHTML}
-    </aside>
-    <main class="game-area">
-      ${renderGameScreen(gameState)}
-    </main>
-    <aside class="sidebar sidebar--right">
-      ${rightHTML}
-    </aside>
-  `;
-  initGameListeners()
+  root.innerHTML = renderShell({ leftHTML, rightHTML, gameState });
+  initGameListeners();
   attachSoundButton();
-  attachStartScreenHandlers();
-  attachGameOverHandlers();
+  attachScreenHandlers();
   attachRetryLocationHandler();
+}
+
+function attachScreenHandlers() {
+  if (gameState.view === "start") {
+    attachStartScreen({ onPlay: handleStartGame });
+  } else if (gameState.view === "gameOver") {
+    attachGameOverScreen({
+      onReplay: () => handleStartGame(gameState.playerName),
+      onHome: handleGoHome,
+    });
+  }
+}
+
+function handleStartGame(name) {
+  resetGameState();
+  setPlayerName(name);
+  playSfx(SFX.startGame, 0.7);
+  setGameState({
+    view: "play",
+    playerName: name,
+    scores: { player: 0, cpu: 0 },
+  });
+}
+
+function handleGoHome() {
+  resetGameState();
+  setGameState({ view: "start" });
 }
 
 function attachRetryLocationHandler() {
   const retryBtn = byId("retry-location");
   if (!retryBtn) return;
-  retryBtn.addEventListener("click", initSidebar);
-}
-
-function attachStartScreenHandlers() {
-  if (gameState.view !== "start") return;
-  const rulesBtn = qs(".btn-rules", root);
-  if (rulesBtn) {
-    rulesBtn.addEventListener("click", () => {
-      if (byId("rules-modal")) return;
-      document.body.insertAdjacentHTML("beforeend", renderRulesModal());
-      attachRulesModal();
-    });
-  }
-  const playBtn = qs(".btn-play", root);
-  if (!playBtn) return;
-  playBtn.addEventListener("click", () => {
-    if (byId("name-modal")) return;
-    document.body.insertAdjacentHTML("beforeend", renderNameModal());
-    attachNameModal((name) => {
-      resetGameState();
-      setPlayerName(name);
-      playSfx(SFX.startGame, 0.7);
-      setGameState({
-        view: "play",
-        playerName: name,
-        scores: { player: 0, cpu: 0 },
-      });
-    });
-  });
-}
-
-function attachGameOverHandlers() {
-  if (gameState.view !== "gameOver") return;
-  const replayBtn = byId("btn-replay");
-  const homeBtn = byId("btn-home");
-  const playerName = gameState.playerName;
-
-  if (replayBtn) {
-    replayBtn.addEventListener("click", () => {
-      resetGameState();
-      setPlayerName(playerName);
-      setGameState({
-        view: "play",
-        playerName,
-        scores: { player: 0, cpu: 0 },
-      });
-    });
-  }
-
-  if (homeBtn) {
-    homeBtn.addEventListener("click", () => {
-      resetGameState();
-      setGameState({ view: "start" });
-    });
-  }
+  retryBtn.addEventListener("click", () => loadSidebar(renderLayout));
 }
 
 export function setGameState(nextState) {
   gameState = nextState;
-  const leftAside = qs(".sidebar--left", root);
-  const rightAside = qs(".sidebar--right", root);
+  const leftAside = root.querySelector(".sidebar--left");
+  const rightAside = root.querySelector(".sidebar--right");
   renderLayout({
     leftHTML: leftAside ? leftAside.innerHTML : "",
     rightHTML: rightAside ? rightAside.innerHTML : "",
   });
 }
 
-async function initSidebar() {
-  renderLayout({
-    leftHTML: renderNews(null),
-    rightHTML: renderLocation(null) + renderWeather(null),
-  });
-
-  let locationData = null;
-
-  try {
-    locationData = await getUserLocation();
-    renderLayout({
-      leftHTML: renderNews(null),
-      rightHTML: renderLocation(locationData) + renderWeather(null),
-    });
-  } catch (error) {
-    console.error("getUserLocation failed:", error.message);
-    renderLayout({
-      leftHTML: renderNews({
-        error: "Se requiere ubicación para las noticias",
-      }),
-      rightHTML:
-        renderLocation({ error: error.message }) +
-        renderWeather({ error: "Se requiere ubicación para el clima" }),
-    });
-
-    return;
-  }
-
-  const [weatherResult, newsResult] = await Promise.allSettled([
-    getWeather(locationData.latitude, locationData.longitude),
-    getNews(locationData.countryCode),
-  ]);
-
-  const weatherHTML =
-    weatherResult.status === "fulfilled"
-      ? renderWeather(weatherResult.value)
-      : renderWeather({ error: weatherResult.reason.message });
-
-  const newsHTML =
-    newsResult.status === "fulfilled"
-      ? renderNews({
-          country: locationData.country,
-          countryCode: locationData.countryCode,
-          articles: newsResult.value,
-        })
-      : renderNews({
-          country: locationData.country,
-          countryCode: locationData.countryCode,
-          error: newsResult.reason.message,
-        });
-
-  if (weatherResult.status === "rejected") {
-    console.error("getWeather failed:", weatherResult.reason.message);
-  }
-  if (newsResult.status === "rejected") {
-    console.error("getNews failed:", newsResult.reason.message);
-  }
-
-  renderLayout({
-    leftHTML: newsHTML,
-    rightHTML: renderLocation(locationData) + weatherHTML,
-  });
-}
-
-initSidebar();
+loadSidebar(renderLayout);

@@ -1,4 +1,13 @@
 import { GAME_OVER_VARIANTS } from "../../constants/game.js";
+import { byId } from "../../helpers/dom.js";
+
+export function attachGameOverScreen({ onReplay, onHome }) {
+  const replayBtn = byId("btn-replay");
+  const homeBtn = byId("btn-home");
+
+  if (replayBtn) replayBtn.addEventListener("click", onReplay);
+  if (homeBtn) homeBtn.addEventListener("click", onHome);
+}
 
 export function renderGameOverScreen(state) {
   const winner = state?.winner ?? "player";

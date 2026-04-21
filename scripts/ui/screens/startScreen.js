@@ -1,3 +1,26 @@
+import { byId, qs } from "../../helpers/dom.js";
+import { renderNameModal, attachNameModal } from "../nameModal.js";
+import { renderRulesModal, attachRulesModal } from "../rulesModal.js";
+
+export function attachStartScreen({ onPlay }) {
+  const rulesBtn = qs(".btn-rules");
+  if (rulesBtn) {
+    rulesBtn.addEventListener("click", () => {
+      if (byId("rules-modal")) return;
+      document.body.insertAdjacentHTML("beforeend", renderRulesModal());
+      attachRulesModal();
+    });
+  }
+
+  const playBtn = qs(".btn-play");
+  if (!playBtn) return;
+  playBtn.addEventListener("click", () => {
+    if (byId("name-modal")) return;
+    document.body.insertAdjacentHTML("beforeend", renderNameModal());
+    attachNameModal(onPlay);
+  });
+}
+
 export function renderStartScreen() {
   return `
     <section class="game-screen game-screen--start">
