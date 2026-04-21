@@ -13,11 +13,8 @@ import { initAudio, attachSoundButton, playSfx } from "./scripts/service/audioCo
 
 const root = document.getElementById("root");
 
-
 initAudio();
 
-// Punto de extensión: la lógica de rondas futura debe llamar a
-// window.__showRoundResult("win" | "lose" | "tie") al terminar cada ronda.
 window.__showRoundResult = showRoundResult;
 
 let gameState = { view: "start" }; // ← pantalla de inicio (por defecto)
