@@ -122,7 +122,7 @@ async function initSidebar() {
       rightHTML: renderLocation(locationData) + renderWeather(null),
     });
   } catch (error) {
-    console.error("Error en getUserLocation:", error.message);
+    console.error("getUserLocation failed:", error.message);
     renderLayout({
       leftHTML: renderNews({
         error: "Se requiere ubicación para las noticias",
@@ -159,10 +159,10 @@ async function initSidebar() {
         });
 
   if (weatherResult.status === "rejected") {
-    console.error("Error en getWeather:", weatherResult.reason.message);
+    console.error("getWeather failed:", weatherResult.reason.message);
   }
   if (newsResult.status === "rejected") {
-    console.error("Error en getNews:", newsResult.reason.message);
+    console.error("getNews failed:", newsResult.reason.message);
   }
 
   renderLayout({

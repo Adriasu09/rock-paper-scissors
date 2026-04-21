@@ -22,31 +22,31 @@ let isPlaying = false;
 let keyboardBound = false;
 
 async function showResult(playerChoice, cpuChoice, result) {
-  // 1. Actualizar manos
-  const imgCPU = document.getElementById("img-cpu");
-  const imgPlayer = document.getElementById("img-player");
-  imgCPU.src = HAND_IMAGES[cpuChoice].right;
-  imgPlayer.src = HAND_IMAGES[playerChoice].left;
+  // 1. Update hand images
+  const cpuImg = document.getElementById("img-cpu");
+  const playerImg = document.getElementById("img-player");
+  cpuImg.src = HAND_IMAGES[cpuChoice].right;
+  playerImg.src = HAND_IMAGES[playerChoice].left;
 
-  // 2. SFX según resultado
+  // 2. Play SFX based on outcome
   if (result === "win") playSfx(SFX.roundWin, 0.7);
   else if (result === "lose") playSfx(SFX.roundLose, 0.7);
 
-  // 3. Limpiar mensaje (el modal muestra el resultado)
+  // 3. Clear message (the modal shows the result)
   const messageEl = document.getElementById("message");
   messageEl.textContent = "";
 
-  // 4. Actualizar marcador en el DOM con el nuevo estado del servicio
+  // 4. Update DOM scoreboard from service state
   applyRoundResult(result);
   const scores = getScores();
   document.getElementById("cpu-score").textContent = scores.cpu;
   document.getElementById("player-score").textContent = scores.player;
 
-  // 5. Mostrar modal de ronda y esperar cierre
+  // 5. Show round modal and wait for close
   const modalResult = result === "draw" ? "tie" : result;
   await showRoundResult(modalResult);
 
-  // 6. ¿Fin de partida?
+  // 6. Is the match over?
   if (isGameOver()) {
     const winner = getWinner();
     const finalScores = getScores();
@@ -62,12 +62,12 @@ async function showResult(playerChoice, cpuChoice, result) {
     return;
   }
 
-  // 7. Reset UI para la siguiente ronda
+  // 7. Reset UI for the next round
   const countdownEl = document.getElementById("countdown");
   if (countdownEl) countdownEl.textContent = String(COUNTDOWN_START);
   if (messageEl) messageEl.textContent = "¡Elige tu movimiento!";
-  imgCPU.src = HAND_IMAGES.rock.right;
-  imgPlayer.src = HAND_IMAGES.rock.left;
+  cpuImg.src = HAND_IMAGES.rock.right;
+  playerImg.src = HAND_IMAGES.rock.left;
 }
 
 function startCountdown(playerChoice) {
@@ -76,14 +76,14 @@ function startCountdown(playerChoice) {
 
   const countdownEl = document.getElementById("countdown");
   const messageEl = document.getElementById("message");
-  const imgCPU = document.getElementById("img-cpu");
-  const imgPlayer = document.getElementById("img-player");
+  const cpuImg = document.getElementById("img-cpu");
+  const playerImg = document.getElementById("img-player");
 
   messageEl.textContent = "3...2...1...";
   playSfx(SFX.countdown, 0.7);
 
-  imgCPU.classList.add("is-shaking");
-  imgPlayer.classList.add("is-shaking");
+  cpuImg.classList.add("is-shaking");
+  playerImg.classList.add("is-shaking");
 
   let count = COUNTDOWN_START;
   countdownEl.textContent = count;
@@ -96,8 +96,8 @@ function startCountdown(playerChoice) {
       clearInterval(interval);
       countdownEl.textContent = " ⚡";
 
-      imgCPU.classList.remove("is-shaking");
-      imgPlayer.classList.remove("is-shaking");
+      cpuImg.classList.remove("is-shaking");
+      playerImg.classList.remove("is-shaking");
 
       const cpuChoice = getCpuChoice();
       const result = resolveRound(playerChoice, cpuChoice);
@@ -123,7 +123,7 @@ export function initGameListeners() {
   btnPaper.addEventListener("click", () => startCountdown("paper"));
   btnScissors.addEventListener("click", () => startCountdown("scissor"));
 
-  // Atajos de teclado (A, S, D) — solo se enganchan una vez
+  // Keyboard shortcuts (A, S, D) — bound only once
   if (!keyboardBound) {
     keyboardBound = true;
     document.addEventListener("keydown", (e) => {

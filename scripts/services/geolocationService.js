@@ -1,32 +1,21 @@
 import { fetchData } from "../helpers/fetchData.js";
 import { NOMINATIM_BASE_URL, FLAG_BASE_URL } from "../constants/urls.js";
-
-const GEOCODE_OPTIONS = {
-  enableHighAccuracy: false,
-  timeout: 10000,
-  maximumAge: Infinity,
-};
-
-const ERROR_MESSAGES = {
-  1: "Permiso denegado",
-  2: "Ubicación no disponible",
-  3: "Tiempo de espera agotado",
-};
+import {
+  GEOCODE_OPTIONS,
+  GEOLOCATION_ERROR_MESSAGES,
+  UNSUPPORTED_GEOLOCATION_MESSAGE,
+  UNKNOWN_GEOLOCATION_ERROR,
+} from "../constants/geolocation.js";
 
 function getPosition() {
   if (!navigator.geolocation) {
-    return Promise.reject(
-      new Error("Geolocalización no soportada en este navegador"),
-    );
+    return Promise.reject(new Error(UNSUPPORTED_GEOLOCATION_MESSAGE));
   }
 
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(
       resolve,
       async (error) => {
-        // Chrome a veces dispara un error cacheado de "permiso denegado"
-        // incluso cuando el permiso ya está concedido. Verificamos con
-        // la Permissions API el estado real antes de rechazar.
         if (error.code === 1 && navigator.permissions) {
           const { state } = await navigator.permissions.query({
             name: "geolocation",
@@ -37,7 +26,8 @@ function getPosition() {
               (retryError) => {
                 reject(
                   new Error(
-                    ERROR_MESSAGES[retryError.code] || "Error desconocido",
+                    GEOLOCATION_ERROR_MESSAGES[retryError.code] ||
+                      UNKNOWN_GEOLOCATION_ERROR,
                   ),
                 );
               },
@@ -47,7 +37,11 @@ function getPosition() {
           }
         }
 
-        reject(new Error(ERROR_MESSAGES[error.code] || "Error desconocido"));
+        reject(
+          new Error(
+            GEOLOCATION_ERROR_MESSAGES[error.code] || UNKNOWN_GEOLOCATION_ERROR,
+          ),
+        );
       },
       GEOCODE_OPTIONS,
     );
