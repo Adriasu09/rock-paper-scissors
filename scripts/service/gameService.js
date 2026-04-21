@@ -1,12 +1,13 @@
 import { setGameState } from "../../index.js"
 import { playSfx } from "./audioController.js"
-
-const HOVER_SOUND = "./assets/sounds/btn-hover.wav"
-const COUNTDOWN_SOUND = "./assets/sounds/3-2-1-fight.flac"
-const WIN_SOUND = "./assets/sounds/succes-sound.wav"
-const LOSE_SOUND = "./assets/sounds/error-sound.mp3"
-const GAME_WIN_SOUND = "./assets/sounds/win.mp3"
-const GAME_LOSE_SOUND = "./assets/sounds/lose-2.wav"
+import {
+    CHOICES,
+    WIN_SCORE,
+    COUNTDOWN_START,
+    COUNTDOWN_INTERVAL_MS,
+    HAND_IMAGES,
+    SFX,
+} from "../constants/game.js"
 
 let cpuScore = 0
 let playerScore = 0
@@ -26,9 +27,8 @@ export function resetGameState() {
 
 //Función que genera la elección aleatoria de la máquina
 function getComputerChoice() {
-    const choices = ["rock", "paper", "scissor"];
-    const randomNumber = Math.floor(Math.random() * 3);
-    return choices[randomNumber]
+    const randomNumber = Math.floor(Math.random() * CHOICES.length);
+    return CHOICES[randomNumber]
 }
 
 //Función que compara y decide quién gana
@@ -57,12 +57,12 @@ async function showResult(playerChoice, cpuChoice, result) {
     const imgCPU = document.getElementById("img-cpu")
     const imgPlayer = document.getElementById("img-player")
 
-    imgCPU.src = "./assets/images/" + cpuChoice + "-right.png"
-    imgPlayer.src = "./assets/images/" + playerChoice + "-left.png"
+    imgCPU.src = HAND_IMAGES[cpuChoice].right
+    imgPlayer.src = HAND_IMAGES[playerChoice].left
 
     //1.1 Efecto de sonido según el resultado
-    if (result === "win") playSfx(WIN_SOUND, 0.7)
-    else if (result === "lose") playSfx(LOSE_SOUND, 0.7)
+    if (result === "win") playSfx(SFX.roundWin, 0.7)
+    else if (result === "lose") playSfx(SFX.roundLose, 0.7)
 
     //2. El resultado lo muestra el modal, limpio el mensaje
     const messageEl = document.getElementById("message")
@@ -86,12 +86,12 @@ async function showResult(playerChoice, cpuChoice, result) {
     }
 
     //5. ¿Hay ganador de la partida?
-    if (playerScore >= 3 || cpuScore >= 3) {
-        const winner = playerScore >= 3 ? "player" : "cpu"
+    if (playerScore >= WIN_SCORE || cpuScore >= WIN_SCORE) {
+        const winner = playerScore >= WIN_SCORE ? "player" : "cpu"
         const finalScores = { player: playerScore, cpu: cpuScore }
         const finalName = currentPlayerName
         resetGameState()
-        playSfx(winner === "player" ? GAME_WIN_SOUND : GAME_LOSE_SOUND, 0.8)
+        playSfx(winner === "player" ? SFX.gameWin : SFX.gameLose, 0.8)
         setGameState({
             view: "gameOver",
             winner,
@@ -103,10 +103,10 @@ async function showResult(playerChoice, cpuChoice, result) {
 
     //6. Si la partida continúa, reiniciamos countdown, mensaje y puños
     const countdownEl = document.getElementById("countdown")
-    if (countdownEl) countdownEl.textContent = "3"
+    if (countdownEl) countdownEl.textContent = String(COUNTDOWN_START)
     if (messageEl) messageEl.textContent = "¡Elige tu movimiento!"
-    imgCPU.src = "./assets/images/rock-right.png"
-    imgPlayer.src = "./assets/images/rock-left.png"
+    imgCPU.src = HAND_IMAGES.rock.right
+    imgPlayer.src = HAND_IMAGES.rock.left
 }
 
 //función de cuenta atrás
@@ -125,13 +125,13 @@ function startCountdown(playerChoice) {
     messageEl.textContent = "3...2...1..."
 
     //Sonido sincronizado con la cuenta atrás
-    playSfx(COUNTDOWN_SOUND, 0.7)
+    playSfx(SFX.countdown, 0.7)
 
     //Animación de shake en las manos
     imgCPU.classList.add("is-shaking")
     imgPlayer.classList.add("is-shaking")
 
-    let count = 3
+    let count = COUNTDOWN_START
     countdownEl.textContent = count
 
     const interval = setInterval(async function () {
@@ -154,7 +154,7 @@ function startCountdown(playerChoice) {
 
             isPlaying = false
         }
-    }, 1000)
+    }, COUNTDOWN_INTERVAL_MS)
 }
 
 //Función que conecta con la lógica del juego
@@ -166,7 +166,7 @@ export function initGameListeners() {
     if (!btnRock || !btnPaper || !btnScissors) return
 
     for (const btn of [btnRock, btnPaper, btnScissors]) {
-        btn.addEventListener("mouseenter", () => playSfx(HOVER_SOUND, 0.5))
+        btn.addEventListener("mouseenter", () => playSfx(SFX.hover, 0.5))
     }
 
     btnRock.addEventListener("click", function () {

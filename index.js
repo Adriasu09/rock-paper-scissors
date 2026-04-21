@@ -10,6 +10,7 @@ import { renderNameModal, attachNameModal } from "./scripts/UI/nameModal.js";
 import { renderRulesModal, attachRulesModal } from "./scripts/UI/rulesModal.js";
 import { showRoundResult } from "./scripts/UI/roundModal.js";
 import { initAudio, attachSoundButton, playSfx } from "./scripts/service/audioController.js";
+import { SFX } from "./scripts/constants/game.js";
 
 const root = document.getElementById("root");
 
@@ -62,7 +63,7 @@ function attachStartScreenHandlers() {
     attachNameModal((name) => {
       resetGameState();
       setPlayerName(name);
-      playSfx("./assets/sounds/start-game.wav", 0.7);
+      playSfx(SFX.startGame, 0.7);
       setGameState({
         view: "play",
         playerName: name,

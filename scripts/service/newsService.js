@@ -1,7 +1,7 @@
 import { fetchData } from "../helpers/fetchData.js";
 import { NEWSAPI_BASE_URL } from "../constants/urls.js";
 import { NEWS_API_KEY } from "../constants/config.js";
-import { NEWS_CATEGORIES, COUNTRY_LANGUAGE } from "../constants/newsConstants.js";
+import { NEWS_CATEGORIES, COUNTRY_LANGUAGE } from "../constants/news.js";
 
 function getRelativeTime(publishedAt) {
   const diffMs = Date.now() - new Date(publishedAt).getTime();
@@ -39,9 +39,6 @@ async function fetchCategory(language, category) {
   return article ? mapArticle(article, category) : null;
 }
 
-// Noticias filtradas por idioma usando el endpoint /v2/everything de NewsAPI.
-// Este endpoint no admite `country` ni `category`; se busca por palabra clave (q)
-// en el idioma derivado del país de la localización (p. ej. España → "es").
 export async function getNews(countryCode) {
   const country = (countryCode || "").toLowerCase();
   const language = COUNTRY_LANGUAGE[country] || "en";

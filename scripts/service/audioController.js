@@ -1,5 +1,4 @@
-const ICON_ON = "./assets/icon/volume-2.svg";
-const ICON_OFF = "./assets/icon/volume-off.svg";
+import { AUDIO_ICONS, MUSIC_PATH } from "../constants/game.js";
 
 let audio = null;
 let isMuted = false;
@@ -19,7 +18,7 @@ function tryPlay() {
 
 export function initAudio() {
   if (audio) return;
-  audio = new Audio("./assets/sounds/music-game.mp3");
+  audio = new Audio(MUSIC_PATH);
   audio.loop = true;
   audio.volume = 0.05;
   audio.muted = isMuted;
@@ -45,7 +44,7 @@ export function toggleMute() {
 
 function refreshButton(btn) {
   const icon = btn.querySelector(".sound-btn-icon");
-  if (icon) icon.src = isMuted ? ICON_OFF : ICON_ON;
+  if (icon) icon.src = isMuted ? AUDIO_ICONS.off : AUDIO_ICONS.on;
   btn.setAttribute("aria-pressed", String(isMuted));
   btn.setAttribute("aria-label", isMuted ? "Activar sonido" : "Silenciar sonido");
   btn.classList.toggle("is-muted", isMuted);

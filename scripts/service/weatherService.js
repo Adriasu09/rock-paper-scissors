@@ -1,6 +1,6 @@
 import { fetchData } from "../helpers/fetchData.js";
 import { OPEN_METEO_BASE_URL, WEATHER_ICON_BASE_URL } from "../constants/urls.js";
-import { WMO_CODES } from "../constants/wmoWeatherCodes.js";
+import { WMO_CODES } from "../constants/weatherCodes.js";
 
 function getWeatherInfo(code, isDay) {
   const entry = WMO_CODES[code];

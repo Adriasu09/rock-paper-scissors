@@ -1,6 +1,3 @@
-// Categorías mostradas en el sidebar, con su etiqueta visible,
-// la categoría real de NewsAPI y la paleta de colores del diseño.
-// NewsAPI soporta: business, entertainment, general, health, science, sports, technology.
 export const NEWS_CATEGORIES = [
   {
     label: "TECNOLOGÍA",
@@ -32,7 +29,6 @@ export const NEWS_CATEGORIES = [
   },
 ];
 
-// Idiomas soportados por NewsAPI (/v2/everything): ar, de, en, es, fr, he, it, nl, no, pt, ru, sv, zh
 export const COUNTRY_LANGUAGE = {
   ae: "ar", ar: "es", at: "de", au: "en", be: "fr", br: "pt",
   ca: "en", ch: "de", cn: "zh", co: "es", cu: "es", de: "de",
