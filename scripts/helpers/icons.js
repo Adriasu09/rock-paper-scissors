@@ -1,14 +1,3 @@
-/**
- * Helper de iconos SVG inline.
- *
- * Todos los iconos usan `currentColor` (stroke o fill), así puedes cambiar
- * el color desde CSS aplicando `color: ...` al elemento contenedor.
- *
- * Uso:
- *   import { icon } from "../helpers/icons.js";
- *   element.innerHTML = icon("menu", { size: 20, className: "navbar__icon" });
- */
-
 const ICONS = {
   fist: {
     viewBox: "0 0 24 24",
