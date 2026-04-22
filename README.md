@@ -1,274 +1,180 @@
-# ✂️ Piedra, Papel o Tijera — AZARGame | Carnival DOM
+# Rock-Paper-Scissors
 
-Bienvenida al equipo de desarrollo! 👋 Este README explica cómo trabajar en el repositorio y cómo gestionar las tareas del proyecto usando GitHub Projects. Léelo con calma antes de empezar.
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6%2B-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?style=flat&logo=vercel&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
 
----
+> Browser-based Rock-Paper-Scissors against the CPU, enriched with live news, weather, and geolocation panels.
 
-## 🎮 Contexto del proyecto
+A classic Rock-Paper-Scissors game built as the final project for the **Factoría F5** bootcamp. The player competes against the CPU in a best-of-three match while a live sidebar shows their current weather, location (with country flag), and latest news headlines across four categories — all tailored to the player's region.
 
-La empresa **AZARGame** nos ha contratado para desarrollar su nueva línea de negocio: **"Juegos típicos de ferias"**. Nuestro equipo se encarga del juego de **Piedra, Papel o Tijera**, desarrollado con **HTML, CSS y JavaScript**.
+The project is intentionally written in **vanilla HTML, CSS and JavaScript ES modules** — no framework, no bundler, no npm dependencies. The only server-side piece is a single Vercel serverless function that proxies NewsAPI requests to keep the API key out of the browser.
 
----
+## Table of Contents
 
-## 🌿 ¿Cómo está organizado el repositorio?
+- [Background](#background)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Architecture](#architecture)
+- [Install](#install)
+- [Usage](#usage)
+- [Deployment](#deployment)
+- [Documentation](#documentation)
+- [Maintainers](#maintainers)
+- [Acknowledgements](#acknowledgements)
+- [Contributing](#contributing)
+- [License](#license)
 
-| Rama | Para qué sirve |
-| ----------- | ------------------------------------------------------------- |
-| `main` | Código final en producción. **Nadie sube aquí directamente.** |
-| `develop` | Rama de integración. **Tampoco se sube directamente.** |
-| `tu-rama` | Tu rama personal según la tarea. **Aquí es donde tú trabajas.** |
+## Background
 
-> ⚠️ **Regla de oro:** Nunca hagas cambios directamente en `main` ni en `develop`. Todo tu trabajo va en tu rama personal.
+This project was developed during the Factoría F5 bootcamp with three explicit learning goals:
 
----
+1. **Master JavaScript fundamentals** — DOM manipulation, ES modules, async/await, and browser APIs without the safety net of a framework.
+2. **Integrate multiple third-party APIs** — handle real-world concerns such as rate limits, CORS, API-key protection, and graceful error handling.
+3. **Ship to production** — take a static site from `localhost` to a public URL while keeping secrets out of client code.
 
-## 📋 Convención para nombrar ramas
+No build tooling was added on purpose: every file in the repo is the file that runs in the browser, which keeps the code easy to reason about and easy to debug.
 
-Las ramas siguen las convenciones estándar de GitHub según el tipo de tarea:
+## Features
 
-| Prefijo | Cuándo usarlo | Ejemplo |
-|---------|--------------|---------|
-| `feat/` | Para añadir una nueva funcionalidad | `feat/game-logic` |
-| `fix/` | Para corregir un error o bug | `fix/score-counter` |
-| `style/` | Solo cambios de CSS o estilos visuales | `style/button-hover` |
-| `refactor/` | Mejorar código sin cambiar funcionalidad | `refactor/player-logic` |
-| `docs/` | Solo cambios en documentación | `docs/readme-update` |
-| `chore/` | Tareas de mantenimiento o configuración | `chore/gitignore` |
+- 🎮 **Best-of-three game loop** against the CPU with live score tracking.
+- ⌨️ **Keyboard shortcuts**: `A` = Rock, `S` = Paper, `D` = Scissors.
+- ⏱️ **Round modal** with a 3-second auto-close before the next round begins.
+- 🌦️ **Live weather** (temperature, humidity, wind) via Open-Meteo, based on geolocation.
+- 📰 **Live news feed** with four categories (Technology, Sports, Politics, Culture), localised by the player's country.
+- 📍 **Reverse geocoding** (Nominatim) plus country flag from flagcdn, shown in the navbar.
+- 🔊 **Sound toggle** with background music and SFX for hover, countdown, win, lose, and round outcomes.
+- 📜 **Rules modal** accessible from the start screen.
+- ✅ **Name validation** (minimum 3 characters) before starting a match.
+- 🛡️ **Graceful degradation** — if an API is unavailable, the rest of the app keeps working with a friendly error message.
 
-> 💡 El nombre debe ser corto y descriptivo, en inglés y con guiones. Ejemplo: `feat/result-modal`
+## Tech Stack
 
----
+| Layer | Technology |
+|---|---|
+| **Frontend** | HTML5, CSS3, Vanilla JavaScript (ES modules) |
+| **Backend** | Vercel Serverless Function (Node.js) — NewsAPI proxy only |
+| **Hosting** | Vercel (static site + `/api/*` serverless) |
+| **Tooling** | None — no bundler, no npm dependencies |
 
-## 🚀 Flujo de trabajo paso a paso
+### Third-party APIs
 
-### 1️⃣ Abre tu proyecto en VS Code
+| API | Purpose |
+|---|---|
+| [NewsAPI](https://newsapi.org) | News articles per category and language |
+| [Open-Meteo](https://open-meteo.com) | Current weather conditions |
+| [Nominatim](https://nominatim.openstreetmap.org) | Reverse geocoding (lat/lon → city/country) |
+| [flagcdn](https://flagcdn.com) | Country flag images |
+| [OpenWeatherMap icons](https://openweathermap.org) | Weather condition icons |
+| Browser Geolocation API | Native lat/lon lookup with user consent |
 
-Abre VS Code dentro de la carpeta del repositorio que clonaste:
+## Architecture
+
+```
+rock-paper-scissors/
+├── api/
+│   └── news.js              # Vercel serverless proxy for NewsAPI
+├── assets/                  # Images, SVG icons, sound files
+├── docs/                    # Flowcharts and user-flow documentation
+├── scripts/
+│   ├── constants/           # Game config, URLs, categories, error messages
+│   ├── helpers/             # DOM utilities, error handler, icon rendering
+│   ├── services/            # API clients and domain logic
+│   └── ui/                  # Screens, modals, sections, controllers
+├── style/                   # CSS organised by section
+├── index.html               # Entry point
+├── index.js                 # App orchestrator (state, navigation, audio)
+├── vercel.json              # Vercel routing configuration
+└── LICENSE
+```
+
+## Install
+
+### Prerequisites
+
+- A modern browser (Chrome, Firefox, Edge, Safari).
+- VS Code with the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension installed.
+- A free [NewsAPI](https://newsapi.org/register) key.
+
+### Clone and configure
 
 ```bash
-code .
+git clone https://github.com/Adriasu09/rock-paper-scissors.git
+cd rock-paper-scissors
 ```
 
-> 💡 Asegúrate de estar dentro de la carpeta del proyecto (`rock-paper-scissors`) antes de ejecutar este comando.
+Create the local config file so the app can reach NewsAPI while developing:
 
----
-
-### 2️⃣ Verifica en qué rama estás
-
-```bash
-git branch
+```js
+// scripts/constants/config.js (gitignored)
+export const NEWS_API_KEY = "your_newsapi_key_here";
 ```
 
-La rama con `*` es en la que estás. Debe ser la tuya.
+### Run
 
----
+Open the project folder in VS Code, right-click `index.html` and choose **Open with Live Server** (or click **Go Live** in the status bar). The app will open in your browser at `http://127.0.0.1:5500`.
 
-### 3️⃣ Crea tu rama a partir de `develop`
+## Usage
 
-Antes de empezar una tarea, crea tu rama desde `develop` para no quedarte desfasada:
+1. Open the app in the browser.
+2. Click **PLAY vs CPU**, enter a player name (min. 3 characters) and confirm.
+3. Pick **Rock**, **Paper**, or **Scissors** — either by clicking the button or pressing `A` / `S` / `D`.
+4. Wait for the 3-2-1 countdown; both hands are revealed and the round result is shown for 3 seconds.
+5. First player to reach **3 wins** takes the match.
+6. On the Game Over screen, choose **Replay** to start a new match or **Home** to go back to the start screen.
+7. Toggle background music and SFX with the sound icon in the navbar at any time.
 
-```bash
-git checkout develop
-git pull origin develop
-git checkout -b feat/nombre-de-tu-tarea
-```
+## Deployment
 
-> 💡 Esto te asegura que empiezas con el código más actualizado.
+The app is deployed on **Vercel** as a static site plus a single serverless function.
 
----
+### Why a serverless proxy?
 
-### 4️⃣ Trabaja en tus archivos
+NewsAPI requires an API key on every request. Shipping that key in the browser would expose it to anyone inspecting the page. Instead, [api/news.js](api/news.js) runs on the server, reads `NEWS_API_KEY` from Vercel's environment variables, and forwards the request to NewsAPI. The browser only ever talks to `/api/news`.
 
-Ahora sí puedes editar, crear o modificar archivos en VS Code con tranquilidad.
+### How client routing works
 
----
+[scripts/services/apiClient.js](scripts/services/apiClient.js) inspects `window.location.hostname`:
 
-### 5️⃣ Guarda tus cambios con Git
+- **Local (`localhost` / `127.0.0.1`)** → calls NewsAPI directly using the key from the local `config.js`.
+- **Production (Vercel domain)** → strips the API key from params and routes the request to `/api/news`.
 
-**Paso A — Ver qué archivos cambiaste:**
+Other APIs (Open-Meteo, Nominatim, flagcdn, OpenWeatherMap icons) do not need a key and are called directly from the browser in both environments.
 
-```bash
-git status
-```
+### Deploying your own fork
 
-**Paso B — Agregar los archivos:**
+1. Fork the repo and push to GitHub.
+2. In [Vercel](https://vercel.com), **Add New → Project** and import the fork.
+3. Framework preset: **Other**. Root directory: `.`.
+4. Under **Environment Variables**, add `NEWS_API_KEY` with your NewsAPI key for Production, Preview, and Development.
+5. Click **Deploy**. Vercel detects [vercel.json](vercel.json) and [api/news.js](api/news.js) automatically.
 
-```bash
-git add .
-```
+## Documentation
 
-**Paso C — Hacer el commit:**
+- [docs/USERFLOW.md](docs/USERFLOW.md) — end-to-end user journey and screen transitions.
+- [docs/FLOWCHARTS.md](docs/FLOWCHARTS.md) — technical flowcharts: state machine, round resolution, input binding.
+- [DeepWiki](https://deepwiki.com/Adriasu09/rock-paper-scissors) — auto-generated architectural wiki.
 
-```bash
-git commit -m "descripción breve de lo que hiciste"
-```
+## Maintainers
 
-**Paso D — Antes de subir, actualiza tu rama con los últimos cambios de `develop`:**
+| Name | GitHub |
+|---|---|
+| Adriana Suárez | [@Adriasu09](https://github.com/Adriasu09) |
+| Yeli Cortés | [@YeliCort](https://github.com/YeliCort) |
+| Irma Ortiz | [@Irma0805](https://github.com/Irma0805) |
+| María Carrillo | [@MariaCarrilloCarrasco](https://github.com/MariaCarrilloCarrasco) |
 
-```bash
-git pull origin develop
-```
+## Acknowledgements
 
-> ⚠️ Esto es importante por si alguien ha subido cambios mientras trabajabas. Si hay conflictos, resuélvelos antes de continuar.
+- **Factoría F5** bootcamp and mentors for the guidance and feedback throughout the project.
+- Free-tier providers that make this project possible: [NewsAPI](https://newsapi.org), [Open-Meteo](https://open-meteo.com), [OpenStreetMap / Nominatim](https://nominatim.openstreetmap.org), [flagcdn](https://flagcdn.com), and [OpenWeatherMap](https://openweathermap.org).
 
-> ✏️ Ejemplos de buenos mensajes:
->
-> - `"feat: agrego lógica del juego"`
-> - `"fix: corrijo el contador de puntos"`
-> - `"style: añado estilos al botón de reinicio"`
+## Contributing
 
----
+Issues and pull requests are welcome. Please open an issue first to discuss larger changes. For questions, reach out to any of the [maintainers](#maintainers).
 
-### 6️⃣ Sube tu rama a GitHub
+## License
 
-```bash
-git push origin feat/nombre-de-tu-tarea
-```
-
----
-
-### 7️⃣ Crea un Pull Request en GitHub
-
-1. Ve al repositorio: [github.com/Adriasu09/rock-paper-scissors](https://github.com/Adriasu09/rock-paper-scissors)
-2. Verás un banner amarillo **"Compare & pull request"** → haz clic
-3. Comprueba que la configuración sea:
-   - **base:** `develop` ← hacia donde va tu código
-   - **compare:** `feat/nombre-de-tu-tarea` ← tu rama
-4. Escribe un **título claro** describiendo qué hiciste
-5. En la descripción explica brevemente los cambios
-6. Vincula la issue que resuelve (ver sección de Projects más abajo ⬇️)
-7. Haz clic en **"Create pull request"** ✅
-
-> ⏳ Adriana revisará tu PR y puede dejarte comentarios. Si eso pasa, no te preocupes — ¡es parte del proceso!
-
----
-
-### 8️⃣ Si te piden hacer cambios en el PR
-
-1. Vuelve a VS Code
-2. Asegúrate de estar en tu rama: `git checkout feat/nombre-de-tu-tarea`
-3. Haz los cambios pedidos
-4. Repite el paso 5 y 6 (add → commit → push)
-5. El PR se actualizará automáticamente en GitHub 🔄
-
----
-
-## 🗂️ GitHub Projects — Gestión de tareas
-
-Usamos un **tablero Kanban** en GitHub Projects para organizar el trabajo de todo el equipo. Así todas sabemos en qué está trabajando cada una y qué queda por hacer.
-
-### 🔗 Acceso al tablero
-
-Ve a la pestaña **Projects** del repositorio o accede directamente desde tu perfil de GitHub en la sección Projects.
-
----
-
-### 📌 ¿Qué significa cada columna?
-
-| Columna | Significado |
-|---------|------------|
-| **Backlog** | Tareas pendientes que aún no se han empezado |
-| **In progress** | Tareas en las que estás trabajando ahora mismo |
-| **In review** | Tu PR está abierto y esperando revisión |
-| **Ready** | El PR fue aprobado y mergeado en `develop` ✅ |
-| **Done** | Tarea completada y mergeada en `main` ✅ |
-
----
-
-### 🆕 Cómo crear una issue (tarea)
-
-Cualquiera del equipo puede crear issues, especialmente si quieres dividir una tarea grande en subtareas más pequeñas.
-
-1. Ve a la pestaña **Issues** del repositorio
-2. Haz clic en **"New issue"**
-3. Escribe un **título claro** (ej: `Crear pantalla de resultado`)
-4. En la descripción explica qué hay que hacer (puedes usar checkboxes con `- [ ]`)
-5. A la derecha, asígnate la issue en **"Assignees"** → haz clic y selecciónate
-6. También puedes añadir una etiqueta en **"Labels"** (ej: `enhancement`, `bug`, `documentation`)
-7. Haz clic en **"Submit new issue"** ✅
-
-> 💡 **Ejemplo de descripción con subtareas:**
-> ```
-> ## Descripción
-> Crear la pantalla que muestra si el jugador ganó, perdió o empató.
->
-> ## Subtareas
-> - [ ] Crear el HTML del modal de resultado
-> - [ ] Añadir estilos CSS al modal
-> - [ ] Conectar el resultado con la lógica del juego
-> ```
-
----
-
-### ➕ Cómo añadir una issue al tablero Projects
-
-Después de crear la issue:
-
-1. Dentro de la issue, busca el panel derecho y haz clic en **"Projects"**
-2. Selecciona el proyecto **rock-paper-scissors**
-3. La issue aparecerá automáticamente en la columna **Backlog**
-
----
-
-### 🔄 Cómo mover tarjetas en el tablero
-
-El tablero refleja el estado real de tu trabajo. Mueve las tarjetas así:
-
-| Cuándo | Qué hacer |
-|--------|-----------|
-| Vas a empezar a trabajar en una tarea | Muévela de **Backlog** → **In progress** |
-| Abres el Pull Request | Muévela de **In progress** → **In review** |
-| El PR es aprobado y mergeado en `develop` | Muévela de **In review** → **Ready** |
-| Se hace merge en `main` | Muévela a **Done** |
-
-> 💡 Para mover una tarjeta: haz clic en los **tres puntos `...`** de la tarjeta y selecciona el nuevo estado, o arrástrala directamente a la columna correcta.
-
----
-
-### 🔗 Vincular una issue a tu Pull Request
-
-Cuando abras tu PR, es importante vincularlo a la issue que resuelve. Esto cierra la issue automáticamente cuando se hace merge.
-
-En la descripción del PR escribe:
-
-```
-Closes #número-de-la-issue
-```
-
-> 💡 Ejemplo: si tu issue es la número 3, escribe `Closes #3`
-
----
-
-## ❓ Errores comunes de Git
-
-**"You are not on the right branch"**
-→ Usa `git checkout feat/nombre-de-tu-rama` para cambiarte.
-
-**"Please commit your changes or stash them before you merge"**
-→ Tienes cambios sin guardar. Haz `git add .` y `git commit -m "mensaje"` primero.
-
-**"Rejected — non-fast-forward"**
-→ Alguien hizo cambios antes. Corre `git pull origin feat/nombre-de-tu-rama` primero y vuelve a intentar el push.
-
----
-
-## 💬 Resumen rápido
-
-```bash
-# Antes de empezar una tarea nueva
-git checkout develop
-git pull origin develop
-git checkout -b feat/nombre-de-tu-tarea
-
-# Guardar y subir tu trabajo
-git status
-git add .
-git commit -m "feat: descripción de lo que hiciste"
-git push origin feat/nombre-de-tu-tarea
-
-# → Ir a GitHub, abrir el Pull Request y mover la tarjeta a "In review"
-```
-
----
-
-> 🙌 Cualquier duda, pregúntale a Adriana antes de hacer algo que no estés segura. ¡Es mejor preguntar que romper el código!
+[MIT](LICENSE) © 2026 Adriana Suárez, Yeli Cortés, Irma Ortiz, María Carrillo.
