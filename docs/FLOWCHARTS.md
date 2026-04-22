@@ -142,29 +142,6 @@ flowchart TD
 
 ---
 
-## 7. Estado global del juego (`gameService` state)
-
-```mermaid
-flowchart LR
-    subgraph State
-      PS[playerScore: 0]
-      CS[cpuScore: 0]
-      PN[playerName: '']
-    end
-
-    setPlayerName --> PN
-    applyRoundResult -->|result=win| PS
-    applyRoundResult -->|result=lose| CS
-    resetGameState -->|scores=0| PS
-    resetGameState -->|scores=0| CS
-    isGameOver -->|lee| PS
-    isGameOver -->|lee| CS
-    getWinner -->|lee| PS
-    getWinner -->|lee| CS
-```
-
----
-
 ## Constantes clave
 
 | Constante | Valor | Origen |
