@@ -9,7 +9,7 @@ import { ERROR_MESSAGES } from "../constants/errorMessages.js";
 
 export async function loadSidebar(renderLayout) {
   renderLayout({
-    //leftHTML: renderNews(null),
+    leftHTML: renderNews(null),
     leftHTML: "",
     rightHTML: renderLocation(null) + renderWeather(null),
   });
@@ -43,7 +43,10 @@ export async function loadSidebar(renderLayout) {
     weatherResult.status === "fulfilled"
       ? renderWeather(weatherResult.value)
       : renderWeather({
-          error: toUserMessage(weatherResult.reason, ERROR_MESSAGES.weather.default),
+          error: toUserMessage(
+            weatherResult.reason,
+            ERROR_MESSAGES.weather.default,
+          ),
         });
 
   const newsHTML =
@@ -53,12 +56,11 @@ export async function loadSidebar(renderLayout) {
           countryCode: locationData.countryCode,
           articles: newsResult.value,
         })
-      // : renderNews({
-      //     country: locationData.country,
-      //     countryCode: locationData.countryCode,
-      //     error: toUserMessage(newsResult.reason, ERROR_MESSAGES.news.default),
-      //   });
-      : "";
+      : renderNews({
+          country: locationData.country,
+          countryCode: locationData.countryCode,
+          error: toUserMessage(newsResult.reason, ERROR_MESSAGES.news.default),
+        });
 
   if (weatherResult.status === "rejected") {
     logError("sidebar:getWeather", weatherResult.reason);
