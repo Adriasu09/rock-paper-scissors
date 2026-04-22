@@ -114,10 +114,10 @@ Función en [gameService.js:9](../scripts/services/gameService.js#L9).
 
 ```mermaid
 flowchart LR
-    A([Inicio]) --> B[r = Math.random<br/>0 .. 1)]
-    B --> C[index = floor r * 3]
-    C --> D[return CHOICES index]
-    D --> E([rock | paper | scissor])
+    A([Inicio]) --> B["r = Math.random() — rango [0, 1)"]
+    B --> C["index = floor(r * 3)"]
+    C --> D["return CHOICES[index]"]
+    D --> E([rock / paper / scissor])
 ```
 
 ---
