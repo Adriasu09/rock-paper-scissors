@@ -1,0 +1,64 @@
+import { AUDIO_ICONS, MUSIC_PATH } from "../constants/game.js";
+import { logError } from "../helpers/errorHandler.js";
+
+let audio = null;
+let isMuted = false;
+
+function tryPlay() {
+  if (!audio) return;
+  const promise = audio.play();
+  if (promise && typeof promise.catch === "function") {
+    promise.catch((err) => {
+      logError("audio:autoplay", err);
+      const unlock = () => {
+        audio.play().catch((retryErr) => logError("audio:unlock", retryErr));
+      };
+      document.addEventListener("pointerdown", unlock, { once: true });
+    });
+  }
+}
+
+export function initAudio() {
+  if (audio) return;
+  audio = new Audio(MUSIC_PATH);
+  audio.loop = true;
+  audio.volume = 0.05;
+  audio.muted = isMuted;
+  tryPlay();
+}
+
+export function isAudioMuted() {
+  return isMuted;
+}
+
+export function playSfx(path, volume = 0.6) {
+  if (isMuted) return;
+  const sfx = new Audio(path);
+  sfx.volume = volume;
+  sfx.play().catch((err) => logError("audio:sfx", err));
+}
+
+export function toggleMute() {
+  isMuted = !isMuted;
+  if (audio) audio.muted = isMuted;
+  return isMuted;
+}
+
+function refreshButton(btn) {
+  const icon = btn.querySelector(".sound-btn-icon");
+  if (icon) icon.src = isMuted ? AUDIO_ICONS.off : AUDIO_ICONS.on;
+  btn.setAttribute("aria-pressed", String(isMuted));
+  btn.setAttribute("aria-label", isMuted ? "Activar sonido" : "Silenciar sonido");
+  btn.classList.toggle("is-muted", isMuted);
+}
+
+export function attachSoundButton() {
+  const btn = document.getElementById("btn-sound");
+  if (!btn) return;
+  refreshButton(btn);
+  btn.addEventListener("click", () => {
+    toggleMute();
+    if (!isMuted) tryPlay();
+    refreshButton(btn);
+  });
+}
