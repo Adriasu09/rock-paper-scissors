@@ -11,6 +11,7 @@ export async function loadSidebar(renderNavbarWith, renderLayout) {
   renderNavbarWith(null, null);
   renderLayout({
     leftHTML: renderNews(null),
+    leftHTML: "",
     rightHTML: renderLocation(null) + renderWeather(null),
   });
 
@@ -46,7 +47,10 @@ export async function loadSidebar(renderNavbarWith, renderLayout) {
     weatherResult.status === "fulfilled"
       ? renderWeather(weatherData)
       : renderWeather({
-          error: toUserMessage(weatherResult.reason, ERROR_MESSAGES.weather.default),
+          error: toUserMessage(
+            weatherResult.reason,
+            ERROR_MESSAGES.weather.default,
+          ),
         });
 
   const newsHTML =
