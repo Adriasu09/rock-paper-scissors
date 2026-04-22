@@ -1,7 +1,19 @@
 import { fetchData } from "./apiClient.js";
 import { NEWSAPI_BASE_URL } from "../constants/urls.js";
-import { NEWS_API_KEY } from "../constants/config.js";
 import { NEWS_CATEGORIES, COUNTRY_LANGUAGE } from "../constants/news.js";
+
+const isLocal =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1";
+
+let NEWS_API_KEY = "";
+if (isLocal) {
+  try {
+    ({ NEWS_API_KEY } = await import("../constants/config.js"));
+  } catch {
+    NEWS_API_KEY = "";
+  }
+}
 
 function getRelativeTime(publishedAt) {
   const diffMs = Date.now() - new Date(publishedAt).getTime();
