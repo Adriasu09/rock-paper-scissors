@@ -74,22 +74,3 @@ flowchart LR
 | **Game Over** | Click `Home` | Inicio |
 
 ---
-
-## 4. Estados emocionales del jugador (opcional, UX)
-
-```mermaid
-journey
-    title Experiencia del jugador en una partida
-    section Entrada
-      Abrir app: 4: Usuario
-      Ver inicio: 4: Usuario
-      Leer reglas: 3: Usuario
-    section Partida
-      Ingresar nombre: 4: Usuario
-      Elegir jugada: 5: Usuario
-      Ver countdown: 5: Usuario
-      Ver resultado de ronda: 4: Usuario
-    section Cierre
-      Ver ganador final: 5: Usuario
-      Decidir Replay / Home: 4: Usuario
-```
