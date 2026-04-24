@@ -1,45 +1,12 @@
-:root {
-  --background: #0c0d14;
-  --text: #ffffff;
-  --muted: #8b8fa8;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  --fs-nav: 14px;
-  color: #ffffff;
-}
-
-button,
-input {
-  font: inherit;
-}
-
 .page-wrapper {
   max-width: 1280px;
   margin: 1px;
   padding: 1rem;
   }
-  .tu-clase-de-texto {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 14px;
-  line-height: 1;
-  letter-spacing: 0;
-  vertical-align: middle;
-}
 
 .card {
   background: var(--card);
   border-radius: 16px;
-  box-shadow: 0 10px 30px
-
 }
 
 .topbar {
@@ -50,6 +17,11 @@ input {
   gap: 1.5rem;
   flex-wrap: wrap;
   margin-top: 0.5rem;
+}
+
+.header.topbar.card.glass.header {
+  background-color: #727378;
+  border-bottom: 1px solid var(--border-soft);
 }
 
 .topbar-row {
@@ -179,7 +151,7 @@ input {
 }
 
 .nav-tab.is-active {
-  background: #25104a;
+  background: #000000;
   color: #6d4bb6;
   font-weight: 700;
   padding: 0.74rem 1.1rem;
@@ -312,13 +284,13 @@ input {
 }
 
 .about-pill {
-  background: #161728;
   font-weight: 600;
   font-weight: 400;
   border-radius: 999px;
   padding: 0.74rem 1.1rem;
   box-sizing: border-box;
   .about-pill {
+
   /* Tus especificaciones de texto */
   font-family: 'Inter', sans-serif;
   font-size: 14px;
